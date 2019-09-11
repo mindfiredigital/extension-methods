@@ -60,5 +60,29 @@ namespace Extensions.UnitTest
             var expected = bar.SplitTo<decimal>(StringSplitOptions.RemoveEmptyEntries, ',').ToArray();
             Assert.Equal(expected, actual);
         }
+        [Theory]
+        [InlineData("true", true)]
+        [InlineData("t", true)]
+        [InlineData("t ", true)]
+        [InlineData("True ", true)]
+        [InlineData("TRUE ", true)]
+        [InlineData("yes", true)]
+        [InlineData("false", false)]
+        [InlineData("f ", false)]
+        [InlineData("no", false)]
+        [InlineData("False", false)]
+        [InlineData("FALSE", false)]
+        public void ToBoolean_ShouldPass(string actual, bool expected)
+        {
+            Assert.True(actual.ToBoolean() == expected);
+        }
+        [Theory]
+        [InlineData("")]
+        [InlineData("tR")]
+        [InlineData("  ")]
+        public void ToBoolean_Exception_ArgumentException(string actual)
+        {
+            Assert.Throws<ArgumentException>(() => actual.ToBoolean());
+        }
     }
 }
