@@ -8,10 +8,8 @@ namespace Extensions.ConsoleApp
         static void Main(string[] args)
         {
             /** Remove sample **/
-            string founder = "Mahesh Chand is a founder of C# Corner";
-            var res = founder.Encrypt("myKey");
-            var decres = res.Decrypt("myKey");
-            Console.WriteLine(res);
+            var user = new TestUser(1, "Swagat", 12);
+            Console.WriteLine(user.ToJson());
             Console.ReadKey();
         }
     }
