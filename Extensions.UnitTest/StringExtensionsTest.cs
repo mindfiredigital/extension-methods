@@ -141,5 +141,30 @@ namespace Extensions.UnitTest
         {
             Assert.True(data.IsDecimal() == expected);
         }
+
+        [Theory]
+        [InlineData(null, null)]
+        [InlineData(" Hello World", " ")]
+        [InlineData("", null)]
+        [InlineData("12 ", "1")]
+        [InlineData(" 112 ", " ")]
+        [InlineData("-112", "-")]
+        [InlineData("Royal College", "R")]
+        public void FirstCharacter_ShouldPass(string data, string expected)
+        {
+            Assert.Equal(data.FirstCharacter() , expected);
+        }
+        [Theory]
+        [InlineData(null, null)]
+        [InlineData(" Hello World", "d")]
+        [InlineData("", null)]
+        [InlineData("12 ", " ")]
+        [InlineData(" 112 ", " ")]
+        [InlineData("-112", "2")]
+        [InlineData("Royal College", "e")]
+        public void LastCharacter_ShouldPass(string data, string expected)
+        {
+            Assert.Equal(data.LastCharacter(),expected);
+        }
     }
 }

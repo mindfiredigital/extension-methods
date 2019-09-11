@@ -212,5 +212,33 @@ namespace Extensions
             }
             return null;
         }
+
+        /// <summary>
+        ///     Gets first character in string
+        /// </summary>
+        /// <param name="val">val</param>
+        /// <returns>System.string</returns>
+        public static string FirstCharacter(this string val)
+        {
+            return (!string.IsNullOrEmpty(val))
+                ? (val.Length >= 1)
+                    ? val.Substring(0, 1)
+                    : val
+                : null;
+        }
+
+        /// <summary>
+        ///     Gets last character in string
+        /// </summary>
+        /// <param name="val">val</param>
+        /// <returns>System.string</returns>
+        public static string LastCharacter(this string val)
+        {
+            return (!string.IsNullOrEmpty(val))
+                ? (val.Length >= 1)
+                    ? val.Substring(val.Length - 1, 1)
+                    : val
+                : null;
+        }
     }
 }
