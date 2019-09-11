@@ -126,7 +126,20 @@ namespace Extensions.UnitTest
         {
             Assert.True(data.IsInteger() == expected);
         }
-
+        [Theory]
+        [InlineData(null, false)]
+        [InlineData(" ", false)]
+        [InlineData("", false)]
+        [InlineData("12 ", true)]
+        [InlineData(" 112 ", true)]
+        [InlineData("-112 ", true)]
+        [InlineData("-112.00", true)]
+        [InlineData("-112.51 ", true)]
+        [InlineData("112.51", true)]
+        public void IsNumeric_ShouldPass(string data, bool expected)
+        {
+            Assert.True(data.IsNumeric() == expected);
+        }
         [Theory]
         [InlineData(null, false)]
         [InlineData(" ", false)]

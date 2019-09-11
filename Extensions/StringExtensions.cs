@@ -57,6 +57,25 @@ namespace Extensions
         }
 
         /// <summary>
+        ///     IsNumeric checks if a string is a valid floating value
+        /// </summary>
+        /// <param name="val"></param>
+        /// <returns>Boolean True if isNumeric else False</returns>
+        /// <remarks></remarks>
+        public static bool IsNumeric(this string val)
+        {
+            // Variable to collect the Return value of the TryParse method.
+
+            // Define variable to collect out parameter of the TryParse method. If the conversion fails, the out parameter is zero.
+            double retNum;
+
+            // The TryParse method converts a string in a specified style and culture-specific format to its double-precision floating point number equivalent.
+            // The TryParse method does not generate an exception if the conversion fails. If the conversion passes, True is returned. If it does not, False is returned.
+            bool isNum = Double.TryParse(val, NumberStyles.Any, NumberFormatInfo.InvariantInfo, out retNum);
+            return isNum;
+        }
+
+        /// <summary>
         /// Converts an object to CSV String separated by a Separator
         /// </summary>
         /// <param name="obj">The object.</param>
