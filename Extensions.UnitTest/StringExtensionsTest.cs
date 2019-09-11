@@ -84,5 +84,16 @@ namespace Extensions.UnitTest
         {
             Assert.Throws<ArgumentException>(() => actual.ToBoolean());
         }
+
+        [Theory]
+        [InlineData("Admin", 1)]
+        [InlineData("PublicUser", 2)]
+        [InlineData("Supervisor", 3)]
+        [InlineData(" ", 0)]
+        public void ToEnum_ShouldPass(string data, int expected)
+        {
+            var actual = Convert.ToInt32(data.ToEnum<TestEnums>());
+            Assert.Equal(actual, expected);
+        }
     }
 }
