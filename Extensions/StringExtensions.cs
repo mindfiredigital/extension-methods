@@ -9,6 +9,52 @@ namespace Extensions
     public static class StringExtensions
     {
         /// <summary>
+        ///     Checks if date with dateFormat is parse-able to System.DateTime format returns boolean value if true else false
+        /// </summary>
+        /// <param name="data">String date</param>
+        /// <param name="dateFormat">date format example dd/MM/yyyy HH:mm:ss</param>
+        /// <returns>boolean True False if is valid System.DateTime</returns>
+        public static bool IsDateTime(this string data, string dateFormat = "dd/MM/yyyy")
+        {
+            // ReSharper disable once RedundantAssignment
+            DateTime dateVal = default(DateTime);
+            return DateTime.TryParseExact(data, dateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None,
+                out dateVal);
+        }
+        /// <summary>
+        ///     IsInteger Function checks if a string is a valid int32 value
+        /// </summary>
+        /// <param name="val">val</param>
+        /// <returns>Boolean True if isInteger else False</returns>
+        public static bool IsInteger(this string val)
+        {
+            // Variable to collect the Return value of the TryParse method.
+
+            // Define variable to collect out parameter of the TryParse method. If the conversion fails, the out parameter is zero.
+            int retNum;
+
+            // The TryParse method converts a string in a specified style and culture-specific format to its double-precision floating point number equivalent.
+            // The TryParse method does not generate an exception if the conversion fails. If the conversion passes, True is returned. If it does not, False is returned.
+            bool isNum = int.TryParse(val, NumberStyles.Any, NumberFormatInfo.InvariantInfo, out retNum);
+            return isNum;
+        }
+        /// <summary>
+        ///     IsDecimal Function checks if a string is a valid decimal value
+        /// </summary>
+        /// <param name="val">val</param>
+        /// <returns>Boolean True if IsDecimal else False</returns>
+        public static bool IsDecimal(this string val)
+        {
+            // Variable to collect the Return value of the TryParse method.
+            // Define variable to collect out parameter of the TryParse method. If the conversion fails, the out parameter is zero.
+            decimal retNum;
+            // The TryParse method converts a string in a specified style and culture-specific format to its double-precision floating point number equivalent.
+            // The TryParse method does not generate an exception if the conversion fails. If the conversion passes, True is returned. If it does not, False is returned.
+            bool isNum = decimal.TryParse(val, NumberStyles.Any, NumberFormatInfo.InvariantInfo, out retNum);
+            return isNum;
+        }
+
+        /// <summary>
         /// Converts an object to CSV String separated by a Separator
         /// </summary>
         /// <param name="obj">The object.</param>
@@ -22,20 +68,6 @@ namespace Extensions
                 res.Add(p.GetValue(obj, null)?.ToString() ?? "");
             }
             return string.Join(separator, res);
-        }
-
-        /// <summary>
-        ///     Checks if date with dateFormat is parse-able to System.DateTime format returns boolean value if true else false
-        /// </summary>
-        /// <param name="data">String date</param>
-        /// <param name="dateFormat">date format example dd/MM/yyyy HH:mm:ss</param>
-        /// <returns>boolean True False if is valid System.DateTime</returns>
-        public static bool IsDateTime(this string data, string dateFormat = "dd/MM/yyyy")
-        {
-            // ReSharper disable once RedundantAssignment
-            DateTime dateVal = default(DateTime);
-            return DateTime.TryParseExact(data, dateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None,
-                out dateVal);
         }
 
         /// <summary>

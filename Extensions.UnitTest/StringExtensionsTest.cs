@@ -114,5 +114,32 @@ namespace Extensions.UnitTest
         {
             Assert.True(data.GetNullIfEmptyString() == expected);
         }
+
+        [Theory]
+        [InlineData(null, false)]
+        [InlineData(" ", false)]
+        [InlineData("", false)]
+        [InlineData("12 ", true)]
+        [InlineData(" 112 ", true)]
+        [InlineData("-112 ", true)]
+        public void IsInteger_ShouldPass(string data, bool expected)
+        {
+            Assert.True(data.IsInteger() == expected);
+        }
+
+        [Theory]
+        [InlineData(null, false)]
+        [InlineData(" ", false)]
+        [InlineData("", false)]
+        [InlineData("12 ", true)]
+        [InlineData(" 112 ", true)]
+        [InlineData("-112 ", true)]
+        [InlineData(" -112.0 ", true)]
+        [InlineData("-112.9 ", true)]
+        [InlineData("123.09000 ", true)]
+        public void IsDecimal_ShouldPass(string data, bool expected)
+        {
+            Assert.True(data.IsDecimal() == expected);
+        }
     }
 }
