@@ -497,33 +497,73 @@ namespace Extensions.UnitTest
         }
 
         [Theory]
-        [InlineData(null, 0,0, false)]
-        [InlineData("", 0,0, true)]
-        [InlineData("", 1,5, false)]
+        [InlineData(null, 0, 0, false)]
+        [InlineData("", 0, 0, true)]
+        [InlineData("", 1, 5, false)]
         [InlineData("Swag", 2, 5, true)]
         [InlineData("Swag  ", 2, 5, false)]
         public void IsLength_ShouldPass(string data, int min, int max, bool actual)
         {
-            Assert.True(data.IsLength(min,max) == actual);
+            Assert.True(data.IsLength(min, max) == actual);
         }
         [Theory]
-        [InlineData("FirstName","First Name")]
-        [InlineData("Firstname","Firstname")]
+        [InlineData("FirstName", "First Name")]
+        [InlineData("Firstname", "Firstname")]
         [InlineData("", "")]
-        [InlineData("First Name","First Name")]
+        [InlineData("First Name", "First Name")]
         public void ToHumanCase_ShouldPass(string data, string actual)
         {
-            Assert.Equal(data.ToHumanCase() , actual);
+            Assert.Equal(data.ToHumanCase(), actual);
         }
 
         [Theory]
-        [InlineData("FirstName",4, "Firs")]
-        [InlineData("Firstname",0, "")]
-        [InlineData("",5, "")]
-        [InlineData("First Name",17, "First Name")]
-        public void Truncate_ShouldPass(string data,int length, string actual)
+        [InlineData("FirstName", 4, "Firs")]
+        [InlineData("Firstname", 0, "")]
+        [InlineData("", 5, "")]
+        [InlineData("First Name", 17, "First Name")]
+        public void Truncate_ShouldPass(string data, int length, string actual)
         {
             Assert.Equal(data.Truncate(length), actual);
+        }
+
+        [Theory]
+        [InlineData("Swagat Swain","swagat",true)]
+        [InlineData("Swagat Swain", "Swagat", false)]
+        [InlineData(" ","swagat",true)]
+        [InlineData("","swagat",true)]
+        public void DoesNotStartWith_ShouldPass(string data, string startsWith, bool actual)
+        {
+            Assert.True(data.DoesNotStartWith(startsWith)== actual);
+        }
+
+        [Theory]
+        [InlineData("Swagat Swain", "swain", true)]
+        [InlineData("Swagat Swain", "Swain", false)]
+        [InlineData(" ", "Swain", true)]
+        [InlineData("", "Swain", true)]
+        public void DoesNotEndWith_ShouldPass(string data, string startsWith, bool actual)
+        {
+            Assert.True(data.DoesNotEndWith(startsWith) == actual);
+        }
+
+        [Theory]
+        [InlineData("Swagat Swain", "swagat", false)]
+        [InlineData("Swagat Swain", "Swagat", false)]
+        [InlineData(" ", "swagat", true)]
+        [InlineData("", "swagat", true)]
+        public void DoesNotStartWith_IgnoreCase_ShouldPass(string data, string startsWith, bool actual)
+        {
+            Assert.True(data.DoesNotStartWith(startsWith,true) == actual);
+        }
+
+        [Theory]
+        [InlineData("Swagat Swain", "swain", false)]
+        [InlineData("Swagat Swain", "Swain", false)]
+        [InlineData(" ", "Swain", true)]
+        [InlineData("", "Swain", true)]
+        public void DoesNotEndWith_IgnoreCase_ShouldPass(string data, string startsWith, bool actual)
+        {
+            Assert.True(data.DoesNotEndWith(startsWith, true) == actual);
         }
     }
 }

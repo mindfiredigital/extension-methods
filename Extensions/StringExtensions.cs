@@ -757,5 +757,37 @@ namespace Extensions
         {
             return Regex.Replace(val, @"^[\r\n]+|\.|[\r\n]+$", "");
         }
+
+        /// <summary>
+        ///     Check if a string does not start with prefix
+        /// </summary>
+        /// <param name="val">string to evaluate</param>
+        /// <param name="prefix">prefix</param>
+        /// <returns>true if string does not match prefix else false, null values will always evaluate to false</returns>
+        public static bool DoesNotStartWith(this string val, string prefix, bool ignoreCase = false)
+        {
+            if (ignoreCase)
+                return val == null || prefix == null ||
+                  !val.StartsWithIgnoreCase(prefix);
+            else
+                return val == null || prefix == null ||
+                       !val.StartsWith(prefix, StringComparison.InvariantCulture);
+        }
+
+        /// <summary>
+        ///     Check if a string does not end with prefix
+        /// </summary>
+        /// <param name="val">string to evaluate</param>
+        /// <param name="suffix">suffix</param>
+        /// <returns>true if string does not match prefix else false, null values will always evaluate to false</returns>
+        public static bool DoesNotEndWith(this string val, string suffix, bool ignoreCase = false)
+        {
+            if (ignoreCase)
+                return val == null || suffix == null ||
+                  !val.EndsWithIgnoreCase(suffix);
+            else
+                return val == null || suffix == null ||
+                       !val.EndsWith(suffix, StringComparison.InvariantCulture);
+        }
     }
 }
