@@ -390,5 +390,15 @@ namespace Extensions
             val = new String(chars);
             return val;
         }
+        /// <summary>
+        ///     Appends String quotes for type CSV data
+        /// </summary>
+        /// <param name="val">val</param>
+        /// <returns></returns>
+        /// <remarks></remarks>
+        public static string ParseToCsv(this string val)
+        {
+            return '"' + GetEmptyStringIfNull(val).Replace("\"", "\"\"") + '"';
+        }
     }
 }
