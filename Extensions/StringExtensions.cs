@@ -149,5 +149,36 @@ namespace Extensions
             bool isParsed = Enum.TryParse(value, true, out result);
             return isParsed ? result : defaultValue;
         }
+
+        /// <summary>
+        ///     Gets empty String if passed value is of type Null/Nothing
+        /// </summary>
+        /// <param name="val">val</param>
+        /// <returns>System.String</returns>
+        /// <remarks></remarks>
+        public static string GetEmptyStringIfNull(this string val)
+        {
+            return (val != null ? val.Trim() : "");
+        }
+
+        /// <summary>
+        ///     Checks if a string is null and returns String if not Empty else returns null/Nothing
+        /// </summary>
+        /// <param name="myValue">String value</param>
+        /// <returns>null/nothing if String IsEmpty</returns>
+        /// <remarks></remarks>
+        public static string GetNullIfEmptyString(this string myValue)
+        {
+            if (myValue == null || myValue.Length <= 0)
+            {
+                return null;
+            }
+            myValue = myValue.Trim();
+            if (myValue.Length > 0)
+            {
+                return myValue;
+            }
+            return null;
+        }
     }
 }

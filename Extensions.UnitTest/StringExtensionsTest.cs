@@ -95,5 +95,24 @@ namespace Extensions.UnitTest
             var actual = Convert.ToInt32(data.ToEnum<TestEnums>());
             Assert.Equal(actual, expected);
         }
+
+        [Theory]
+        [InlineData(null, "")]
+        [InlineData(" ", "")]
+        [InlineData("", "")]
+        [InlineData("Swagat ", "Swagat")]
+        public void GetEmptyStringIfNull_ShouldPass(string data, string expected)
+        {
+            Assert.True(data.GetEmptyStringIfNull() == expected);
+        }
+        [Theory]
+        [InlineData(null, null)]
+        [InlineData(" ", null)]
+        [InlineData("", null)]
+        [InlineData(" Swagat ", "Swagat")]
+        public void GetNullIfEmptyString_ShouldPass(string data, string expected)
+        {
+            Assert.True(data.GetNullIfEmptyString() == expected);
+        }
     }
 }
