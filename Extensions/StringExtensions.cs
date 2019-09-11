@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Extensions
 {
@@ -65,7 +67,7 @@ namespace Extensions
             var res = new List<string>();
             foreach (PropertyInfo p in obj.GetType().GetProperties())
             {
-                res.Add(p.GetValue(obj, null)?.ToString() ?? "");
+                res.Add(p.GetValue(obj, null)?.ToString() ?? string.Empty);
             }
             return string.Join(separator, res);
         }
@@ -166,7 +168,7 @@ namespace Extensions
         /// <returns>Enum object</returns>
         /// <remarks>
         ///     <exception cref="ArgumentException">
-        ///         enumType is not an System.Enum.-or- value is either an empty string ("") or
+        ///         enumType is not an System.Enum.-or- value is either an empty string (string.Empty) or
         ///         only contains white space.-or- value is a name, but not one of the named constants defined for the enumeration
         ///     </exception>
         /// </remarks>
@@ -190,7 +192,7 @@ namespace Extensions
         /// <remarks></remarks>
         public static string GetEmptyStringIfNull(this string val)
         {
-            return (val != null ? val.Trim() : "");
+            return (val != null ? val.Trim() : string.Empty);
         }
 
         /// <summary>
@@ -302,6 +304,56 @@ namespace Extensions
             }
             return s.Substring(0, 1).ToUpper() + s.Substring(1).ToLower();
         }
+        /// <summary>
+        ///     Remove Characters from string
+        /// </summary>
+        /// <param name="s">string to remove characters</param>
+        /// <param name="chars">array of chars</param>
+        /// <returns>System.string</returns>
+        public static string RemoveChars(this string s, params char[] chars)
+        {
+            var sb = new StringBuilder(s.Length);
+            foreach (char c in s.Where(c => !chars.Contains(c)))
+            {
+                sb.Append(c);
+            }
+            return sb.ToString();
+        }
 
+        /// <summary>
+        ///     Replace specified characters with an empty string.
+        /// </summary>
+        /// <param name="s">the string</param>
+        /// <param name="chars">list of characters to replace from the string</param>
+        /// <example>
+        ///     string s = "Friends";
+        ///     s = s.Replace('F', 'r','i','s');  //s becomes 'end;
+        /// </example>
+        /// <returns>System.string</returns>
+        public static string RemoveCharsIgnoreCase(this string s, params char[] chars)
+        {
+            return chars.Aggregate(s, (current, c) => current.ToLower().Replace(c.ToString(CultureInfo.InvariantCulture).ToLower(), string.Empty));
+        }
+        /// <summary>
+        ///     Remove string from string
+        /// </summary>
+        /// <param name="s">string to remove characters</param>
+        /// <param name="replaceString">String  to be removed</param>
+        /// <returns>System.string</returns>
+        public static string RemoveString(this string s, string replaceString)
+        {
+            return s.Replace(replaceString, string.Empty);
+        }
+
+        /// <summary>
+        ///     Remove string from string ignoring case
+        /// </summary>
+        /// <param name="s">string to remove characters</param>
+        /// <param name="replaceString">String  to be removed</param>
+        /// <returns>System.string</returns>
+        public static string RemoveStringIgnoreCase(this string s, string replaceString)
+        {
+            return Regex.Replace(s, replaceString, string.Empty, RegexOptions.IgnoreCase);
+        }
     }
 }

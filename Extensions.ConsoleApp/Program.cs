@@ -7,12 +7,10 @@ namespace Extensions.ConsoleApp
     {
         static void Main(string[] args)
         {
-            var bar = @"23,34,,56,,-2,33,100";
-            var expected = bar.Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries).ToArray();
-
-            Console.WriteLine("Hello World!");
+            /** Remove sample **/
+            string founder = "Mahesh Chand is a founder of C# Corner";
+            Console.WriteLine(founder.RemoveCharsIgnoreCase('m','A'));
             Console.ReadKey();
-
         }
     }
 }

@@ -217,5 +217,48 @@ namespace Extensions.UnitTest
         {
             Assert.Equal(data.Capitalize(), actual);
         }
+
+        [Theory]
+        [InlineData("swagat swain", "s,w,a,i,n", "gt ")]
+        [InlineData("swagat swain ", " ", "swagatswain")]
+        public void RemoveChars_ShouldPass(string data, string replaceString, string actual)
+        {
+            var res = data.RemoveChars(replaceString.ToCharArray());
+            Assert.Equal(res, actual);
+        }
+        [Theory]
+        [InlineData("swagat swain", "S,w,a,i,n", "gt ")]
+        [InlineData("swagat swain ", " ", "swagatswain")]
+        public void RemoveCharsIgnoreCase_ShouldPass(string data, string replaceString, string actual)
+        {
+            var res = data.RemoveCharsIgnoreCase(replaceString.ToCharArray());
+            Assert.Equal(res, actual);
+        }
+        [Theory]
+        [InlineData("swagat swain", "swain", "swagat ")]
+        [InlineData("swagat swain", "ain", "swagat sw")]
+        [InlineData("swagat swain", "Swagat", "swagat swain")]
+        [InlineData("swagat swain is swagat swain", "swagat", " swain is  swain")]
+        [InlineData("swagat swain is swagat swain", "is swagat swain", "swagat swain ")]
+        [InlineData("swagat swain is swagat swain", "agat swain", "sw is sw")]
+        public void RemoveString_ShouldPass(string data, string replaceString, string actual)
+        {
+            var res = data.RemoveString(replaceString);
+            Assert.Equal(res, actual);
+        }
+
+        [Theory]
+        [InlineData("swagat swain", "swain", "swagat ")]
+        [InlineData("swagat swain", "SWAIN", "swagat ")]
+        [InlineData("swagat swain", "ain", "swagat sw")]
+        [InlineData("swagat swain", "Swagat", " swain")]
+        [InlineData("swagat swain is swagat swain", "swagat", " swain is  swain")]
+        [InlineData("swagat swain is swagat swain", "is SWagat swain", "swagat swain ")]
+        [InlineData("swagat swain is swagat swain", "agat swain", "sw is sw")]
+        public void RemoveStringIgnoreCase_ShouldPass(string data, string replaceString, string actual)
+        {
+            var res = data.RemoveStringIgnoreCase(replaceString);
+            Assert.Equal(res, actual);
+        }
     }
 }
