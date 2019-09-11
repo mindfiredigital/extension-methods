@@ -789,5 +789,63 @@ namespace Extensions
                 return val == null || suffix == null ||
                        !val.EndsWith(suffix, StringComparison.InvariantCulture);
         }
+
+        /// <summary>
+        ///     Convert string to Hash using Sha512
+        /// </summary>
+        /// <param name="val">string to hash</param>
+        /// <returns>Hashed string</returns>
+        /// <exception cref="ArgumentException"></exception>
+        public static string CreateHashSha512(string val)
+        {
+            if (string.IsNullOrEmpty(val))
+            {
+                throw new ArgumentException("val");
+            }
+            var sb = new StringBuilder();
+            using (SHA512 hash = SHA512.Create())
+            {
+                byte[] data = hash.ComputeHash(val.ToBytes());
+                foreach (byte b in data)
+                {
+                    sb.Append(b.ToString("x2"));
+                }
+            }
+            return sb.ToString();
+        }
+
+        /// <summary>
+        ///     Convert string to Hash using Sha256
+        /// </summary>
+        /// <param name="val">string to hash</param>
+        /// <returns>Hashed string</returns>
+        public static string CreateHashSha256(string val)
+        {
+            if (string.IsNullOrEmpty(val))
+            {
+                throw new ArgumentException("val");
+            }
+            var sb = new StringBuilder();
+            using (SHA256 hash = SHA256.Create())
+            {
+                byte[] data = hash.ComputeHash(val.ToBytes());
+                foreach (byte b in data)
+                {
+                    sb.Append(b.ToString("x2"));
+                }
+            }
+            return sb.ToString();
+        }
+        /// <summary>
+        ///     Convert a string to its equivalent byte array
+        /// </summary>
+        /// <param name="val">string to convert</param>
+        /// <returns>System.byte array</returns>
+        public static byte[] ToBytes(this string val)
+        {
+            var bytes = new byte[val.Length * sizeof(char)];
+            Buffer.BlockCopy(val.ToCharArray(), 0, bytes, 0, bytes.Length);
+            return bytes;
+        }
     }
 }
