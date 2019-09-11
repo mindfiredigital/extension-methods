@@ -283,5 +283,30 @@ namespace Extensions.UnitTest
             var res = input.Reverse();
             Assert.Equal(res, actual);
         }
+
+        [Theory]
+        [InlineData("Mahesh Chand is a founder of C# Corner", "Chand",  1)]
+        [InlineData("Mahesh Chand is a founder of C# CornerMahesh Chand is a founder of C# Corner", "mahesh",  0)]
+        [InlineData("Mahesh Chand is a founder of C# CornerMahesh Chand is a founder of C# Corner", "Mahesh",  2)]
+        [InlineData("Mahesh Chand is a founder of C# Corner Mahesh Chand is a founder of C# Corner", "Mahesh",  2)]
+        [InlineData("Mahesh Chand is a founder of C# Corner Mahesh Chand is a founder of C# Corner", "a",  6)]
+        [InlineData("Mahesh Chand is a founder of C# Corner Mahesh Chand is a founder of C# Corner", "Swagat",  0)]
+        public void CountOccurrences_ShouldPass(string input, string matchString, int count)
+        {
+            var res = input.CountOccurrences(matchString);
+            Assert.Equal(res, count);
+        }
+        [Theory]
+        [InlineData("Mahesh Chand is a founder of C# Corner", "Chand", 1)]
+        [InlineData("Mahesh Chand is a founder of C# CornerMahesh Chand is a founder of C# Corner", "mahesh", 2)]
+        [InlineData("Mahesh Chand is a founder of C# CornerMahesh Chand is a founder of C# Corner", "Mahesh", 2)]
+        [InlineData("Mahesh Chand is a founder of C# Corner Mahesh Chand is a founder of C# Corner", "Mahesh", 2)]
+        [InlineData("MAhesh Chand is a founder of C# Corner MAhesh Chand is a founder of C# Corner", "a", 6)]
+        [InlineData("Mahesh Chand is a founder of C# Corner Mahesh Chand is a founder of C# Corner", "Swagat", 0)]
+        public void CountOccurrencesIgnoreCase_ShouldPass(string input, string matchString, int count)
+        {
+            var res = input.CountOccurrencesIgnoreCase(matchString);
+            Assert.Equal(res, count);
+        }
     }
 }

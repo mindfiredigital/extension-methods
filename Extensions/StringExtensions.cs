@@ -400,5 +400,25 @@ namespace Extensions
         {
             return '"' + GetEmptyStringIfNull(val).Replace("\"", "\"\"") + '"';
         }
+        /// <summary>
+        ///     Count number of occurrences in string
+        /// </summary>
+        /// <param name="val">string containing text</param>
+        /// <param name="stringToMatch">string or pattern find</param>
+        /// <returns></returns>
+        public static int CountOccurrences(this string val, string stringToMatch)
+        {
+            return Regex.Matches(val, stringToMatch).Count;
+        }
+        /// <summary>
+        ///     Count number of occurrences in string ignoring Case
+        /// </summary>
+        /// <param name="val">string containing text</param>
+        /// <param name="stringToMatch">string or pattern find</param>
+        /// <returns></returns>
+        public static int CountOccurrencesIgnoreCase(this string val, string stringToMatch)
+        {
+            return Regex.Matches(val, stringToMatch, RegexOptions.IgnoreCase).Count;
+        }
     }
 }
