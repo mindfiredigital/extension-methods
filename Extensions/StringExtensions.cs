@@ -240,5 +240,52 @@ namespace Extensions
                     : val
                 : null;
         }
+
+        /// <summary>
+        ///     Check a String ends with another string ignoring the case.
+        /// </summary>
+        /// <param name="val">string</param>
+        /// <param name="suffix">suffix</param>
+        /// <returns>true or false</returns>
+        public static bool EndsWithIgnoreCase(this string val, string suffix)
+        {
+            if (val == null)
+            {
+                throw new ArgumentNullException("val", "val parameter is null");
+            }
+            if (suffix == null)
+            {
+                throw new ArgumentNullException("suffix", "suffix parameter is null");
+            }
+            if (val.Length < suffix.Length)
+            {
+                return false;
+            }
+            return val.EndsWith(suffix, StringComparison.InvariantCultureIgnoreCase);
+        }
+
+        /// <summary>
+        ///     Check a String starts with another string ignoring the case.
+        /// </summary>
+        /// <param name="val">string</param>
+        /// <param name="prefix">prefix</param>
+        /// <returns>true or false</returns>
+        public static bool StartsWithIgnoreCase(this string val, string prefix)
+        {
+            if (val == null)
+            {
+                throw new ArgumentNullException("val", "val parameter is null");
+            }
+            if (prefix == null)
+            {
+                throw new ArgumentNullException("prefix", "prefix parameter is null");
+            }
+            if (val.Length < prefix.Length)
+            {
+                return false;
+            }
+            return val.StartsWith(prefix, StringComparison.InvariantCultureIgnoreCase);
+        }
+
     }
 }

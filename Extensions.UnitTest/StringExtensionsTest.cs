@@ -152,7 +152,7 @@ namespace Extensions.UnitTest
         [InlineData("Royal College", "R")]
         public void FirstCharacter_ShouldPass(string data, string expected)
         {
-            Assert.Equal(data.FirstCharacter() , expected);
+            Assert.Equal(data.FirstCharacter(), expected);
         }
         [Theory]
         [InlineData(null, null)]
@@ -164,7 +164,47 @@ namespace Extensions.UnitTest
         [InlineData("Royal College", "e")]
         public void LastCharacter_ShouldPass(string data, string expected)
         {
-            Assert.Equal(data.LastCharacter(),expected);
+            Assert.Equal(data.LastCharacter(), expected);
+        }
+
+        [Theory]
+        [InlineData("Hello World", "rld", true)]
+        [InlineData("Hello World ", "rld", false)]
+        [InlineData("Hello World", "Orld", true)]
+        [InlineData("Hello World", "World", true)]
+        [InlineData("Hello World", "Hello World", true)]
+        [InlineData("Hello World", "Swagat Hello World", false)]
+        public void EndsWithIgnoreCase_ShouldPass(string data, string endsWith, bool expected)
+        {
+            Assert.True(data.EndsWithIgnoreCase(endsWith) == expected);
+        }
+        [Theory]
+        [InlineData(null, "World", "val")]
+        [InlineData("World", null, "suffix")]
+        public void EndsWithIgnoreCase_ArgumentNullException_ShouldFail(string data, string suffix, string param)
+        {
+            Assert.Throws<ArgumentNullException>(param, () => data.EndsWithIgnoreCase(suffix));
+        }
+
+        [Theory]
+        [InlineData("Hello World", "hell", true)]
+        [InlineData("Hello World ", " hel", false)]
+        [InlineData("Hello World", "HelLo", true)]
+        [InlineData("Hello World", "Hello", true)]
+        [InlineData("Hello World", "Hello World", true)]
+        [InlineData("Hello World", "Swagat Hello World", false)]
+        [InlineData(" Hello World", "Hello World", false)]
+        [InlineData(" Hello World", " Hello World", true)]
+        public void StartsWithIgnoreCase_ShouldPass(string data, string endsWith, bool expected)
+        {
+            Assert.True(data.StartsWithIgnoreCase(endsWith) == expected);
+        }
+        [Theory]
+        [InlineData(null, "World", "val")]
+        [InlineData("World", null, "prefix")]
+        public void StartsWithIgnoreCase_ArgumentNullException_ShouldFail(string data, string prefix, string param)
+        {
+            Assert.Throws<ArgumentNullException>(param, () => data.StartsWithIgnoreCase(prefix));
         }
     }
 }
