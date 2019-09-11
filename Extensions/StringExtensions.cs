@@ -540,5 +540,49 @@ namespace Extensions
             }
             return prefix + val;
         }
+
+        /// <summary>
+        ///     Extracts the left part of the input string limited with the length parameter
+        /// </summary>
+        /// <param name="val">The input string to take the left part from</param>
+        /// <param name="length">The total number characters to take from the input string</param>
+        /// <returns>The substring starting at startIndex 0 until length</returns>
+        /// <exception cref="ArgumentNullException">input is null</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Length is smaller than zero or higher than the length of input</exception>
+        public static string Left(this string val, int length)
+        {
+            if (string.IsNullOrEmpty(val))
+            {
+                throw new ArgumentNullException("val");
+            }
+            if (length < 0 || length > val.Length)
+            {
+                throw new ArgumentOutOfRangeException("length",
+                    "length cannot be higher than total string length or less than 0");
+            }
+            return val.Substring(0, length);
+        }
+
+        /// <summary>
+        ///     Extracts the right part of the input string limited with the length parameter
+        /// </summary>
+        /// <param name="val">The input string to take the right part from</param>
+        /// <param name="length">The total number characters to take from the input string</param>
+        /// <returns>The substring taken from the input string</returns>
+        /// <exception cref="ArgumentNullException">input is null</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Length is smaller than zero or higher than the length of input</exception>
+        public static string Right(this string val, int length)
+        {
+            if (string.IsNullOrEmpty(val))
+            {
+                throw new ArgumentNullException("val");
+            }
+            if (length < 0 || length > val.Length)
+            {
+                throw new ArgumentOutOfRangeException("length",
+                    "length cannot be higher than total string length or less than 0");
+            }
+            return val.Substring(val.Length - length);
+        }
     }
 }

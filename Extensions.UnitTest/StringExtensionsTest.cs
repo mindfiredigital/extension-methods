@@ -356,10 +356,10 @@ namespace Extensions.UnitTest
         }
 
         [Theory]
-        [InlineData("AbcDas",true)]
-        [InlineData("Abc Das",true)]
-        [InlineData("Abc90Das",false)]
-        [InlineData("Abc$#3Das",false)]
+        [InlineData("AbcDas", true)]
+        [InlineData("Abc Das", true)]
+        [InlineData("Abc90Das", false)]
+        [InlineData("Abc$#3Das", false)]
         public void IsAlpha_ShouldPass(string data, bool actual)
         {
             var res = data.IsAlpha();
@@ -403,6 +403,48 @@ namespace Extensions.UnitTest
         {
             var res = data.IsIPv4();
             Assert.True(res == actual);
+        }
+
+        [Theory]
+        [InlineData("Swagat Kumar Swain", 0, "")]
+        [InlineData("Swagat Kumar Swain", 8, "Swagat K")]
+        public void Left_ShouldPass(string data, int length, string actual)
+        {
+            var res = data.Left(length);
+            Assert.Equal(res, actual);
+        }
+        [Theory]
+        [InlineData("", "val", 12)]
+        [InlineData(null, "val", 12)]
+        [InlineData("Swah", "length", 12)]
+        public void Left_ArgumentNullException_ShouldFail(string data, string param, int length)
+        {
+            if (param == "val")
+                Assert.Throws<ArgumentNullException>(param, () => data.Left(length));
+            else
+                Assert.Throws<ArgumentOutOfRangeException>(param, () => data.Left(length));
+        }
+
+
+        [Theory]
+        [InlineData("Swagat Kumar Swain", 0, "")]
+        [InlineData("Swagat Kumar Swain", 8, "ar Swain")]
+        [InlineData("Swagat Kumar Swain", 2, "in")]
+        public void Right_ShouldPass(string data, int length, string actual)
+        {
+            var res = data.Right(length);
+            Assert.Equal(res, actual);
+        }
+        [Theory]
+        [InlineData("", "val", 12)]
+        [InlineData(null, "val", 12)]
+        [InlineData("Swah", "length", 12)]
+        public void Right_ArgumentNullException_ShouldFail(string data, string param, int length)
+        {
+            if (param == "val")
+                Assert.Throws<ArgumentNullException>(param, () => data.Right(length));
+            else
+                Assert.Throws<ArgumentOutOfRangeException>(param, () => data.Right(length));
         }
     }
 }
