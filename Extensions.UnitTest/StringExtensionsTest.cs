@@ -354,5 +354,26 @@ namespace Extensions.UnitTest
             var res = data.AppendPrefixIfMissing(suffix, ignoreCase);
             Assert.Equal(res, actual);
         }
+
+        [Theory]
+        [InlineData("AbcDas",true)]
+        [InlineData("Abc Das",true)]
+        [InlineData("Abc90Das",false)]
+        [InlineData("Abc$#3Das",false)]
+        public void IsAlpha_ShouldPass(string data, bool actual)
+        {
+            var res = data.IsAlpha();
+            Assert.True(res == actual);
+        }
+        [Theory]
+        [InlineData("AbcDas", true)]
+        [InlineData("1233", true)]
+        [InlineData("Abc90Das", true)]
+        [InlineData("Abc90DasA#$", false)]
+        public void IsAlphaNumeric_ShouldPass(string data, bool actual)
+        {
+            var res = data.IsAlphaNumeric();
+            Assert.True(res == actual);
+        }
     }
 }

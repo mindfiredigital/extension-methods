@@ -74,7 +74,35 @@ namespace Extensions
             bool isNum = Double.TryParse(val, NumberStyles.Any, NumberFormatInfo.InvariantInfo, out retNum);
             return isNum;
         }
+        /// <summary>
+        ///     Checks if the String contains only Unicode letters.
+        ///     null will return false. An empty String ("") will return false.
+        /// </summary>
+        /// <param name="val">string to check if is Alpha</param>
+        /// <returns>true if only contains letters, and is non-null</returns>
+        public static bool IsAlpha(this string val)
+        {
+            if (string.IsNullOrEmpty(val))
+            {
+                return false;
+            }
+            return val.Trim().Replace(" ", "").All(Char.IsLetter);
+        }
 
+        /// <summary>
+        ///     Checks if the String contains only Unicode letters, digits.
+        ///     null will return false. An empty String ("") will return false.
+        /// </summary>
+        /// <param name="val">string to check if is Alpha or Numeric</param>
+        /// <returns></returns>
+        public static bool IsAlphaNumeric(this string val)
+        {
+            if (string.IsNullOrEmpty(val))
+            {
+                return false;
+            }
+            return val.Trim().Replace(" ", "").All(Char.IsLetterOrDigit);
+        }
         /// <summary>
         /// Converts an object to CSV String separated by a Separator
         /// </summary>
