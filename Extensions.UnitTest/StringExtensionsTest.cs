@@ -275,8 +275,8 @@ namespace Extensions.UnitTest
         }
 
         [Theory]
-        [InlineData("Swagat","tagawS")]
-        [InlineData(" "," ")]
+        [InlineData("Swagat", "tagawS")]
+        [InlineData(" ", " ")]
         [InlineData("Mahesh Chand is a founder of C# Corner", "renroC #C fo rednuof a si dnahC hsehaM")]
         public void Reverse_ShouldPass(string input, string actual)
         {
@@ -285,12 +285,12 @@ namespace Extensions.UnitTest
         }
 
         [Theory]
-        [InlineData("Mahesh Chand is a founder of C# Corner", "Chand",  1)]
-        [InlineData("Mahesh Chand is a founder of C# CornerMahesh Chand is a founder of C# Corner", "mahesh",  0)]
-        [InlineData("Mahesh Chand is a founder of C# CornerMahesh Chand is a founder of C# Corner", "Mahesh",  2)]
-        [InlineData("Mahesh Chand is a founder of C# Corner Mahesh Chand is a founder of C# Corner", "Mahesh",  2)]
-        [InlineData("Mahesh Chand is a founder of C# Corner Mahesh Chand is a founder of C# Corner", "a",  6)]
-        [InlineData("Mahesh Chand is a founder of C# Corner Mahesh Chand is a founder of C# Corner", "Swagat",  0)]
+        [InlineData("Mahesh Chand is a founder of C# Corner", "Chand", 1)]
+        [InlineData("Mahesh Chand is a founder of C# CornerMahesh Chand is a founder of C# Corner", "mahesh", 0)]
+        [InlineData("Mahesh Chand is a founder of C# CornerMahesh Chand is a founder of C# Corner", "Mahesh", 2)]
+        [InlineData("Mahesh Chand is a founder of C# Corner Mahesh Chand is a founder of C# Corner", "Mahesh", 2)]
+        [InlineData("Mahesh Chand is a founder of C# Corner Mahesh Chand is a founder of C# Corner", "a", 6)]
+        [InlineData("Mahesh Chand is a founder of C# Corner Mahesh Chand is a founder of C# Corner", "Swagat", 0)]
         public void CountOccurrences_ShouldPass(string input, string matchString, int count)
         {
             var res = input.CountOccurrences(matchString);
@@ -329,6 +329,29 @@ namespace Extensions.UnitTest
         public void RemoveSuffix_ShouldPass(string data, string suffix, bool ignoreCase, string actual)
         {
             var res = data.RemoveSuffix(suffix, ignoreCase);
+            Assert.Equal(res, actual);
+        }
+        [Theory]
+        [InlineData("Swagat Kumar", " ,Swain", true, "Swagat Kumar ,Swain")]
+        [InlineData("Swagat Kumar", " ,Swain", false, "Swagat Kumar ,Swain")]
+        [InlineData("Swagat Kumar Swain", "swain", true, "Swagat Kumar Swain")]
+        [InlineData("Swagat Kumar Swain", "swain", false, "Swagat Kumar Swainswain")]
+        [InlineData("Swagat Kumar Swain", "Swain", true, "Swagat Kumar Swain")]
+        [InlineData("Swagat Kumar Swain", "Swain", false, "Swagat Kumar Swain")]
+        public void AppendSuffixIfMissing_ShouldPass(string data, string suffix, bool ignoreCase, string actual)
+        {
+            var res = data.AppendSuffixIfMissing(suffix, ignoreCase);
+            Assert.Equal(res, actual);
+        }
+
+        [Theory]
+        [InlineData("Swagat Kumar", "Swagat", true, "Swagat Kumar")]
+        [InlineData("Swagat Kumar", "Swagat", false, "Swagat Kumar")]
+        [InlineData("Swagat Kumar Swain", "swagat", true, "Swagat Kumar Swain")]
+        [InlineData("Swagat Kumar Swain", "swagat", false, "swagatSwagat Kumar Swain")]
+        public void AppendPrefixIfMissing_ShouldPass(string data, string suffix, bool ignoreCase, string actual)
+        {
+            var res = data.AppendPrefixIfMissing(suffix, ignoreCase);
             Assert.Equal(res, actual);
         }
     }
