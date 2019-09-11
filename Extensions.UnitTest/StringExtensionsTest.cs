@@ -273,5 +273,15 @@ namespace Extensions.UnitTest
             var res = data.RemoveStringIgnoreCase(replaceString);
             Assert.Equal(res, actual);
         }
+
+        [Theory]
+        [InlineData("Swagat","tagawS")]
+        [InlineData(" "," ")]
+        [InlineData("Mahesh Chand is a founder of C# Corner", "renroC #C fo rednuof a si dnahC hsehaM")]
+        public void Reverse_ShouldPass(string input, string actual)
+        {
+            var res = input.Reverse();
+            Assert.Equal(res, actual);
+        }
     }
 }

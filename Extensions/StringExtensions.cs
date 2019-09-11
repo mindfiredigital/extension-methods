@@ -374,5 +374,21 @@ namespace Extensions
         {
             return Regex.Replace(s, replaceString, string.Empty, RegexOptions.IgnoreCase);
         }
+
+        /// <summary>
+        ///     Reverse string
+        /// </summary>
+        /// <param name="val">string to reverse</param>
+        /// <returns>System.string</returns>
+        public static string Reverse(this string val)
+        {
+            var chars = new char[val.Length];
+            for (int i = val.Length - 1, j = 0; i >= 0; --i, ++j)
+            {
+                chars[j] = val[i];
+            }
+            val = new String(chars);
+            return val;
+        }
     }
 }
