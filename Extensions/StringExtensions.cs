@@ -746,5 +746,16 @@ namespace Extensions
             return query.Split('&').Select(p => p.Split('=')).ToDictionary(
                 key => key[0].ToLower().Trim(), value => value[1]);
         }
+
+
+        /// <summary>
+        ///     Remove Line Feeds
+        /// </summary>
+        /// <param name="val">string to remove line feeds</param>
+        /// <returns>System.string</returns>
+        public static string RemoveLineFeeds(this string val)
+        {
+            return Regex.Replace(val, @"^[\r\n]+|\.|[\r\n]+$", "");
+        }
     }
 }
