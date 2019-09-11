@@ -652,5 +652,28 @@ namespace Extensions
         {
             return val != null && val.Length >= minCharLength && val.Length <= maxCharLength;
         }
+
+        /// <summary>Splits the camel case into an IEnumerable, If the input is "FirstName", It will return "First" "Name"</summary>
+        /// <param name="source">The source.</param>
+        /// <returns></returns>
+        public static IEnumerable<string> SplitCamelCase(this string source)
+        {
+            const string pattern = @"[A-Z][a-z]*|[a-z]+|\d+";
+            var matches = Regex.Matches(source, pattern);
+            foreach (Match match in matches)
+            {
+                yield return match.Value;
+            }
+        }
+
+        /// <summary>Converts to humancase. If the input is "FirstName", It will return "First Name"</summary>
+        /// <param name="source">The source.</param>
+        /// <returns></returns>
+        public static string ToHumanCase(this string source)
+        {
+            var words = source.SplitCamelCase();
+            string humanCased = string.Join(" ", words);
+            return humanCased;
+        }
     }
 }

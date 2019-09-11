@@ -506,5 +506,14 @@ namespace Extensions.UnitTest
         {
             Assert.True(data.IsLength(min,max) == actual);
         }
+        [Theory]
+        [InlineData("FirstName","First Name")]
+        [InlineData("Firstname","Firstname")]
+        [InlineData("", "")]
+        [InlineData("First Name","First Name")]
+        public void ToHumanCase_ShouldPass(string data, string actual)
+        {
+            Assert.Equal(data.ToHumanCase() , actual);
+        }
     }
 }
