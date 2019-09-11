@@ -446,5 +446,65 @@ namespace Extensions.UnitTest
             else
                 Assert.Throws<ArgumentOutOfRangeException>(param, () => data.Right(length));
         }
+
+        [Theory]
+        [InlineData(null, true)]
+        [InlineData("", false)]
+        [InlineData("Swag", false)]
+        [InlineData("  ", false)]
+        public void IsNull_ShouldPass(string data, bool actual)
+        {
+            Assert.True(data.IsNull() == actual);
+        }
+
+        [Theory]
+        [InlineData(null, true)]
+        [InlineData("", true)]
+        [InlineData("Swag", false)]
+        [InlineData("  ", false)]
+        public void IsNullOrEmpty_ShouldPass(string data, bool actual)
+        {
+            Assert.True(data.IsNullOrEmpty() == actual);
+        }
+        [Theory]
+        [InlineData(null, true)]
+        [InlineData("", true)]
+        [InlineData("Swag", false)]
+        [InlineData("  ", true)]
+        public void IsNullOrWhiteSpace_ShouldPass(string data, bool actual)
+        {
+            Assert.True(data.IsNullOrWhiteSpace() == actual);
+        }
+        [Theory]
+        [InlineData(null, 0, false)]
+        [InlineData("", 0, true)]
+        [InlineData("Swag", 5, false)]
+        [InlineData("Swag", 2, true)]
+        [InlineData("Swag ", 5, true)]
+        public void IsMinlength_ShouldPass(string data, int length, bool actual)
+        {
+            Assert.True(data.IsMinLength(length) == actual);
+        }
+        [Theory]
+        [InlineData(null, 0, false)]
+        [InlineData("", 0, true)]
+        [InlineData("Swag", 5, true)]
+        [InlineData("Swag", 2, false)]
+        [InlineData("Swag ", 5, true)]
+        public void IsMaxLength_ShouldPass(string data, int length, bool actual)
+        {
+            Assert.True(data.IsMaxLength(length) == actual);
+        }
+
+        [Theory]
+        [InlineData(null, 0,0, false)]
+        [InlineData("", 0,0, true)]
+        [InlineData("", 1,5, false)]
+        [InlineData("Swag", 2, 5, true)]
+        [InlineData("Swag  ", 2, 5, false)]
+        public void IsLength_ShouldPass(string data, int min, int max, bool actual)
+        {
+            Assert.True(data.IsLength(min,max) == actual);
+        }
     }
 }
