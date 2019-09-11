@@ -420,5 +420,37 @@ namespace Extensions
         {
             return Regex.Matches(val, stringToMatch, RegexOptions.IgnoreCase).Count;
         }
+
+        /// <summary>
+        ///     Removes the first part of the string, if no match found return original string
+        /// </summary>
+        /// <param name="val">string to remove prefix</param>
+        /// <param name="prefix">prefix</param>
+        /// <param name="ignoreCase">Indicates whether the compare should ignore case</param>
+        /// <returns>trimmed string with no prefix or original string</returns>
+        public static string RemovePrefix(this string val, string prefix, bool ignoreCase = true)
+        {
+            if (!string.IsNullOrEmpty(val) && (ignoreCase ? val.StartsWithIgnoreCase(prefix) : val.StartsWith(prefix)))
+            {
+                return val.Substring(prefix.Length, val.Length - prefix.Length);
+            }
+            return val;
+        }
+
+        /// <summary>
+        ///     Removes the end part of the string, if no match found return original string
+        /// </summary>
+        /// <param name="val">string to remove suffix</param>
+        /// <param name="suffix">suffix</param>
+        /// <param name="ignoreCase">Indicates whether the compare should ignore case</param>
+        /// <returns>trimmed string with no suffix or original string</returns>
+        public static string RemoveSuffix(this string val, string suffix, bool ignoreCase = true)
+        {
+            if (!string.IsNullOrEmpty(val) && (ignoreCase ? val.EndsWithIgnoreCase(suffix) : val.EndsWith(suffix)))
+            {
+                return val.Substring(0, val.Length - suffix.Length);
+            }
+            return val;
+        }
     }
 }

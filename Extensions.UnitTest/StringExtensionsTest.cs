@@ -308,5 +308,28 @@ namespace Extensions.UnitTest
             var res = input.CountOccurrencesIgnoreCase(matchString);
             Assert.Equal(res, count);
         }
+
+        [Theory]
+        [InlineData("Swagat Kumar Swain", "Swa", true, "gat Kumar Swain")]
+        [InlineData("Swagat Kumar Swain", "Swa", false, "gat Kumar Swain")]
+        [InlineData("Swagat Kumar Swain", "swag", false, "Swagat Kumar Swain")]
+        [InlineData("Swagat Kumar Swain", "swag", true, "at Kumar Swain")]
+        [InlineData("Swagat Kumar Swain", "Swain", true, "Swagat Kumar Swain")]
+        public void RemovePrefix_ShouldPass(string data, string prefix, bool ignoreCase, string actual)
+        {
+            var res = data.RemovePrefix(prefix, ignoreCase);
+            Assert.Equal(res, actual);
+        }
+        [Theory]
+        [InlineData("Swagat Kumar Swain", "Swa", true, "Swagat Kumar Swain")]
+        [InlineData("Swagat Kumar Swain", "Swain", true, "Swagat Kumar ")]
+        [InlineData("Swagat Kumar Swain", "Swain", false, "Swagat Kumar ")]
+        [InlineData("Swagat Kumar Swain", "swain", true, "Swagat Kumar ")]
+        [InlineData("Swagat Kumar Swain", "swain", false, "Swagat Kumar Swain")]
+        public void RemoveSuffix_ShouldPass(string data, string suffix, bool ignoreCase, string actual)
+        {
+            var res = data.RemoveSuffix(suffix, ignoreCase);
+            Assert.Equal(res, actual);
+        }
     }
 }
