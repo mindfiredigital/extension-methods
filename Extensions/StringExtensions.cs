@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -685,6 +686,41 @@ namespace Extensions
         {
             if (value.IsNullOrEmpty()) return value;
             return value.Length <= maxLength ? value : value.Substring(0, maxLength);
+        }
+
+        /// <summary>
+        ///     Encrypt a string using the supplied key. Encoding is done using RSA encryption.
+        /// </summary>
+        /// <param name="stringToEncrypt">String that must be encrypted.</param>
+        /// <param name="key">Encryption key</param>
+        /// <returns>A string representing a byte array separated by a minus sign.</returns>
+        /// <exception cref="ArgumentException">Occurs when stringToEncrypt or key is null or empty.</exception>
+        public static string Encrypt(this string stringToEncrypt, string key)
+        {
+            var cspParameter = new CspParameters { KeyContainerName = key };
+            var rsaServiceProvider = new RSACryptoServiceProvider(cspParameter) { PersistKeyInCsp = true };
+            byte[] bytes = rsaServiceProvider.Encrypt(Encoding.UTF8.GetBytes(stringToEncrypt), true);
+            return BitConverter.ToString(bytes);
+        }
+
+
+        /// <summary>
+        ///     Decrypt a string using the supplied key. Decoding is done using RSA encryption.
+        /// </summary>
+        /// <param name="stringToDecrypt">String that must be decrypted.</param>
+        /// <param name="key">Decryption key.</param>
+        /// <returns>The decrypted string or null if decryption failed.</returns>
+        /// <exception cref="ArgumentException">Occurs when stringToDecrypt or key is null or empty.</exception>
+        public static string Decrypt(this string stringToDecrypt, string key)
+        {
+            var cspParamters = new CspParameters { KeyContainerName = key };
+            var rsaServiceProvider = new RSACryptoServiceProvider(cspParamters) { PersistKeyInCsp = true };
+            string[] decryptArray = stringToDecrypt.Split(new[] { "-" }, StringSplitOptions.None);
+            byte[] decryptByteArray = Array.ConvertAll(decryptArray,
+                (s => Convert.ToByte(byte.Parse(s, NumberStyles.HexNumber))));
+            byte[] bytes = rsaServiceProvider.Decrypt(decryptByteArray, true);
+            string result = Encoding.UTF8.GetString(bytes);
+            return result;
         }
     }
 }

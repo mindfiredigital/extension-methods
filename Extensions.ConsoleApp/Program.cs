@@ -9,7 +9,8 @@ namespace Extensions.ConsoleApp
         {
             /** Remove sample **/
             string founder = "Mahesh Chand is a founder of C# Corner";
-            var res = founder.ParseToCsv();
+            var res = founder.Encrypt("myKey");
+            var decres = res.Decrypt("myKey");
             Console.WriteLine(res);
             Console.ReadKey();
         }
