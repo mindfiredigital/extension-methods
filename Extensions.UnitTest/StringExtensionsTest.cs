@@ -206,5 +206,16 @@ namespace Extensions.UnitTest
         {
             Assert.Throws<ArgumentNullException>(param, () => data.StartsWithIgnoreCase(prefix));
         }
+
+        [Theory]
+        [InlineData("swagat", "Swagat")]
+        [InlineData(" swagat", " swagat")]
+        [InlineData("swagat kumar swain", "Swagat kumar swain")]
+        [InlineData("", "")]
+        [InlineData(null, null)]
+        public void Capitalize_ShouldPass(string data, string actual)
+        {
+            Assert.Equal(data.Capitalize(), actual);
+        }
     }
 }

@@ -286,6 +286,22 @@ namespace Extensions
             }
             return val.StartsWith(prefix, StringComparison.InvariantCultureIgnoreCase);
         }
+        /// <summary>
+        ///     Read in a sequence of words from standard input and capitalize each
+        ///     one (make first letter uppercase; make rest lowercase).
+        /// </summary>
+        /// <param name="s">string</param>
+        /// <returns>Word with capitalization</returns>
+        public static string Capitalize(this string s)
+        {
+            if (s == null)
+                return null;
+            if (s.Length == 0)
+            {
+                return s;
+            }
+            return s.Substring(0, 1).ToUpper() + s.Substring(1).ToLower();
+        }
 
     }
 }
