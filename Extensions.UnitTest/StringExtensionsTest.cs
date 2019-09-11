@@ -12,7 +12,7 @@ namespace Extensions.UnitTest
         public void IsDateTime_OnlyDateInddMMyyyy(string actual, string format, bool res)
         {
             bool isEqual = actual.IsDateTime(format);
-            Assert.Equal(res, isEqual);
+            Assert.True(res == isEqual);
         }
 
         [Theory]
