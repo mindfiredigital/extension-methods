@@ -584,5 +584,35 @@ namespace Extensions
             }
             return val.Substring(val.Length - length);
         }
+
+        /// <summary>
+        ///     Checks if a string is null
+        /// </summary>
+        /// <param name="val">string to evaluate</param>
+        /// <returns>true if string is null else false</returns>
+        public static bool IsNull(this string val)
+        {
+            return val == null;
+        }
+
+        /// <summary>
+        ///     Checks if a string is null or empty
+        /// </summary>
+        /// <param name="val">string to evaluate</param>
+        /// <returns>true if string is null or is empty else false</returns>
+        public static bool IsNullOrEmpty(this string val)
+        {
+            return string.IsNullOrEmpty(val);
+        }
+
+        /// <summary>
+        ///     Checks if a string is Null or white space
+        /// </summary>
+        /// <param name="val">string to evaluate</param>
+        /// <returns>true if string is Null or white space else false</returns>
+        public static bool IsNullOrWhiteSpace(this string val)
+        {
+            return string.IsNullOrWhiteSpace(val);
+        }
     }
 }
