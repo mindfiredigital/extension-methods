@@ -675,5 +675,16 @@ namespace Extensions
             string humanCased = string.Join(" ", words);
             return humanCased;
         }
+        /// <summary>
+        /// Truncates a string to the specified maximum length.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="maxLength">The maximum length.</param>
+        /// <returns>System.String</returns>
+        public static string Truncate(this string value, int maxLength)
+        {
+            if (value.IsNullOrEmpty()) return value;
+            return value.Length <= maxLength ? value : value.Substring(0, maxLength);
+        }
     }
 }

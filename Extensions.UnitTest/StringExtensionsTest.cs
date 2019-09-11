@@ -515,5 +515,15 @@ namespace Extensions.UnitTest
         {
             Assert.Equal(data.ToHumanCase() , actual);
         }
+
+        [Theory]
+        [InlineData("FirstName",4, "Firs")]
+        [InlineData("Firstname",0, "")]
+        [InlineData("",5, "")]
+        [InlineData("First Name",17, "First Name")]
+        public void Truncate_ShouldPass(string data,int length, string actual)
+        {
+            Assert.Equal(data.Truncate(length), actual);
+        }
     }
 }
