@@ -375,5 +375,34 @@ namespace Extensions.UnitTest
             var res = data.IsAlphaNumeric();
             Assert.True(res == actual);
         }
+        [Theory]
+        [InlineData("ssswagatss@gmail.com", true)]
+        [InlineData("ssswagat.ss@gmail.com", true)]
+        [InlineData("ssswagatss@gmail.co.in", true)]
+        [InlineData("23@gmail.com", false)]
+        [InlineData("23ssswagatss@gmail.com", false)]
+        [InlineData("ssswagatss1992@gmail.com", true)]
+        [InlineData("ssswagatss1992gmail.com", false)]
+        [InlineData(" ", false)]
+        [InlineData("", false)]
+        [InlineData("23+12@gmail.com", false)]
+        [InlineData("23+12@gmail.co.in.com", false)]
+        public void IsEmailAddress_ShouldPass(string data, bool actual)
+        {
+            var res = data.IsEmailAddress();
+            Assert.True(res == actual);
+        }
+        [Theory]
+        [InlineData("ssswagatss@gmail.com", false)]
+        [InlineData("192.168.1.1", true)]
+        [InlineData("192.168", false)]
+        [InlineData("123", false)]
+        [InlineData(".1.1", false)]
+        [InlineData("1.1.1.1", true)]
+        public void IsIPv4_ShouldPass(string data, bool actual)
+        {
+            var res = data.IsIPv4();
+            Assert.True(res == actual);
+        }
     }
 }

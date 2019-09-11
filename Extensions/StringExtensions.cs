@@ -104,6 +104,34 @@ namespace Extensions
             return val.Trim().Replace(" ", "").All(Char.IsLetterOrDigit);
         }
         /// <summary>
+        ///     Validate email address
+        /// </summary>
+        /// <param name="email">string email address</param>
+        /// <returns>true or false if email if valid</returns>
+        public static bool IsEmailAddress(this string email)
+        {
+            string pattern =
+                "^[a-zA-Z][\\w\\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\\w\\.-]*[a-zA-Z0-9]\\.[a-zA-Z][a-zA-Z\\.]*[a-zA-Z]$";
+            return Regex.Match(email, pattern).Success;
+        }
+        /// <summary>
+        ///     Validates if a string is valid IPv4
+        ///     Regular expression taken from <a href="http://regexlib.com/REDetails.aspx?regexp_id=2035">Regex reference</a>
+        /// </summary>
+        /// <param name="val">string IP address</param>
+        /// <returns>true if string matches valid IP address else false</returns>
+        public static bool IsIPv4(this string val)
+        {
+            if (string.IsNullOrEmpty(val))
+            {
+                return false;
+            }
+            return Regex.Match(val,
+                @"(?:^|\s)([a-z]{3,6}(?=://))?(://)?((?:25[0-5]|2[0-4]\d|[01]?\d\d?)\.(?:25[0-5]|2[0-4]\d|[01]?\d\d?)\.(?:25[0-5]|2[0-4]\d|[01]?\d\d?)\.(?:25[0-5]|2[0-4]\d|[01]?\d\d?))(?::(\d{2,5}))?(?:\s|$)")
+                .Success;
+        }
+
+        /// <summary>
         /// Converts an object to CSV String separated by a Separator
         /// </summary>
         /// <param name="obj">The object.</param>
