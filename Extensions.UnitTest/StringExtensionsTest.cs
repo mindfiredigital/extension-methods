@@ -587,5 +587,15 @@ namespace Extensions.UnitTest
             bool res = data.InWithIgnoreCase(list.Split(","));
             Assert.True(res == actual);
         }
+
+        [Theory]
+        [InlineData("C# is my favourite Language", "c-sharp-is-my-favourite-language")]
+        [InlineData("10 reasons why we waste time on people & emotions", "10-reasons-why-we-waste-time-on-people-emotions")]
+        [InlineData("The crazy boy @ 23i*123 Road", "the-crazy-boy-23i-123-road")]
+        public void SeoFriendlyURL_ShouldPass(string data, string actual)
+        {
+            var res = data.SeoFriendlyURL(100);
+            Assert.Equal(res,actual);
+        }
     }
 }

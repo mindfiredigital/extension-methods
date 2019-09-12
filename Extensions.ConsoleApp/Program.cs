@@ -7,9 +7,10 @@ namespace Extensions.ConsoleApp
     {
         static void Main(string[] args)
         {
-            /** Remove sample **/
-            var user = new TestUser(1, "Swagat", 12);
-            Console.WriteLine(user.ToJson());
+            Console.WriteLine("Enter the Title");
+            string title = Console.ReadLine();
+            string seoUrl = title.SeoFriendlyURL(100);
+            Console.WriteLine("Seo url is: {0}", seoUrl);
             Console.ReadKey();
         }
     }

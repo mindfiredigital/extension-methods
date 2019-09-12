@@ -874,5 +874,47 @@ namespace Extensions
 
             return false;
         }
+        /// <summary>
+        /// Converts a string to a SEO friendly URL.
+        /// </summary>
+        /// <param name="maxLength">The maximum length.</param>
+        /// <returns></returns>
+        public static string SeoFriendlyURL(this string title, int maxLength)  
+        {  
+            Dictionary<string, string> dictWords = new Dictionary<string, string>{  
+                {"C#","c-sharp"},  
+                {"F#","f-sharp"} //Add Other list if possible
+            };  
+  
+            foreach (KeyValuePair<string, string> word in dictWords)  
+            {  
+                title = title.Replace(word.Key, word.Value);  
+            }  
+  
+            var match = Regex.Match(title.ToLower(), "[\\w]+");  
+            StringBuilder seoUrl = new StringBuilder("");  
+            bool maxLengthHit = false;  
+            while (match.Success && !maxLengthHit)  
+            {  
+                if (seoUrl.Length + match.Value.Length <= maxLength)  
+                {  
+                    seoUrl.Append(match.Value + "-");  
+                }  
+                else  
+                {  
+                    maxLengthHit = true;  
+                    if (seoUrl.Length == 0)  
+                    {  
+                        seoUrl.Append(match.Value.Substring(0, maxLength));  
+                    }  
+                }  
+                match = match.NextMatch();  
+            }  
+            if (seoUrl[seoUrl.Length - 1] == '-')  
+            {  
+                seoUrl.Remove(seoUrl.Length - 1, 1);  
+            }  
+            return seoUrl.ToString();  
+        }
     }
 }
