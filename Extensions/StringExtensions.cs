@@ -879,42 +879,78 @@ namespace Extensions
         /// </summary>
         /// <param name="maxLength">The maximum length.</param>
         /// <returns></returns>
-        public static string SeoFriendlyURL(this string title, int maxLength)  
-        {  
-            Dictionary<string, string> dictWords = new Dictionary<string, string>{  
-                {"C#","c-sharp"},  
+        public static string SeoFriendlyURL(this string title, int maxLength)
+        {
+            Dictionary<string, string> dictWords = new Dictionary<string, string>{
+                {"C#","c-sharp"},
                 {"F#","f-sharp"} //Add Other list if possible
-            };  
-  
-            foreach (KeyValuePair<string, string> word in dictWords)  
-            {  
-                title = title.Replace(word.Key, word.Value);  
-            }  
-  
-            var match = Regex.Match(title.ToLower(), "[\\w]+");  
-            StringBuilder seoUrl = new StringBuilder("");  
-            bool maxLengthHit = false;  
-            while (match.Success && !maxLengthHit)  
-            {  
-                if (seoUrl.Length + match.Value.Length <= maxLength)  
-                {  
-                    seoUrl.Append(match.Value + "-");  
-                }  
-                else  
-                {  
-                    maxLengthHit = true;  
-                    if (seoUrl.Length == 0)  
-                    {  
-                        seoUrl.Append(match.Value.Substring(0, maxLength));  
-                    }  
-                }  
-                match = match.NextMatch();  
-            }  
-            if (seoUrl[seoUrl.Length - 1] == '-')  
-            {  
-                seoUrl.Remove(seoUrl.Length - 1, 1);  
-            }  
-            return seoUrl.ToString();  
+            };
+
+            foreach (KeyValuePair<string, string> word in dictWords)
+            {
+                title = title.Replace(word.Key, word.Value);
+            }
+
+            var match = Regex.Match(title.ToLower(), "[\\w]+");
+            StringBuilder seoUrl = new StringBuilder("");
+            bool maxLengthHit = false;
+            while (match.Success && !maxLengthHit)
+            {
+                if (seoUrl.Length + match.Value.Length <= maxLength)
+                {
+                    seoUrl.Append(match.Value + "-");
+                }
+                else
+                {
+                    maxLengthHit = true;
+                    if (seoUrl.Length == 0)
+                    {
+                        seoUrl.Append(match.Value.Substring(0, maxLength));
+                    }
+                }
+                match = match.NextMatch();
+            }
+            if (seoUrl[seoUrl.Length - 1] == '-')
+            {
+                seoUrl.Remove(seoUrl.Length - 1, 1);
+            }
+            return seoUrl.ToString();
+        }
+
+        /// <summary>
+        ///     Replaces one or more format items in a specified string with the string representation of a specified object.
+        /// </summary>
+        /// <param name="value">A composite format string</param>
+        /// <param name="arg0">An System.Object to format</param>
+        /// <returns>A copy of format in which any format items are replaced by the string representation of arg0</returns>
+        /// <exception cref="ArgumentNullException">format or args is null.</exception>
+        /// <exception cref="FormatException">
+        ///     format is invalid.-or- The index of a format item is less than zero, or
+        ///     greater than or equal to the length of the args array.
+        /// </exception>
+        public static string Format(this string value, object arg0)
+        {
+            return string.Format(value, arg0);
+        }
+
+        /// <summary>
+        ///     Replaces the format item in a specified string with the string representation of a corresponding object in a
+        ///     specified array.
+        /// </summary>
+        /// <param name="value">A composite format string</param>
+        /// <param name="args">An object array that contains zero or more objects to format</param>
+        /// <returns>
+        ///     A copy of format in which the format items have been replaced by the string representation of the
+        ///     corresponding objects in args
+        /// </returns>
+        /// <exception cref="ArgumentNullException">format or args is null.</exception>
+        /// <exception cref="FormatException">
+        ///     format is invalid.-or- The index of a format item is less than zero, or
+        ///     greater than or equal to the length of the args array.
+        /// </exception>
+        public static string Format(this string value, params object[] args)
+        {
+            return string.Format(value, args);
         }
     }
 }

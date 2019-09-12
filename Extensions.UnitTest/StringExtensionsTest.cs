@@ -595,7 +595,25 @@ namespace Extensions.UnitTest
         public void SeoFriendlyURL_ShouldPass(string data, string actual)
         {
             var res = data.SeoFriendlyURL(100);
-            Assert.Equal(res,actual);
+            Assert.Equal(res, actual);
+        }
+        [Theory]
+        [InlineData("{0} is my favourite {1}", "C#,Language", "C# is my favourite Language")]
+        [InlineData("My name is {0}", "Swagat Swain", "My name is Swagat Swain")]
+        [InlineData("My age is {0}", 25, "My age is 25")]
+        public void Format_ShoulPass(string data, object arg, string actual)
+        {
+            if (arg.ToString().Contains(","))
+            {
+                string result = data.Format(arg.ToString().Split(','));
+                Assert.Equal(result, actual);
+            }
+            else
+            {
+                string result = data.Format(arg);
+                Assert.Equal(result, actual);
+            }
+
         }
     }
 }
