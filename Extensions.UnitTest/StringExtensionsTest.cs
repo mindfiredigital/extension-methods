@@ -623,5 +623,14 @@ namespace Extensions.UnitTest
             var result = data.ToTitleCase();
             Assert.Equal(result, actual);
         }
+
+        [Theory]
+        [InlineData("ssswagatss@gmail.com", "^[a-zA-Z][\\w\\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\\w\\.-]*[a-zA-Z0-9]\\.[a-zA-Z][a-zA-Z\\.]*[a-zA-Z]$", true)]
+        [InlineData("ssswagatss+09@gmail.com", "^[a-zA-Z][\\w\\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\\w\\.-]*[a-zA-Z0-9]\\.[a-zA-Z][a-zA-Z\\.]*[a-zA-Z]$", false)]
+        public void IsMatch_ShouldPass(string data, string regex, bool actual)
+        {
+            var res = data.IsMatch(regex);
+            Assert.True(res == actual);
+        }
     }
 }

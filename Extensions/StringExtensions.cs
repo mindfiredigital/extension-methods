@@ -113,7 +113,7 @@ namespace Extensions
         {
             string pattern =
                 "^[a-zA-Z][\\w\\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\\w\\.-]*[a-zA-Z0-9]\\.[a-zA-Z][a-zA-Z\\.]*[a-zA-Z]$";
-            return Regex.Match(email, pattern).Success;
+            return Regex.IsMatch(email, pattern);
         }
         /// <summary>
         ///     Validates if a string is valid IPv4
@@ -127,9 +127,21 @@ namespace Extensions
             {
                 return false;
             }
-            return Regex.Match(val,
-                @"(?:^|\s)([a-z]{3,6}(?=://))?(://)?((?:25[0-5]|2[0-4]\d|[01]?\d\d?)\.(?:25[0-5]|2[0-4]\d|[01]?\d\d?)\.(?:25[0-5]|2[0-4]\d|[01]?\d\d?)\.(?:25[0-5]|2[0-4]\d|[01]?\d\d?))(?::(\d{2,5}))?(?:\s|$)")
-                .Success;
+            return Regex.IsMatch(val,
+                @"(?:^|\s)([a-z]{3,6}(?=://))?(://)?((?:25[0-5]|2[0-4]\d|[01]?\d\d?)\.(?:25[0-5]|2[0-4]\d|[01]?\d\d?)\.(?:25[0-5]|2[0-4]\d|[01]?\d\d?)\.(?:25[0-5]|2[0-4]\d|[01]?\d\d?))(?::(\d{2,5}))?(?:\s|$)");
+        }
+        /// <summary>
+        /// Determines whether the specified string matches a regular expression or not.
+        /// </summary>
+        /// <param name="content">The content.</param>
+        /// <param name="regEx">The reg ex.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified reg ex is match; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsMatch(this string content, string regEx)
+        {
+            if (string.IsNullOrEmpty(content)) return false;
+            return Regex.IsMatch(content, regEx);
         }
 
         /// <summary>
@@ -969,5 +981,6 @@ namespace Extensions
         {
             return string.Format(value, args);
         }
+
     }
 }
