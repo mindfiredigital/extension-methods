@@ -676,6 +676,23 @@ namespace Extensions
             string humanCased = string.Join(" ", words);
             return humanCased;
         }
+
+        /// <summary>
+        /// Converts a string to Title Case
+        /// </summary>
+        /// <param name="source">Given input string</param>
+        /// <returns></returns>
+        public static string ToTitleCase(this string source)
+        {
+            if (source == null) return source;
+
+            System.Globalization.CultureInfo cultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
+            System.Globalization.TextInfo textInfo = cultureInfo.TextInfo;
+
+            // TextInfo.ToTitleCase only operates on the string if is all lower case, otherwise it returns the string unchanged.
+            return textInfo.ToTitleCase(source.ToLower());
+        }
+
         /// <summary>
         /// Truncates a string to the specified maximum length.
         /// </summary>

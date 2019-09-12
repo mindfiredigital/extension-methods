@@ -615,5 +615,13 @@ namespace Extensions.UnitTest
             }
 
         }
+        [Theory]
+        [InlineData("my Name is Swagat swain", "My Name Is Swagat Swain")]
+        [InlineData("", "")]
+        public void ToTitleCase_ShouldPass(string data, string actual)
+        {
+            var result = data.ToTitleCase();
+            Assert.Equal(result, actual);
+        }
     }
 }
