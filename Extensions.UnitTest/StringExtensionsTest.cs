@@ -527,13 +527,13 @@ namespace Extensions.UnitTest
         }
 
         [Theory]
-        [InlineData("Swagat Swain","swagat",true)]
+        [InlineData("Swagat Swain", "swagat", true)]
         [InlineData("Swagat Swain", "Swagat", false)]
-        [InlineData(" ","swagat",true)]
-        [InlineData("","swagat",true)]
+        [InlineData(" ", "swagat", true)]
+        [InlineData("", "swagat", true)]
         public void DoesNotStartWith_ShouldPass(string data, string startsWith, bool actual)
         {
-            Assert.True(data.DoesNotStartWith(startsWith)== actual);
+            Assert.True(data.DoesNotStartWith(startsWith) == actual);
         }
 
         [Theory]
@@ -553,7 +553,7 @@ namespace Extensions.UnitTest
         [InlineData("", "swagat", true)]
         public void DoesNotStartWith_IgnoreCase_ShouldPass(string data, string startsWith, bool actual)
         {
-            Assert.True(data.DoesNotStartWith(startsWith,true) == actual);
+            Assert.True(data.DoesNotStartWith(startsWith, true) == actual);
         }
 
         [Theory]
@@ -564,6 +564,28 @@ namespace Extensions.UnitTest
         public void DoesNotEndWith_IgnoreCase_ShouldPass(string data, string startsWith, bool actual)
         {
             Assert.True(data.DoesNotEndWith(startsWith, true) == actual);
+        }
+        [Theory]
+        [InlineData("Cuttack", "Bhubaneswar,Cuttack,Rourkela", true)]
+        [InlineData("cuttack", "Bhubaneswar,Cuttack,Rourkela", false)]
+        [InlineData("Cutta", "Bhubaneswar,Cuttack,Rourkela", false)]
+        [InlineData("", "Bhubaneswar,Cuttack,Rourkela", false)]
+        [InlineData("Jaraka", "Bhubaneswar,Cuttack,Rourkela", false)]
+        public void In_ShouldPass(string data, string list, bool actual)
+        {
+            bool res = data.In(list.Split(","));
+            Assert.True(res == actual);
+        }
+        [Theory]
+        [InlineData("Cuttack", "Bhubaneswar,Cuttack,Rourkela", true)]
+        [InlineData("cuttack", "Bhubaneswar,Cuttack,Rourkela", true)]
+        [InlineData("Cutta", "Bhubaneswar,Cuttack,Rourkela", false)]
+        [InlineData("", "Bhubaneswar,Cuttack,Rourkela", false)]
+        [InlineData("Jaraka", "Bhubaneswar,Cuttack,Rourkela", false)]
+        public void InWithIgnoreCase_ShouldPass(string data, string list, bool actual)
+        {
+            bool res = data.InWithIgnoreCase(list.Split(","));
+            Assert.True(res == actual);
         }
     }
 }

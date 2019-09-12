@@ -848,7 +848,7 @@ namespace Extensions
             return bytes;
         }
         /// <summary>
-        /// Checks string object's value to array of string values
+        /// Checks string object's value to array of string values, does not ignore case sensitivity
         /// </summary>        
         /// <param name="stringValues">Array of string values to compare</param>
         /// <returns>Return true if any string value matches</returns>
@@ -856,6 +856,20 @@ namespace Extensions
         {
             foreach (string otherValue in stringValues)
                 if (string.Compare(value, otherValue) == 0)
+                    return true;
+
+            return false;
+        }
+
+        /// <summary>
+        /// Checks string object's value to array of string values, ignores case sensitivity
+        /// </summary>        
+        /// <param name="stringValues">Array of string values to compare</param>
+        /// <returns>Return true if any string value matches</returns>
+        public static bool InWithIgnoreCase(this string value, params string[] stringValues)
+        {
+            foreach (string otherValue in stringValues)
+                if (string.Compare(value.ToLower(), otherValue.ToLower()) == 0)
                     return true;
 
             return false;
