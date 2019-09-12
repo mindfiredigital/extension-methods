@@ -12,13 +12,10 @@ namespace Extensions.ConsoleApp
             //    Console.WriteLine(item.ToMMDDYY());
             //}
             var today = DateTime.Now;
-            var due = today.AddWorkdays(2);
-            //foreach (var item in today.GetDateRange(due))
-            //{
-            //    Console.WriteLine(item.ToMMDDYY());
-
-            //}
-            Console.WriteLine(due.ToMMDDYY());
+            foreach (var item in today.GetDateRangeForCurrentWeek())
+            {
+                Console.WriteLine(item.ToMMDDYY());
+            }
             Console.ReadKey();
         }
     }

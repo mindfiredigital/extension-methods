@@ -440,12 +440,31 @@ namespace Extensions
         /// <returns> IEnumerable<DateTime></returns>
         public static IEnumerable<DateTime> GetDateRange(this DateTime startDate, DateTime endDate)
         {
-            var range = Enumerable.Range(0, new TimeSpan(endDate.Ticks - startDate.Ticks).Days);
+            var range = Enumerable.Range(0, (endDate - startDate).Days + 1);
 
             return from p in range
                    select startDate.Date.AddDays(p);
         }
+        /// <summary>
+        /// Gets the date range for current month for a given Date.
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <returns>IEnumerable<DateTime></returns>
+        public static IEnumerable<DateTime> GetDateRangeForCurrentMonth(this DateTime date)
+        {
+            return GetDateRange(date.FirstDayOfMonth(), date.LastDayOfMonth());
+        }
 
+        /// <summary>
+        /// Gets the date range for current week.
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <param name="startDayOfWeek">The start day of week.</param>
+        /// <returns></returns>
+        public static IEnumerable<DateTime> GetDateRangeForCurrentWeek(this DateTime date, DayOfWeek startDayOfWeek = DayOfWeek.Monday)
+        {
+            return GetDateRange(date.FirstDateOfWeek(startDayOfWeek), date.LastDateOfWeek(startDayOfWeek));
+        }
         /// <summary>
         /// Adds a given number of Working Days (Monday-Friday) to the given date. 
         /// </summary>
@@ -488,7 +507,7 @@ namespace Extensions
         /// <param name="date">The given date.</param>
         /// <param name="startOfWeek">The start of week. By Default Monday</param>
         /// <returns>system.DateTime</returns>
-        public static DateTime StartDateOfWeek(this DateTime date, DayOfWeek startOfWeek = DayOfWeek.Monday)
+        public static DateTime FirstDateOfWeek(this DateTime date, DayOfWeek startOfWeek = DayOfWeek.Monday)
         {
             int diff = (7 + (date.DayOfWeek - startOfWeek)) % 7;
             return date.AddDays(-1 * diff).Date;
@@ -501,8 +520,43 @@ namespace Extensions
         /// <returns>system.DateTime</returns>
         public static DateTime LastDateOfWeek(this DateTime date, DayOfWeek startOfWeek = DayOfWeek.Monday)
         {
-            return date.StartDateOfWeek(startOfWeek).AddDays(6);
+            return date.FirstDateOfWeek(startOfWeek).AddDays(6);
+        }
+        /// <summary>
+        /// Checks if a range decided by a given date and end date intersects the daterange betweer intersectingStartDate and intersectingEndDate
+        /// </summary>
+        /// <param name="startDate">The given start date of the range to be compared</param>
+        /// <param name="endDate">The given end date of the range to be compared</param>
+        /// <param name="intersectingStartDate">The intersecting start date.</param>
+        /// <param name="intersectingEndDate">The intersecting end date.</param>
+        /// <returns>True, if the range interscects else false</returns>
+        public static bool Intersects(this DateTime startDate, DateTime endDate, DateTime intersectingStartDate, DateTime intersectingEndDate)
+        {
+            return (intersectingEndDate >= startDate && intersectingStartDate <= endDate);
         }
 
+        /// <summary>
+        /// Determines whether a date is Last Date of the Month.
+        /// </summary>
+        /// <param name="dateTime">The date time.</param>
+        /// <returns>
+        ///   <c>true</c> if a date is Last Date of the Month otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsLastDayOfTheMonth(this DateTime dateTime)
+        {
+            return dateTime.Date == dateTime.LastDayOfMonth().Date;
+        }
+
+        /// <summary>
+        /// Determines whether a date is First Date of the Month.
+        /// </summary>
+        /// <param name="dateTime">The date time.</param>
+        /// <returns>
+        ///   <c>true</c> if a date is First Date of the Month otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsFirstDayOfTheMonth(this DateTime dateTime)
+        {
+            return dateTime.Date == dateTime.FirstDayOfMonth().Date;
+        }
     }
 }
