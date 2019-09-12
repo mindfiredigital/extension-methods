@@ -558,5 +558,14 @@ namespace Extensions
         {
             return dateTime.Date == dateTime.FirstDayOfMonth().Date;
         }
+        /// <summary>
+        /// Gets the quarter for a given date. It can be 1, 2, 3, 4
+        /// </summary>
+        /// <param name="fromDate">From date.</param>
+        /// <returns></returns>
+        public static int GetQuarter(this DateTime fromDate)
+        {
+            return ((fromDate.Month - 1) / 3) + 1;
+        }
     }
 }
