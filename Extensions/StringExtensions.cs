@@ -145,6 +145,18 @@ namespace Extensions
         }
 
         /// <summary>
+        /// Determines whether this string is URL.
+        /// </summary>
+        /// <param name="text">The text.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified text is URL; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsUrl(this string text)
+        {
+            var rx = new Regex(@"http(s)?://([\w-]+\.)+[\w-]+(/[\w- ./?%&=]*)?");
+            return rx.IsMatch(text);
+        }
+        /// <summary>
         /// Converts an object to CSV String separated by a Separator
         /// </summary>
         /// <param name="obj">The object.</param>
