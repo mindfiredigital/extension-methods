@@ -95,5 +95,111 @@ namespace Extensions
         {
             return dateTime?.ToDateTimeString(format) ?? string.Empty;
         }
+        /// <summary>
+        /// DateDiff in SQL style.
+        /// Datepart implemented:
+        /// "year" (abbr. "yy", "yyyy"),
+        /// "quarter" (abbr. "qq", "q"),
+        /// "month" (abbr. "mm", "m"),
+        /// "day" (abbr. "dd", "d"),
+        /// "week" (abbr. "wk", "ww"),
+        /// "hour" (abbr. "hh"),
+        /// "minute" (abbr. "mi", "n"),
+        /// "second" (abbr. "ss", "s"),
+        /// "millisecond" (abbr. "ms").
+        /// </summary>
+        /// <param name="startDate">The start date.</param>
+        /// <param name="endDate">The end date.</param>
+        /// <param name="datePary">The date part.</param>
+        /// <returns>Date Difference in System.long</returns>
+        /// <exception cref="Exception"></exception>
+        public static long DateDiff(this DateTime startDate, DateTime endDate, string datePary)
+        {
+            long DateDiffVal = 0;
+            System.Globalization.Calendar cal = System.Threading.Thread.CurrentThread.CurrentCulture.Calendar;
+            TimeSpan ts = new TimeSpan(endDate.Ticks - startDate.Ticks);
+            switch (datePary.ToLower().Trim())
+            {
+                #region year
+                case "year":
+                case "yy":
+                case "yyyy":
+                    DateDiffVal = (long)(cal.GetYear(endDate) - cal.GetYear(startDate));
+                    break;
+                #endregion
+
+                #region quarter
+                case "quarter":
+                case "qq":
+                case "q":
+                    DateDiffVal = (long)((((cal.GetYear(endDate)
+                                        - cal.GetYear(startDate)) * 4)
+                                        + ((cal.GetMonth(endDate) - 1) / 3))
+                                        - ((cal.GetMonth(startDate) - 1) / 3));
+                    break;
+                #endregion
+
+                #region month
+                case "month":
+                case "mm":
+                case "m":
+                    DateDiffVal = (long)(((cal.GetYear(endDate)
+                                        - cal.GetYear(startDate)) * 12
+                                        + cal.GetMonth(endDate))
+                                        - cal.GetMonth(startDate));
+                    break;
+                #endregion
+
+                #region day
+                case "day":
+                case "d":
+                case "dd":
+                    DateDiffVal = (long)ts.TotalDays;
+                    break;
+                #endregion
+
+                #region week
+                case "week":
+                case "wk":
+                case "ww":
+                    DateDiffVal = (long)(ts.TotalDays / 7);
+                    break;
+                #endregion
+
+                #region hour
+                case "hour":
+                case "hh":
+                    DateDiffVal = (long)ts.TotalHours;
+                    break;
+                #endregion
+
+                #region minute
+                case "minute":
+                case "mi":
+                case "n":
+                    DateDiffVal = (long)ts.TotalMinutes;
+                    break;
+                #endregion
+
+                #region second
+                case "second":
+                case "ss":
+                case "s":
+                    DateDiffVal = (long)ts.TotalSeconds;
+                    break;
+                #endregion
+
+                #region millisecond
+                case "millisecond":
+                case "ms":
+                    DateDiffVal = (long)ts.TotalMilliseconds;
+                    break;
+                #endregion
+
+                default:
+                    throw new Exception(string.Format("DatePart \"{0}\" is unknown", datePary));
+            }
+            return DateDiffVal;
+        }
     }
 }
