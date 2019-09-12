@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 
 namespace Extensions.ConsoleApp
 {
@@ -7,10 +6,19 @@ namespace Extensions.ConsoleApp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Enter the Title");
-            string title = Console.ReadLine();
-            string seoUrl = title.ToTitleCase();
-            Console.WriteLine("ToTitleCase is: {0}", seoUrl);
+            //IEnumerable<DateTime> dateRange = DateTime.Now.GetDateRange(DateTime.Now.AddDays(80));
+            //foreach (var item in dateRange)
+            //{
+            //    Console.WriteLine(item.ToMMDDYY());
+            //}
+            var today = DateTime.Now;
+            var due = today.AddWorkdays(2);
+            //foreach (var item in today.GetDateRange(due))
+            //{
+            //    Console.WriteLine(item.ToMMDDYY());
+
+            //}
+            Console.WriteLine(due.ToMMDDYY());
             Console.ReadKey();
         }
     }

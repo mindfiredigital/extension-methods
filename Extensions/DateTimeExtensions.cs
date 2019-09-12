@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Extensions
 {
@@ -201,5 +203,306 @@ namespace Extensions
             }
             return DateDiffVal;
         }
+
+        /// <summary>
+        /// Converts a given DateTime to Readable string. Like "2 seconds ago", "3 years ago" etc
+        /// </summary>
+        /// <param name="dateTime">The value.</param>
+        /// <returns>System.String</returns>
+        public static string ToReadableTime(this DateTime dateTime)
+        {
+            var ts = new TimeSpan(DateTime.Now.Ticks - dateTime.Ticks);
+            double delta = ts.TotalSeconds;
+            if (delta < 60)
+            {
+                return ts.Seconds == 1 ? "one second ago" : ts.Seconds + " seconds ago";
+            }
+            if (delta < 120)
+            {
+                return "a minute ago";
+            }
+            if (delta < 2700) // 45 * 60
+            {
+                return ts.Minutes + " minutes ago";
+            }
+            if (delta < 5400) // 90 * 60
+            {
+                return "an hour ago";
+            }
+            if (delta < 86400) // 24 * 60 * 60
+            {
+                return ts.Hours + " hours ago";
+            }
+            if (delta < 172800) // 48 * 60 * 60
+            {
+                return "yesterday";
+            }
+            if (delta < 2592000) // 30 * 24 * 60 * 60
+            {
+                return ts.Days + " days ago";
+            }
+            if (delta < 31104000) // 12 * 30 * 24 * 60 * 60
+            {
+                int months = Convert.ToInt32(Math.Floor((double)ts.Days / 30));
+                return months <= 1 ? "one month ago" : months + " months ago";
+            }
+            var years = Convert.ToInt32(Math.Floor((double)ts.Days / 365));
+            return years <= 1 ? "one year ago" : years + " years ago";
+        }
+        /// <summary>
+        /// Converts a given Nullable DateTime to Readable string. Like "2 seconds ago", "3 years ago" etc
+        /// </summary>
+        /// <param name="dateTime">The value.</param>
+        /// <returns>
+        /// System.String if the datetime is not null and an Empty string if the given date is null.
+        /// </returns>
+        public static string ToReadableTime(this DateTime? dateTime)
+        {
+            return dateTime?.ToReadableTime() ?? string.Empty;
+        }
+        /// <summary>
+        /// Converts a Date to Friendly Day. Today @ 5.30 PM 
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <returns>system.string</returns>
+        public static string ToFriendlyDayString(this DateTime date)
+        {
+            string formattedDate = "";
+            if (date.Date > DateTime.Today)
+            {
+                formattedDate = date.ToString("MMMM dd, yyyy");
+            }
+            else if (date.Date == DateTime.Today)
+            {
+                formattedDate = "Today";
+            }
+            else if (date.Date == DateTime.Today.AddDays(-1))
+            {
+                formattedDate = "Yesterday";
+            }
+            else if (date.Date > DateTime.Today.AddDays(-6))
+            {
+                // *** Show the Day of the week
+                formattedDate = date.ToString("dddd").ToString();
+            }
+            else
+            {
+                formattedDate = date.ToString("MMMM dd, yyyy");
+            }
+
+            //append the time portion to the output
+            formattedDate += " @ " + date.ToString("t").ToLower();
+            return formattedDate;
+        }
+        /// <summary>
+        /// Checks if a given date lies between a Range of Dates.
+        /// </summary>
+        /// <param name="date">The given date.</param>
+        /// <param name="rangeStart">The range start.</param>
+        /// <param name="rangeEnd">The range end.</param>
+        /// <returns>True, if the date is between rangeStart and rangeEnd, else returns false</returns>
+        public static bool IsInBetween(this DateTime date, DateTime rangeStart, DateTime rangeEnd)
+        {
+            return date.Ticks >= rangeStart.Ticks && date.Ticks <= rangeEnd.Ticks;
+        }
+
+        /// <summary>
+        /// Calculates the age for a given Date.
+        /// </summary>
+        /// <param name="dateTime">The date time.</param>
+        /// <returns>Integer</returns>
+        public static int CalculateAge(this DateTime dateTime)
+        {
+            var age = DateTime.Now.Year - dateTime.Year;
+            if (DateTime.Now < dateTime.AddYears(age))
+                age--;
+            return age;
+        }
+
+        /// <summary>
+        /// Determines whether a given date is a WeekDay (Monday-Friday)
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <returns>
+        ///   <c>true</c> if the date is WeekDay; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsWeekDay(this DateTime date)
+        {
+            return date.DayOfWeek != DayOfWeek.Saturday && date.DayOfWeek != DayOfWeek.Sunday;
+        }
+        /// <summary>
+        /// Determines whether a given date is a WeekEnd (Daturday-Sunday)
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <returns>
+        ///   <c>true</c> if the date is WeekEnd; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsWeekend(this DateTime date)
+        {
+            return date.DayOfWeek == DayOfWeek.Saturday || date.DayOfWeek == DayOfWeek.Sunday;
+        }
+        /// <summary>
+        /// Determines whether the dayOfWeek is weekday.
+        /// </summary>
+        /// <param name="dayOfWeek">The dayOfWeek</param>
+        /// <returns>
+        ///   <c>true</c> if the specified dayOfWeek is weekday; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsWeekday(this DayOfWeek dayOfWeek)
+        {
+            switch (dayOfWeek)
+            {
+                case DayOfWeek.Sunday:
+                case DayOfWeek.Saturday: return false;
+
+                default: return true;
+            }
+        }
+        /// <summary>
+        /// Determines whether the dayOfWeek is weekend.
+        /// </summary>
+        /// <param name="dayOfWeek">The dayOfWeek</param>
+        /// <returns>
+        ///   <c>true</c> if the specified dayOfWeek is weekend; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsWeekend(this DayOfWeek d)
+        {
+            return !d.IsWeekday();
+        }
+        /// <summary>
+        /// Gets the Next working day (Monday - Friday) for a given Date
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <returns>System.DateTime</returns>
+        public static DateTime NextWorkday(this DateTime date)
+        {
+            var nextDay = date;
+            while (!nextDay.IsWeekDay())
+            {
+                nextDay = nextDay.AddDays(1);
+            }
+            return nextDay;
+        }
+
+        /// <summary>
+        /// Gets the next Date for the specified day of week.
+        /// </summary>
+        /// <param name="current">The current.</param>
+        /// <param name="dayOfWeek">The day of week.</param>
+        /// <returns>System.DateTime</returns>
+        public static DateTime Next(this DateTime current, DayOfWeek dayOfWeek)
+        {
+            int offsetDays = dayOfWeek - current.DayOfWeek;
+            if (offsetDays <= 0)
+            {
+                offsetDays += 7;
+            }
+            DateTime result = current.AddDays(offsetDays);
+            return result;
+        }
+
+        /// <summary>
+        /// Determines whether a the given date's year is a Leap Year.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        ///   <c>true</c> if a the given date's year is a Leap Year ; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsLeapYear(this DateTime value)
+        {
+            return (DateTime.DaysInMonth(value.Year, 2) == 29);
+        }
+
+        /// <summary>
+        /// Get the First day of month.
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <returns>system.DateTime</returns>
+        public static DateTime FirstDayOfMonth(this DateTime date)
+        {
+            return new DateTime(date.Year, date.Month, 1);
+        }
+        /// <summary>
+        /// Get the Last day of month.
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <returns>system.DateTime</returns>
+        public static DateTime LastDayOfMonth(this DateTime date)
+        {
+            return date.FirstDayOfMonth().AddMonths(1).AddDays(-1);
+        }
+
+        /// <summary>
+        /// Gets the range of dates between two given dates.
+        /// </summary>
+        /// <param name="startDate">The start date.</param>
+        /// <param name="endDate">End date.</param>
+        /// <returns> IEnumerable<DateTime></returns>
+        public static IEnumerable<DateTime> GetDateRange(this DateTime startDate, DateTime endDate)
+        {
+            var range = Enumerable.Range(0, new TimeSpan(endDate.Ticks - startDate.Ticks).Days);
+
+            return from p in range
+                   select startDate.Date.AddDays(p);
+        }
+
+        /// <summary>
+        /// Adds a given number of Working Days (Monday-Friday) to the given date. 
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <param name="days">The no of days.</param>
+        /// <returns>system.DateTime</returns>
+        public static DateTime AddWorkdays(this DateTime date, int days)
+        {
+            DateTime tmpDate = date;
+            while (days > 0)
+            {
+                tmpDate = tmpDate.AddDays(1);
+                if (tmpDate.IsWeekDay())
+                    days--;
+            }
+            return tmpDate;
+        }
+        /// <summary>
+        /// Adds a given number of Working Days (Monday-Friday) to the given date.
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <param name="days">The no of days.</param>
+        /// <param name="holidays">The holidays. You can pass a list of dates as holidays and they will be considered as non working days</param>
+        /// <returns>system.DateTime</returns>
+        public static DateTime AddWorkdays(this DateTime date, int days, IEnumerable<DateTime> holidays)
+        {
+            DateTime tmpDate = date;
+            while (days > 0)
+            {
+                tmpDate = tmpDate.AddDays(1);
+                if (tmpDate.IsWeekDay() && !holidays.Contains(tmpDate))
+                    days--;
+            }
+            return tmpDate;
+        }
+
+        /// <summary>
+        /// Gets the start date of a week for a given date. By default, it considers start of week as Monday
+        /// </summary>
+        /// <param name="date">The given date.</param>
+        /// <param name="startOfWeek">The start of week. By Default Monday</param>
+        /// <returns>system.DateTime</returns>
+        public static DateTime StartDateOfWeek(this DateTime date, DayOfWeek startOfWeek = DayOfWeek.Monday)
+        {
+            int diff = (7 + (date.DayOfWeek - startOfWeek)) % 7;
+            return date.AddDays(-1 * diff).Date;
+        }
+        /// <summary>
+        /// Gets the end date of a week for a given date. By default, it considers start of week as Monday
+        /// </summary>
+        /// <param name="date">The given date.</param>
+        /// <param name="startOfWeek">The start of week. By Default Monday</param>
+        /// <returns>system.DateTime</returns>
+        public static DateTime LastDateOfWeek(this DateTime date, DayOfWeek startOfWeek = DayOfWeek.Monday)
+        {
+            return date.StartDateOfWeek(startOfWeek).AddDays(6);
+        }
+
     }
 }
