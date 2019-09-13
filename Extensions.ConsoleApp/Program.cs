@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace Extensions.ConsoleApp
@@ -13,11 +14,13 @@ namespace Extensions.ConsoleApp
             //{
             //    Console.WriteLine(item.ToMMDDYY());
             //}
-            var myNumbers = new List<double?>
-                            {
-                                null,1,2
-                            };
-            Console.WriteLine(myNumbers.Sum());
+            double number;
+            number = 12345.00000678900000000;
+
+            decimal number2;
+            number2 = 12345.00000678900000000M;
+            Console.WriteLine(number.RemoveTraillingZeros());
+            Console.WriteLine(number2.RemoveTraillingZeros());
             Console.ReadKey();
         }
     }

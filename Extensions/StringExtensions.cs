@@ -994,5 +994,14 @@ namespace Extensions
             return string.Format(value, args);
         }
 
+        /// <summary>
+        /// Gets the only digits from a specified string. If the string is "123-12-1234", returns "123121234".
+        /// </summary>
+        /// <param name="value">specified string</param>
+        /// <returns>A string containing only digits</returns>
+        public static string GetOnlyDigits(this string value)
+        {
+            return new string(value?.Where(c => char.IsDigit(c)).ToArray());
+        }
     }
 }

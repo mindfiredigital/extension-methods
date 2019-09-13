@@ -121,6 +121,10 @@ namespace Extensions
         {
             return value.ToString("N" + precision);
         }
+        public static double RemoveTraillingZeros(this double number)
+        {
+            return double.Parse(number.ToString("G", CultureInfo.InvariantCulture));
+        }
         #endregion
 
         #region Integers
@@ -232,5 +236,6 @@ namespace Extensions
             return value.ToString("N" + precision);
         }
         #endregion
+
     }
 }
