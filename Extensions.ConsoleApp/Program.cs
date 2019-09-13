@@ -1,6 +1,5 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Net;
 
 namespace Extensions.ConsoleApp
 {
@@ -20,14 +19,11 @@ namespace Extensions.ConsoleApp
             //    Console.WriteLine(s.MaskPhoneNumber('#'));
             //}
             //Console.WriteLine("ssswagatss@gmail.com".MaskEmail('#'));
-            List<DayOfWeek> weekdays = EnumExtensions.EnumToList<DayOfWeek>().ToList();
-            foreach (var w in weekdays)
+
+            foreach (HttpStatusCode c in Enum.GetValues(typeof(HttpStatusCode)))
             {
-                Console.WriteLine(w);
+                Console.WriteLine("Name:{0} - {1} - {2} - {3}", c, c.ToString(), c.ToString().ToHumanCase(), c.ToHumanCase());
             }
-
-            var monday = "Monday".ToEnum<DayOfWeek>();
-
             Console.ReadKey();
         }
     }

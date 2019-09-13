@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Extensions
 {
@@ -51,6 +52,12 @@ namespace Extensions
         {
             var attribute = value.GetAttribute<DescriptionAttribute>();
             return attribute == null ? value.ToString() : attribute.Description;
+        }
+
+        public static string ToHumanCase(this Enum e)
+        {
+            Regex upperCamelCaseRegex = new Regex(@"(?<!^)((?<!\d)\d|(?(?<=[A-Z])[A-Z](?=[a-z])|[A-Z]))", RegexOptions.Compiled);
+            return upperCamelCaseRegex.Replace(e.ToString(), " $1");
         }
     }
 }
