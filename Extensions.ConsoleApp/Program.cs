@@ -1,7 +1,5 @@
 using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Extensions.ConsoleApp
 {
@@ -14,13 +12,13 @@ namespace Extensions.ConsoleApp
             //{
             //    Console.WriteLine(item.ToMMDDYY());
             //}
-            double number;
-            number = 12345.00000678900000000;
-
-            decimal number2;
-            number2 = 12345.00000678900000000M;
-            Console.WriteLine(number.RemoveTraillingZeros());
-            Console.WriteLine(number2.RemoveTraillingZeros());
+            Console.WriteLine(string.Format("{0:(###) ###-####}", 8005551212));
+            var data = new string[] { "(123) 556 -7890", "123 556 7890", "(123) 556 - 7890", "11111111111" };
+            foreach (var s in data)
+            {
+                Console.WriteLine(s.MaskPhoneNumber('#'));
+            }
+            Console.WriteLine("ssswagatss@gmail.com".MaskEmail('#'));
             Console.ReadKey();
         }
     }

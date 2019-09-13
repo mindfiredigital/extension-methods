@@ -1003,5 +1003,44 @@ namespace Extensions
         {
             return new string(value?.Where(c => char.IsDigit(c)).ToArray());
         }
+        /// <summary>
+        /// Masks the email string.
+        /// If an email address is "abc@gmail.com", the output is a#c@g####.com
+        /// </summary>
+        /// <param name="emailAddress">The email address</param>
+        /// <param name="maskChar">The mask character, "*" by default</param>
+        /// <returns>system.string</returns>
+        public static string MaskEmail(this string emailAddress, char maskChar = '*')
+        {
+            string pattern = @"(?<=[\w]{1})[\w-\._\+%\\]*(?=[\w]{1}@)|(?<=@[\w]{1})[\w-_\+%]*(?=\.)";
+            if (!emailAddress.Contains("@"))
+                return new string('*', emailAddress.Length);
+            if (emailAddress.Split('@')[0].Length < 4)
+                return @"*@*.*";
+            return Regex.Replace(emailAddress, pattern, m => new string(maskChar, m.Length));
+        }
+        /// <summary>
+        /// Masks the phone number.
+        /// If a phone number is "(800) 555-1212", the output will be "(###) ### -1212"
+        /// If a phone number is "800 555-7890", the output will be "### ### 7890"
+        /// If a phone number is "1234561111", the output will be "######1111"
+        /// </summary>
+        /// <param name="phoneNumber">The phone number</param>
+        /// <param name="maskChar">The mask character.</param>
+        /// <returns>system.string</returns>
+        public static string MaskPhoneNumber(this string phoneNumber, char maskChar = '*')
+        {
+            return Regex.Replace(phoneNumber, @"\d(?!\d{0,3}$)", maskChar.ToString());
+        }
+        /// <summary>
+        /// Transforms a string to phone number
+        /// If a phone number is "1234567890", then the formatted string will be "(123) 456-7890"
+        /// </summary>
+        /// <param name="phoneNumber">The phone number.</param>
+        /// <returns>system.string</returns>
+        public static string ToPhoneNumber(this string phoneNumber)
+        {
+            return string.Format("{0:(###) ###-####}", phoneNumber);
+        }
     }
 }
