@@ -1,5 +1,6 @@
 using System;
-using System.Text.RegularExpressions;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Extensions.ConsoleApp
 {
@@ -12,13 +13,18 @@ namespace Extensions.ConsoleApp
             //{
             //    Console.WriteLine(item.ToMMDDYY());
             //}
-            Console.WriteLine(string.Format("{0:(###) ###-####}", 8005551212));
-            var data = new string[] { "(123) 556 -7890", "123 556 7890", "(123) 556 - 7890", "11111111111" };
-            foreach (var s in data)
+            //Console.WriteLine(string.Format("{0:(###) ###-####}", 8005551212));
+            //var data = new string[] { "(123) 556 -7890", "123 556 7890", "(123) 556 - 7890", "11111111111" };
+            //foreach (var s in data)
+            //{
+            //    Console.WriteLine(s.MaskPhoneNumber('#'));
+            //}
+            //Console.WriteLine("ssswagatss@gmail.com".MaskEmail('#'));
+            List<DayOfWeek> weekdays = EnumExtensions.EnumToList<DayOfWeek>().ToList();
+            foreach (var w in weekdays)
             {
-                Console.WriteLine(s.MaskPhoneNumber('#'));
+                Console.WriteLine(w);
             }
-            Console.WriteLine("ssswagatss@gmail.com".MaskEmail('#'));
             Console.ReadKey();
         }
     }
