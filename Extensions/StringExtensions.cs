@@ -1042,5 +1042,32 @@ namespace Extensions
         {
             return string.Format("{0:(###) ###-####}", phoneNumber);
         }
+
+        /// <summary>
+        /// Formats the string according to the specified mask
+        /// </summary>
+        /// <param name="input">The input string.</param>
+        /// <param name="mask">The mask for formatting. Like "A##-##-T-###Z"</param>
+        /// <returns>The formatted string</returns>
+        public static string Mask(this string input, string mask)
+        {
+            if (input.IsNullOrEmpty()) return input;
+            var output = string.Empty;
+            var index = 0;
+            foreach (var m in mask)
+            {
+                if (m == '#')
+                {
+                    if (index < input.Length)
+                    {
+                        output += input[index];
+                        index++;
+                    }
+                }
+                else
+                    output += m;
+            }
+            return output;
+        }
     }
 }
