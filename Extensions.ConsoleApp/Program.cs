@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 
 namespace Extensions.ConsoleApp
@@ -7,23 +9,18 @@ namespace Extensions.ConsoleApp
     {
         static void Main(string[] args)
         {
-            //IEnumerable<DateTime> dateRange = DateTime.Now.GetDateRange(DateTime.Now.AddDays(80));
-            //foreach (var item in dateRange)
-            //{
-            //    Console.WriteLine(item.ToMMDDYY());
-            //}
-            //Console.WriteLine(string.Format("{0:(###) ###-####}", 8005551212));
-            //var data = new string[] { "(123) 556 -7890", "123 556 7890", "(123) 556 - 7890", "11111111111" };
-            //foreach (var s in data)
-            //{
-            //    Console.WriteLine(s.MaskPhoneNumber('#'));
-            //}
-            //Console.WriteLine("ssswagatss@gmail.com".MaskEmail('#'));
+            var nums = Enumerable.Range(0, 18);
+            var split = nums.Split(5);
 
-            foreach (HttpStatusCode c in Enum.GetValues(typeof(HttpStatusCode)))
+            foreach (var item in split)
             {
-                Console.WriteLine("Name:{0} - {1} - {2} - {3}", c, c.ToString(), c.ToString().ToHumanCase(), c.ToHumanCase());
+                foreach (var inner in item)
+                {
+                    Console.WriteLine(inner);
+                }
+                Console.WriteLine("----------------");
             }
+
             Console.ReadKey();
         }
     }
