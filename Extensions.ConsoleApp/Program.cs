@@ -25,6 +25,9 @@ namespace Extensions.ConsoleApp
             {
                 Console.WriteLine(w);
             }
+
+            var monday = "Monday".ToEnum<DayOfWeek>();
+
             Console.ReadKey();
         }
     }
