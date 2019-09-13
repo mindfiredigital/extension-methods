@@ -11,11 +11,12 @@ namespace Extensions.ConsoleApp
             //{
             //    Console.WriteLine(item.ToMMDDYY());
             //}
-            var today = DateTime.Now;
-            foreach (var item in today.GetDateRangeForCurrentWeek())
-            {
-                Console.WriteLine(item.ToMMDDYY());
-            }
+            double? pi = null;
+            string s = pi.ToString("0.00"); //s = ""
+            Console.WriteLine("s : "+s);
+            pi = Math.PI;
+            s = pi.ToString("0.00");  //s = 3.14
+            Console.WriteLine("s : " + s);
             Console.ReadKey();
         }
     }
