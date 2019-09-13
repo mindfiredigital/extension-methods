@@ -264,7 +264,8 @@ namespace Extensions
         /// </summary>
         /// <typeparam name="T">generic type</typeparam>
         /// <param name="value"> The string representation of the enumeration name or underlying value to convert</param>
-        /// <param name="defaultValue"></param>
+        /// <param name="defaultValue">Dafault value of the Enum</param>
+        /// <param name="ignoreCase">Check if it checks case sensitivity of not</param>
         /// <returns>Enum object</returns>
         /// <remarks>
         ///     <exception cref="ArgumentException">
@@ -272,15 +273,14 @@ namespace Extensions
         ///         only contains white space.-or- value is a name, but not one of the named constants defined for the enumeration
         ///     </exception>
         /// </remarks>
-        public static T ToEnum<T>(this string value, T defaultValue = default(T)) where T : struct
+        public static T ToEnum<T>(this string value, T defaultValue = default(T), bool ignoreCase = false) where T : struct
         {
             if (!typeof(T).IsEnum)
             {
                 throw new ArgumentException("Type T Must of type System.Enum");
             }
-
             T result;
-            bool isParsed = Enum.TryParse(value, true, out result);
+            bool isParsed = Enum.TryParse(value, ignoreCase, out result);
             return isParsed ? result : defaultValue;
         }
 
