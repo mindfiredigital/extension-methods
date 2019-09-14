@@ -205,30 +205,32 @@ namespace Extensions
         {
             return collection.TakeWhile(item => !endCondition(item));
         }
-        
-
+        /// <summary>
+        /// Selects a random element out of a sequence.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="sequence">The sequence.</param>
+        /// <returns>T selected at Random</returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentException">The sequence is empty.</exception>
         public static T SelectRandom<T>(this IEnumerable<T> sequence)
         {
             if (sequence == null)
             {
                 throw new ArgumentNullException();
             }
-
             if (!sequence.Any())
             {
                 throw new ArgumentException("The sequence is empty.");
             }
-
             //optimization for ICollection<T>
             if (sequence is ICollection<T>)
             {
                 ICollection<T> col = (ICollection<T>)sequence;
                 return col.ElementAt(random.Next(col.Count));
             }
-
             int count = 1;
             T selected = default(T);
-
             foreach (T element in sequence)
             {
                 if (random.Next(count++) == 0)
@@ -237,7 +239,6 @@ namespace Extensions
                     selected = element;
                 }
             }
-
             return selected;
         }
         #region Private Methods
