@@ -241,6 +241,145 @@ namespace Extensions
             }
             return selected;
         }
+        /// <summary>
+        /// Determines whether a sequence contains exactly one element.
+        /// </summary>
+        /// <typeparam name="T">The type of the elements of <paramref name="source"/></typeparam>
+        /// <param name="source">The <see cref="IEnumerable{T}"/> to check for singularity.</param>
+        /// <returns>
+        /// <c>true</c> if the <paramref name="source"/> sequence contains exactly one element; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsSingle<T>(this IEnumerable<T> source)
+        {
+            if (source == null)
+                throw new ArgumentNullException("source");
+
+            using (var enumerator = source.GetEnumerator())
+            {
+                return enumerator.MoveNext() && !enumerator.MoveNext();
+            }
+        }
+        /// <summary>
+        /// Creates a string that is each the elements' ToString() values wrapped in the 'tag' that is passed as a param. Good for converting an IEnum<T> into a block of HTML/XML.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source">The source.</param>
+        /// <param name="tagToWrap">The tag to wrap.</param>
+        /// <returns></returns>
+        public static string WrapEachWithTag<T>(this IEnumerable<T> source, string tagToWrap)
+        {
+            var tag = String.Format("</{0}>", tagToWrap);
+            var s = "";
+            foreach (T item in source)
+            {
+                s += tag.Replace(@"/", "") + item.ToString() + tag;
+            }
+            return s;
+        }
+
+        /// <summary>
+        /// Determines whether the specified comparison is sorted.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source">The source.</param>
+        /// <param name="comparison">The comparison.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified comparison is sorted; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsSorted<T>(this IEnumerable<T> source, Comparison<T> comparison = null)
+        {
+            if (comparison == null)
+                comparison = Comparer<T>.Default.Compare;
+
+            using (IEnumerator<T> e = source.GetEnumerator())
+            {
+                if (!e.MoveNext())
+                    return true;
+
+                T prev = e.Current;
+                while (e.MoveNext())
+                {
+                    T current = e.Current;
+                    if (comparison(prev, current) > 0)
+                        return false;
+
+                    prev = current;
+                }
+            }
+            return true;
+        }
+        /// <summary>
+        /// Selects the object in a list with the minimum or maximum value on a particular property
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source">The source.</param>
+        /// <param name="start">The start.</param>
+        /// <param name="count">The count.</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">source</exception>
+        public static IEnumerable<T> Slice<T>(this IEnumerable<T> source, int start, int count)
+        {
+            if (source == null)
+                throw new ArgumentNullException("source");
+
+            return source.Skip(start).Take(count);
+        }
+        /// <summary>
+        /// Selects the object in a list with the minimum value on a particular property
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TValue">The type of the value.</typeparam>
+        /// <param name="list">The list.</param>
+        /// <param name="predicate">The predicate.</param>
+        /// <returns></returns>
+        public static T FindMin<T, TValue>(this IEnumerable<T> list, Func<T, TValue> predicate)
+                                                        where TValue : IComparable<TValue>
+        {
+
+            T result = list.FirstOrDefault();
+            if (result != null)
+            {
+                var bestMin = predicate(result);
+                foreach (var item in list.Skip(1))
+                {
+                    var v = predicate(item);
+                    if (v.CompareTo(bestMin) < 0)
+                    {
+                        bestMin = v;
+                        result = item;
+                    }
+                }
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Selects the object in a list with the maximum value on a particular property
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TValue">The type of the value.</typeparam>
+        /// <param name="list">The list.</param>
+        /// <param name="predicate">The predicate.</param>
+        /// <returns></returns>
+        public static T FindMax<T, TValue>(this IEnumerable<T> list, Func<T, TValue> predicate)
+                                                                where TValue : IComparable<TValue>
+        {
+            T result = list.FirstOrDefault();
+            if (result != null)
+            {
+                var bestMax = predicate(result);
+                foreach (var item in list.Skip(1))
+                {
+                    var v = predicate(item);
+                    if (v.CompareTo(bestMax) > 0)
+                    {
+                        bestMax = v;
+                        result = item;
+                    }
+                }
+            }
+            return result;
+        }
         #region Private Methods
         private static IEnumerable<T> InnerSplit<T>(IEnumerator<T> enumerator, int splitSize)
         {

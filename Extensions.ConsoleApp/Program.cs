@@ -9,18 +9,10 @@ namespace Extensions.ConsoleApp
     {
         static void Main(string[] args)
         {
-            var nums = Enumerable.Range(0, 18);
-            var split = nums.Split(5);
-
-            foreach (var item in split)
-            {
-                foreach (var inner in item)
-                {
-                    Console.WriteLine(inner);
-                }
-                Console.WriteLine("----------------");
-            }
-
+            var items = new[] { 1, 2, 3 };
+            items.IsSingle(); // returns false
+            items.Take(1).IsSingle(); // returns true
+            new List<object>().IsSingle(); // returns false
             Console.ReadKey();
         }
     }
