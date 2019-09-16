@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
-namespace Extension.Methods.Methods
+namespace Extension.Methods
 {
     public static class GenericExtensions
     {
@@ -379,6 +379,86 @@ namespace Extension.Methods.Methods
             }
             return result;
         }
+        /// <summary>
+        /// Inserts an element to the proper position in a sorted list. Make sure to sort the list before calling InsertSorted
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source">The sorted source.</param>
+        /// <param name="value">The value to be inserted</param>
+        /// <returns>Returns the position where the value was inserted</returns>
+        /// <exception cref="ArgumentNullException">source</exception>
+        public static int InsertSorted<T>(this IList<T> source, T value) where T : IComparable<T>
+        {
+            if (source is null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+            for (int i = 0; i < source.Count; i++)
+            {
+                if (value.CompareTo(source[i]) < 0)
+                {
+                    source.Insert(i, value);
+                    return i;
+                }
+            }
+            source.Add(value);
+            return source.Count - 1;
+        }
+
+        /// <summary>
+        /// Inserts an element to the proper position in a sorted list. Make sure to sort the list before calling InsertSorted
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source">The sorted source.</param>
+        /// <param name="value">The value to be inserted</param>
+        /// <param name="comparison">The comparison that implements the Compare() for comparision of two objects of Type T.</param>
+        /// <returns>Returns the position where the value was inserted</returns>
+        /// <exception cref="ArgumentNullException">source</exception>
+        public static int InsertSorted<T>(this IList<T> source, T value, IComparer<T> comparison)
+        {
+            if (source is null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+            for (int i = 0; i < source.Count; i++)
+            {
+                if (comparison.Compare(value, source[i]) < 0)
+                {
+                    source.Insert(i, value);
+                    return i;
+                }
+            }
+            source.Add(value);
+            return source.Count - 1;
+        }
+
+        /// <summary>
+        /// Inserts an element to the proper position in a sorted list. Make sure to sort the list before calling InsertSorted
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source">The sorted source.</param>
+        /// <param name="value">The value to be inserted</param>
+        /// <param name="comparison">The comparison deligate that compares two objects of Type T.</param>
+        /// <returns>Returns the position where the value was inserted</returns>
+        /// <exception cref="ArgumentNullException">source</exception>
+        public static int InsertSorted<T>(this IList<T> source, T value, Comparison<T> comparison)
+        {
+            if (source is null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+            for (int i = 0; i < source.Count; i++)
+            {
+                if (comparison(value, source[i]) < 0)
+                {
+                    source.Insert(i, value);
+                    return i;
+                }
+            }
+            source.Add(value);
+            return source.Count - 1;
+        }
+
         #region Private Methods
         private static IEnumerable<T> InnerSplit<T>(IEnumerator<T> enumerator, int splitSize)
         {

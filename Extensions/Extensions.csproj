@@ -3,6 +3,19 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>Extension.Methods</RootNamespace>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>Extension.Methods</PackageId>
+    <Authors>Swagat Kumar Swain</Authors>
+    <Company>Mindfire Solutions</Company>
+    <Product>Extension Methods</Product>
+    <Description>This contains some of the most helpful extension methods we use everyday.</Description>
+    <Copyright>MIT</Copyright>
+    <PackageLicenseUrl>https://github.com/ssswagatss/Extensions/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/ssswagatss/Extensions</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/ssswagatss/Extensions</RepositoryUrl>
+    <RepositoryType>Public</RepositoryType>
+    <PackageTags>c-sharp extension-methods c# helper-methods</PackageTags>
+    <Version>0.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
