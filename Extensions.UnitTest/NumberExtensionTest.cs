@@ -1,4 +1,5 @@
 ﻿using Xunit;
+using Extension.Methods;
 
 namespace Extensions.UnitTest
 {

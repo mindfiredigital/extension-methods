@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
-namespace Extensions
+namespace Extension.Methods
 {
     public static class NumberExtensions
     {

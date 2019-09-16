@@ -2,7 +2,7 @@ using Extensions.UnitTest.OtherClasses;
 using System;
 using System.Linq;
 using Xunit;
-
+using Extension.Methods;
 namespace Extensions.UnitTest
 {
     public class StringExtensionsTest

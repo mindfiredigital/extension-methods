@@ -7,7 +7,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace Extensions
+namespace Extension.Methods
 {
     public static class StringExtensions
     {

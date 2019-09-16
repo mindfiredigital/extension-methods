@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using Extension.Methods;
 
 namespace Extensions.ConsoleApp
 {
@@ -9,10 +10,6 @@ namespace Extensions.ConsoleApp
     {
         static void Main(string[] args)
         {
-            var items = new[] { 1, 2, 3 };
-            items.IsSingle(); // returns false
-            items.Take(1).IsSingle(); // returns true
-            new List<object>().IsSingle(); // returns false
             Console.ReadKey();
         }
     }
