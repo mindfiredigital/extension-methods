@@ -29,8 +29,7 @@ namespace Extensions
         /// <returns></returns>
         public static IEnumerable<T> Randomize<T>(this IEnumerable<T> target)
         {
-            Random r = new Random();
-            return target.OrderBy(x => (r.Next()));
+            return target.OrderBy(x => (random.Next()));
         }
         /// <summary>
         /// Determines whether an IEnumerable is null or Empty
