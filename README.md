@@ -1,1 +1,63 @@
-# Extensions
+# Extension.Methods
+
+Extension.Methods is a C# library built on top of .Net Standard 2.0. This class library contains some of the most used extension methods we used in our day-to-day development process. We are committed to adding new methods.
+
+The reason why I started is very simple. Mostly to automate a redundant process. Each time I used to start a new project, I had to copy and paste these lines of codes to my project. Though most of the extension methods are available in the internet, they are not present under a single library. Adding this to your existing/new project is as easy as adding a NuGet package.
+
+## Installation
+
+The library is hosted on NuGet. You can install the same to your project using both Package Manager and .Net CLI. 
+
+Installing Extension.Methods using [NuGet Package Manager Console](https://www.nuget.org/) 
+
+    PM>Install-Package Extension.Methods
+
+Installing Extension.Methods using [.Net CLI](https://dotnet.microsoft.com/download)
+
+    >dotnet add package Extension.Methods
+
+This will install the packages and its dependencies to your project and you can start using the methods just by importing the **Extension.Methods** namespace. 
+
+## Example
+
+```csharp
+    using System;
+    using System.Collections.Generic;
+    using Extension.Methods; // This is important
+    
+    namespace YourProject.TestApp
+    {
+        class Program
+        {
+            static void Main(string[] args)
+            {
+                var l = new List<int>() { 1, 2, 4, 8, 5, 3, 0 };
+                l.Sort();
+                l.InsertSorted(0); // You can use all the available extension methods like this.
+                Console.ReadKey();
+            }
+        }
+    }
+```
+    
+
+## API References
+
+The project contains extension methods for the followings. 
+
+- StringExtensions
+- NumberExtensions
+- DateTimeExtensions
+- EnumExtensions
+- JsonExtensions
+- GenericExtensions
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
