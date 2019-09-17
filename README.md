@@ -57,7 +57,7 @@ The project contains extension methods for the followings.
 Checks if date string with dateFormat is parsable to System.DateTime format. True if is valid System.DateTime else returns false.
 ```csharp
 /// data : datetime string
-/// dateFormat : >date format "dd/MM/yyyy" by default
+/// dateFormat : date format "dd/MM/yyyy" by default
 public static bool IsDateTime(this string data, string dateFormat = "dd/MM/yyyy");
 ```
 #### Example
