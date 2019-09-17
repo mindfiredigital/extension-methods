@@ -17,7 +17,7 @@ namespace Extensions.ConsoleApp
 
             // Extension Method ToString(", ") would make your list nicely formatted with comma separated.
             Console.WriteLine(l.ToString(", "));
-
+          
             Console.ReadKey();
         }
     }
