@@ -632,5 +632,14 @@ namespace Extensions.UnitTest
             var res = data.IsMatch(regex);
             Assert.True(res == actual);
         }
+        [Theory]
+        [InlineData("9238545725", "(923)-854-5725")]
+        [InlineData("", "")]
+        [InlineData("9238", "9238")]
+        [InlineData("9238545", "9238545")]
+        public void ToPhoneNumber_ShouldPass(string data, string expected)
+        {
+            Assert.Equal(expected, data.ToPhoneNumber());
+        }
     }
 }

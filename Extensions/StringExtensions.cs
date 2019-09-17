@@ -1040,7 +1040,7 @@ namespace Extension.Methods
         /// <returns>system.string</returns>
         public static string ToPhoneNumber(this string phoneNumber)
         {
-            return string.Format("{0:(###) ###-####}", phoneNumber);
+            return Regex.Replace(phoneNumber, @"(\d{3})(\d{3})(\d{4})", "($1)-$2-$3");
         }
 
         /// <summary>
