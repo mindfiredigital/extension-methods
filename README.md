@@ -45,13 +45,21 @@ This will install the packages and its dependencies to your project and you can 
 
 The project contains extension methods for the followings. 
 
-- StringExtensions
+- [StringExtensions](#string-extensions)
 - NumberExtensions
 - DateTimeExtensions
 - EnumExtensions
 - JsonExtensions
 - GenericExtensions
 
+## String Extensions
+* ### IsDateTime
+Checks if date string with dateFormat is parsable to System.DateTime format. True if is valid System.DateTime else returns false.
+```csharp
+    var bar = "09/10/2019".IsDateTime(); //Returns true.
+    var foo = "11/28/2019".IsDateTime("MM/dd/yyyy"); // Returns false
+    var isDate = "11/28/2019".IsDateTime("dd/MM/yyyy"); // Returns false
+```
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
