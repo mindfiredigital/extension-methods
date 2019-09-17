@@ -31,7 +31,7 @@ This will install the packages and its dependencies to your project and you can 
         {
             static void Main(string[] args)
             {
-                var l = new List<int>() { 1, 2, 4, 8, 5, 3, 0 };
+                var l = new List<int>() { 1, 2, 4, 8, 5, 3 };
                 l.Sort();
                 l.InsertSorted(0); // You can use all the available extension methods like this.
                 Console.ReadKey();
