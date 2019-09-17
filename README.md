@@ -74,8 +74,8 @@ public static bool IsInteger(this string val);
 ```
 #### Example
 ```csharp
-    var isNumber = "112.51".IsInteger(); //Returns true.
-    isNumber = "-23.211".IsInteger(); // Returns true
+    var isNumber = "112".IsInteger(); //Returns true.
+    isNumber = "-23".IsInteger(); // Returns true
     isNumber = "".IsInteger(); // Returns false
 ```
 
