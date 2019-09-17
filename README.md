@@ -55,9 +55,9 @@ The project contains extension methods for the followings.
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
 Please make sure to update tests as appropriate.
 
 ## License
+Copyright (c) Swagat Swain. All rights reserved.
 
-[MIT](https://choosealicense.com/licenses/mit/)
+Licensed under the [MIT](https://choosealicense.com/licenses/mit/) license.
