@@ -56,6 +56,12 @@ The project contains extension methods for the followings.
 * ### IsDateTime
 Checks if date string with dateFormat is parsable to System.DateTime format. True if is valid System.DateTime else returns false.
 ```csharp
+/// data : datetime string
+/// dateFormat : >date format "dd/MM/yyyy" by default
+public static bool IsDateTime(this string data, string dateFormat = "dd/MM/yyyy");
+```
+#### Example
+```csharp
     var bar = "09/10/2019".IsDateTime(); //Returns true.
     var foo = "11/28/2019".IsDateTime("MM/dd/yyyy"); // Returns false
     var isDate = "11/28/2019".IsDateTime("dd/MM/yyyy"); // Returns false
