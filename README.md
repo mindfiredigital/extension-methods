@@ -1,6 +1,6 @@
 # Extension.Methods
 
-“Extension.Methods” is a C# library built on top of .Net Standard 2.0. This library contains most of the extension methods that you would use in everyday life. We are committed to adding new methods.
+**Extension.Methods** is a C# library built on top of .Net Standard 2.0. This library contains most of the extension methods that you would use in everyday life. We are committed to adding new methods.
 
 The reason why we started this project is very simple. Mostly to automate a redundant process. Each time we used to start a new project, we had to copy and paste these lines of codes to our project. Though most of the extension methods are available in the internet, they are not present under a single library. So we added everything to one place and created a package out of it. Adding this package to your existing/new project is as easy as adding any other NuGet package.
 
@@ -8,11 +8,11 @@ The reason why we started this project is very simple. Mostly to automate a redu
 
 The library is hosted on NuGet. You can install the same to your project using both Package Manager and .Net CLI. 
 
-Installing "Extension.Methods" using [NuGet Package Manager Console](https://www.nuget.org/) 
+Installing **Extension.Methods** using [NuGet Package Manager Console](https://www.nuget.org/) 
 
     PM>Install-Package Extension.Methods
 
-Installing "Extension.Methods" using [.Net CLI](https://dotnet.microsoft.com/download)
+Installing **Extension.Methods** using [.Net CLI](https://dotnet.microsoft.com/download)
 
     >dotnet add package Extension.Methods
 
