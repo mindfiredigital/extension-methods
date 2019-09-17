@@ -53,8 +53,8 @@ The project contains extension methods for the followings.
 - GenericExtensions
 
 ## String Extensions
-* ### IsDateTime
-Checks if date string with dateFormat is parsable to System.DateTime format. True if is valid System.DateTime else returns false.
+* ### IsDateTime()
+Checks if date string with dateFormat is parsable to ```System.DateTime``` format. True if is valid ```System.DateTime``` else returns false.
 ```csharp
 /// data : datetime string
 /// dateFormat : date format "dd/MM/yyyy" by default
@@ -62,10 +62,23 @@ public static bool IsDateTime(this string data, string dateFormat = "dd/MM/yyyy"
 ```
 #### Example
 ```csharp
-    var bar = "09/10/2019".IsDateTime(); //Returns true.
-    var foo = "11/28/2019".IsDateTime("MM/dd/yyyy"); // Returns false
-    var isDate = "11/28/2019".IsDateTime("dd/MM/yyyy"); // Returns false
+    var isDate = "09/10/2019".IsDateTime(); //Returns true.
+    isDate = "11/28/2019".IsDateTime("MM/dd/yyyy"); // Returns false
+    isDate = "11/28/2019".IsDateTime("dd/MM/yyyy"); // Returns false
 ```
+* ### IsInteger()
+Checks if a string is a valid int32 value. Returns true if the string is a valid Integer, else returns false.
+```csharp
+/// val : string value
+public static bool IsInteger(this string val);
+```
+#### Example
+```csharp
+    var isNumber = "112.51".IsInteger(); //Returns true.
+    isNumber = "-23.211".IsInteger(); // Returns true
+    isNumber = "".IsInteger(); // Returns false
+```
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
