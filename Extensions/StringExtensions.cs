@@ -76,6 +76,22 @@ namespace Extension.Methods
             return isNum;
         }
         /// <summary>
+        /// Checks if a string can be parsed to Guid or Not 
+        /// </summary>
+        /// <param name="s">A string containing a Guid to convert.</param>
+        /// <value>
+        /// <see langword="true" /> if <paramref name="s"/> was converted 
+        /// successfully; otherwise, <see langword="false" />.
+        /// </value>
+        public static bool IsGuid(this string s)
+        {
+            if (s.IsNullOrEmpty())
+                return false;
+            return s.IsMatch("^[A-Fa-f0-9]{32}$|" +
+                "^({|\\()?[A-Fa-f0-9]{8}-([A-Fa-f0-9]{4}-){3}[A-Fa-f0-9]{12}(}|\\))?$|" +
+                "^({)?[0xA-Fa-f0-9]{3,10}(, {0,1}[0xA-Fa-f0-9]{3,6}){2}, {0,1}({)([0xA-Fa-f0-9]{3,4}, {0,1}){7}[0xA-Fa-f0-9]{3,4}(}})$");
+        }
+        /// <summary>
         ///     Checks if the String contains only Unicode letters.
         ///     null will return false. An empty String ("") will return false.
         /// </summary>
@@ -1069,5 +1085,6 @@ namespace Extension.Methods
             }
             return output;
         }
+
     }
 }

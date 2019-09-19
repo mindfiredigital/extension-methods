@@ -641,5 +641,19 @@ namespace Extensions.UnitTest
         {
             Assert.Equal(expected, data.ToPhoneNumber());
         }
+        [Theory]
+        [InlineData("54b4bd2b-ca94-4e09-82e2-a4363c7c542d", true)]
+        [InlineData("54b4bd2b-ca94-4e09-82e2-a4363c7c52d", false)]
+        [InlineData("", false)]
+        [InlineData(null, false)]
+        [InlineData("7FB05CF8-1D45-4935-81C0-A4DD22264C34", true)]
+        [InlineData("A005041CCCFF4D349AA0FF48F384A0D3", true)]
+        [InlineData("ABCDER", false)]
+        [InlineData("2302190", false)]
+        public void IsGuid_ShouldPass(string data, bool expected)
+        {
+            Assert.True(data.IsGuid()==expected);
+            //Assert.True(Guid.TryParse(data, out var guidvalue) == expected);
+        }
     }
 }
