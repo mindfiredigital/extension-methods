@@ -63,7 +63,7 @@ public static bool IsDateTime(this string data, string dateFormat = "dd/MM/yyyy"
 #### Example
 ```csharp
     var isDate = "09/10/2019".IsDateTime(); //Returns true.
-    isDate = "11/28/2019".IsDateTime("MM/dd/yyyy"); // Returns false
+    isDate = "11/28/2019".IsDateTime("MM/dd/yyyy"); // Returns true
     isDate = "11/28/2019".IsDateTime("dd/MM/yyyy"); // Returns false
 ```
 * ### IsInteger()
@@ -83,6 +83,9 @@ public static bool IsInteger(this string val);
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 Please make sure to update tests as appropriate.
+
+## Feedback
+Any feedback or issues can be added to the [issues](https://github.com/ssswagatss/extension-methods/issues) for this project in GitHub.
 
 ## License
 Copyright (c) Swagat Swain. All rights reserved.
