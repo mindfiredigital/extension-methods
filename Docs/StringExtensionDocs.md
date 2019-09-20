@@ -1,5 +1,5 @@
 # String Extension Methods
-This contains Extension Methods that mostly deal with strings. 
+This contains Extension Methods that mostly deal with strings. You can check the examples below for more details. 
 
 * ### IsDateTime()
 Checks if date string with dateFormat is parsable to ```System.DateTime``` format. True if is valid ```System.DateTime``` else returns false.
@@ -86,4 +86,42 @@ public static bool IsAlphaNumeric(this string val);
     isAlphaNumeric = "1234".IsAlphaNumeric(); //Returns true.
     isAlphaNumeric = "Abc90Das".IsAlphaNumeric(); // Returns true
     isAlphaNumeric = "Abc90DasA#$".IsAlphaNumeric(); // Returns false
+```
+* ### IsEmailAddress()
+Validates email address. Returns true, if a given string is a valid email address. Else returns false.
+```csharp
+/// val : string value
+public static bool IsEmailAddress(this string val);
+```
+#### Example
+```csharp
+    var isEmail = "abc@gmail.com".IsEmailAddress(); //Returns true.
+    isEmail = "1234".IsEmailAddress(); //Returns false.
+    isEmail = "23@gmail.com".IsEmailAddress(); // Returns false
+    isEmail = "23+12@gmail.co.in.com".IsEmailAddress(); // Returns false
+```
+* ### IsIPv4()
+Validates if a string is valid IPv4 Returns true, if a given string is a valid IP. Else returns false.
+```csharp
+/// val : string value
+public static bool IsIPv4(this string val);
+```
+#### Example
+```csharp
+    var isIpV4 = "1.1.1.1".IsIPv4(); //Returns true.
+    isIpV4 = ".1.1".IsIPv4(); //Returns false.
+    isIpV4 = "23@gmail.com".IsIPv4(); // Returns false
+    isIpV4 = "192.168.1.1".IsIPv4(); // Returns true
+```
+* ### IsMatch()
+Determines whether the specified string matches a regular expression or not. Returns true if the regex matches, else returns false.
+```csharp
+/// val : string value
+/// regEx : The reg ex.
+public static bool IsMatch(this string content, string regEx);
+```
+#### Example
+```csharp
+    var isIpV4 = "ssswagatss@gmail.com".IsMatch("^[a-zA-Z][\\w\\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\\w\\.-]*[a-zA-Z0-9]\\.[a-zA-Z][a-zA-Z\\.]*[a-zA-Z]$"); //Returns true.
+    isIpV4 = "ssswagatss+09@gmail.com".IsMatch("^[a-zA-Z][\\w\\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\\w\\.-]*[a-zA-Z0-9]\\.[a-zA-Z][a-zA-Z\\.]*[a-zA-Z]$"); //Returns false.
 ```

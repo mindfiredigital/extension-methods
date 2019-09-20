@@ -123,13 +123,13 @@ namespace Extension.Methods
         /// <summary>
         ///     Validate email address
         /// </summary>
-        /// <param name="email">string email address</param>
+        /// <param name="val">string email address</param>
         /// <returns>true or false if email if valid</returns>
-        public static bool IsEmailAddress(this string email)
+        public static bool IsEmailAddress(this string val)
         {
             string pattern =
                 "^[a-zA-Z][\\w\\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\\w\\.-]*[a-zA-Z0-9]\\.[a-zA-Z][a-zA-Z\\.]*[a-zA-Z]$";
-            return Regex.IsMatch(email, pattern);
+            return Regex.IsMatch(val, pattern);
         }
         /// <summary>
         ///     Validates if a string is valid IPv4
