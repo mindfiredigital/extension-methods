@@ -188,3 +188,90 @@ public static IEnumerable<T> SplitTo<T>(this string val, StringSplitOptions opti
     var bar = "23,34,,56,,-2,33,100";
     var foo = bar.SplitTo<int>(StringSplitOptions.RemoveEmptyEntries, ',').ToArray(); //Returns new int[] { 23, 34, 56, -2, 33, 100 };
 ```
+* ### ToBoolean()
+Converts string to its boolean equivalent. This checks ignoring cases and trimming the string.
+```csharp
+/// val : string value
+public static bool ToBoolean(this string val);
+```
+#### Example
+```csharp
+    "false".ToBoolean(); //Returns false
+    "f".ToBoolean(); //Returns false
+    "n".ToBoolean(); //Returns false
+    "no".ToBoolean(); //Returns false
+    "False".ToBoolean(); //Returns false
+    "True".ToBoolean(); //Returns true
+    "True".ToBoolean(); //Returns true
+    "Yes".ToBoolean(); //Returns true
+    "y".ToBoolean(); //Returns true
+```
+* ### ToEnum()
+Converts string to its Enum type. Checks of string is a member of type `T` enum before converting. If fails returns `default enum`
+```csharp
+/// val : string value
+public static T ToEnum<T>(this string val, T defaultValue = default(T), bool ignoreCase = false) where T : struct;
+```
+#### Example
+```csharp
+    public enum TestEnums
+    {
+        Admin = 1,
+        PublicUser = 2,
+        Supervisor = 3
+    }
+    
+    "1".ToEnum<TestEnums>(); //Returns TestEnums.Admin
+    "2".ToEnum<TestEnums>(); //Returns TestEnums.PublicUser
+```
+* ### GetNullIfEmptyString()
+Checks if a string is Null or EmptyString (`string.Empty`), retuns NULL if the string is NULL or Empty and returns the same string if Not.
+```csharp
+/// val : string value
+public static string GetNullIfEmptyString(this string val);
+```
+#### Example
+```csharp
+    var bar = " Swagat ".GetNullIfEmptyString(); //Returns Swagat
+    bar = "".GetNullIfEmptyString(); //Returns null
+```
+* ### FirstCharacter()
+ Gets first character in string
+```csharp
+/// val : string value
+public static string FirstCharacter(this string val);
+```
+#### Example
+```csharp
+    var bar = "Royal College".FirstCharacter(); //Returns R
+```
+* ### LastCharacter()
+ Gets Last character in string
+```csharp
+/// val : string value
+public static string LastCharacter(this string val);
+```
+#### Example
+```csharp
+    var bar = "Royal College".LastCharacter(); //Returns e
+```
+* ### EndsWithIgnoreCase()
+ Checks a String ends with another sub-string ignoring the case. If it does, returns true, else returns false.
+```csharp
+/// val : string value
+public static bool EndsWithIgnoreCase(this string val, string suffix);
+```
+#### Example
+```csharp
+    var bar = "Royal College".EndsWithIgnoreCase("Ege"); //Returns true
+```
+* ### StartsWithIgnoreCase()
+ Checks a String Starts with another sub-string ignoring the case. If it does, returns true, else returns false.
+```csharp
+/// val : string value
+public static bool StartsWithIgnoreCase(this string val, string suffix);
+```
+#### Example
+```csharp
+    var bar = "Royal College".StartsWithIgnoreCase("royal"); //Returns true
+```
