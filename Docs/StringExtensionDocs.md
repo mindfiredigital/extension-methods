@@ -60,7 +60,7 @@ public static bool IsGuid(this string val);
 ```csharp
     var isGuid = "ABCDER".IsGuid(); //Returns False.
     isGuid = "7FB05CF8-1D45-4935-81C0-A4DD22264C34".IsGuid(); // Returns true
-    isGuid = "A005041CCCFF4D349AA0FF48F384A0D3".IsGuid(); // Returns false
+    isGuid = "A005041CCCFF4D349AA0FF48F384A0D3".IsGuid(); // Returns true
 ```
 * ### IsAlpha()
 Checks if the String contains only Unicode letters. ```null``` will return false. An empty String ("") will return false.
@@ -124,4 +124,16 @@ public static bool IsMatch(this string content, string regEx);
 ```csharp
     var isRegexMatch = "ssswagatss@gmail.com".IsMatch("^[a-zA-Z][\\w\\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\\w\\.-]*[a-zA-Z0-9]\\.[a-zA-Z][a-zA-Z\\.]*[a-zA-Z]$"); //Returns true.
     isRegexMatch = "ssswagatss+09@gmail.com".IsMatch("^[a-zA-Z][\\w\\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\\w\\.-]*[a-zA-Z0-9]\\.[a-zA-Z][a-zA-Z\\.]*[a-zA-Z]$"); //Returns false.
+```
+* ### IsUrl()
+Determines whether this string is URL. Returns true if URL, else returns false.
+```csharp
+/// val : string value
+public static bool IsUrl(this string val);
+```
+#### Example
+```csharp
+    var isUrl = "http://google.com".IsUrl(); //Returns true.
+    isUrl = "http://go ogle.com".IsUrl(); //Returns false.
+    isUrl = "http://google.com/abc-ght?url=bar".IsUrl(); //Returns true.
 ```
