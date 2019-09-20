@@ -45,7 +45,7 @@ This will install the packages and its dependencies to your project and you can 
 
 The project contains extension methods for the followings. 
 
-- [StringExtensions](#string-extensions)
+- [StringExtensions](https://github.com/ssswagatss/extension-methods/blob/development/Docs/StringExtensionDocs.md)
 - NumberExtensions
 - DateTimeExtensions
 - EnumExtensions
