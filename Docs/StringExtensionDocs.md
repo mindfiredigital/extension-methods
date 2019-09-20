@@ -13,6 +13,14 @@ Followings are the Methods available for public use.
 - [IsIPv4()](#isipv4)
 - [IsMatch()](#ismatch)
 - [ToCSVString()](#tocsvstring)
+- [SplitTo()](#splitto)
+- [ToBoolean()](#toboolean)
+- [ToEnum()](#toenum)
+- [GetNullIfEmptyString()](#getnullifemptystring)
+- [FirstCharacter()](#firstcharacter)
+- [LastCharacter()](#lastcharacter)
+- [EndsWithIgnoreCase()](#endswithignorecase)
+- [StartsWithIgnoreCase()](#startswithignorecase)
 
 ## Api Reference Details
 * ### IsDateTime()
