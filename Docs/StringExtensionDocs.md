@@ -122,6 +122,6 @@ public static bool IsMatch(this string content, string regEx);
 ```
 #### Example
 ```csharp
-    var isIpV4 = "ssswagatss@gmail.com".IsMatch("^[a-zA-Z][\\w\\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\\w\\.-]*[a-zA-Z0-9]\\.[a-zA-Z][a-zA-Z\\.]*[a-zA-Z]$"); //Returns true.
-    isIpV4 = "ssswagatss+09@gmail.com".IsMatch("^[a-zA-Z][\\w\\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\\w\\.-]*[a-zA-Z0-9]\\.[a-zA-Z][a-zA-Z\\.]*[a-zA-Z]$"); //Returns false.
+    var isRegexMatch = "ssswagatss@gmail.com".IsMatch("^[a-zA-Z][\\w\\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\\w\\.-]*[a-zA-Z0-9]\\.[a-zA-Z][a-zA-Z\\.]*[a-zA-Z]$"); //Returns true.
+    isRegexMatch = "ssswagatss+09@gmail.com".IsMatch("^[a-zA-Z][\\w\\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\\w\\.-]*[a-zA-Z0-9]\\.[a-zA-Z][a-zA-Z\\.]*[a-zA-Z]$"); //Returns false.
 ```
