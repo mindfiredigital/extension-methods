@@ -1,5 +1,11 @@
 # String Extension Methods
 This contains Extension Methods that mostly deal with strings. You can check the examples below for more details. 
+Followings are the Methods available for public use. 
+
+- [IsDateTime()](#IsDateTime())
+- [IsInteger()](#IsInteger())
+- [IsDecimal()](#IsDecimal())
+- [IsNumeric()](#IsNumeric())
 
 * ### IsDateTime()
 Checks if date string with dateFormat is parsable to ```System.DateTime``` format. True if is valid ```System.DateTime``` else returns false.
@@ -136,4 +142,17 @@ public static bool IsUrl(this string val);
     var isUrl = "http://google.com".IsUrl(); //Returns true.
     isUrl = "http://go ogle.com".IsUrl(); //Returns false.
     isUrl = "http://google.com/abc-ght?url=bar".IsUrl(); //Returns true.
+```
+* ### ToCSVString()
+Converts an object to CSV String separated by a Separator.
+```csharp
+/// val : string value
+/// separator : string separator, be default it separates with comma.
+public static string ToCSVString(this object obj, string separator = ",");
+```
+#### Example
+```csharp
+    var user = new TestUser { Id = 1, Name = "Extension Methods", Age = 18 };
+    var csv =user.ToCSVString(); //Returns "1,Extension Methods,18"
+    csv =user.ToCSVString("|"); //Returns "1|Extension Methods|18"
 ```
