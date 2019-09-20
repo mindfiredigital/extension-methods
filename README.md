@@ -46,11 +46,11 @@ This will install the packages and its dependencies to your project and you can 
 The project contains extension methods for the followings. 
 
 - [StringExtensions](https://github.com/ssswagatss/extension-methods/blob/development/Docs/StringExtensionDocs.md)
-- NumberExtensions
-- DateTimeExtensions
-- EnumExtensions
-- JsonExtensions
-- GenericExtensions
+- [NumberExtensions](https://github.com/ssswagatss/extension-methods/blob/development/Docs/NumberExtensionsDocs.md)
+- [DateTimeExtensions](https://github.com/ssswagatss/extension-methods/blob/development/Docs/DateTimeExtensionsDocs.md)
+- [EnumExtensions](https://github.com/ssswagatss/extension-methods/blob/development/Docs/EnumExtensionsDocs.md)
+- [JsonExtensions](https://github.com/ssswagatss/extension-methods/blob/development/Docs/JsonExtensionsDocs.md)
+- [GenericExtensions](https://github.com/ssswagatss/extension-methods/blob/development/Docs/GenericExtensionsDocs.md)
 
 ## Contributing
 
