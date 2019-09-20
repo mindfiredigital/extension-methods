@@ -2,10 +2,10 @@
 This contains Extension Methods that mostly deal with strings. You can check the examples below for more details. 
 Followings are the Methods available for public use. 
 
-- [IsDateTime()](#isdateTime())
-- [IsInteger()](#isinteger())
-- [IsDecimal()](#isdecimal())
-- [IsNumeric()](#isnumeric())
+- [IsDateTime()](#isdateTime)
+- [IsInteger()](#isinteger)
+- [IsDecimal()](#isdecimal)
+- [IsNumeric()](#isnumeric)
 
 * ### IsDateTime()
 Checks if date string with dateFormat is parsable to ```System.DateTime``` format. True if is valid ```System.DateTime``` else returns false.
