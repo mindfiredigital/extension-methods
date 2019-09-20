@@ -114,7 +114,31 @@ public static bool IsGuid(this string val);
     isGuid = "7FB05CF8-1D45-4935-81C0-A4DD22264C34".IsGuid(); // Returns true
     isGuid = "A005041CCCFF4D349AA0FF48F384A0D3".IsGuid(); // Returns false
 ```
-
+* ### IsAlpha()
+Checks if the String contains only Unicode letters. ```null``` will return false. An empty String ("") will return false.
+```csharp
+/// val : string value
+public static bool IsAlpha(this string val);
+```
+#### Example
+```csharp
+    var isAlpha = "Abc Das".IsAlpha(); //Returns true.
+    isAlpha = "Abc90Das".IsAlpha(); // Returns false
+    isAlpha = "Abc$#3Das".IsAlpha(); // Returns false
+```
+* ### IsAlphaNumeric()
+Checks if the String contains only Unicode letters, digits. ```null``` will return false. An empty String ("") will return false.
+```csharp
+/// val : string value
+public static bool IsAlphaNumeric(this string val);
+```
+#### Example
+```csharp
+    var isAlphaNumeric = "Abc Das".IsAlphaNumeric(); //Returns true.
+    isAlphaNumeric = "1234".IsAlphaNumeric(); //Returns true.
+    isAlphaNumeric = "Abc90Das".IsAlphaNumeric(); // Returns true
+    isAlphaNumeric = "Abc90DasA#$".IsAlphaNumeric(); // Returns false
+```
 
 ## Contributing
 
