@@ -6,7 +6,15 @@ Followings are the Methods available for public use.
 - [IsInteger()](#isinteger)
 - [IsDecimal()](#isdecimal)
 - [IsNumeric()](#isnumeric)
+- [IsGuid()](#isguid)
+- [IsAlpha()](#isalpha)
+- [IsAlphaNumeric()](#isalphanumeric)
+- [IsEmailAddress()](#isemailaddress)
+- [IsIPv4()](#isipv4)
+- [IsMatch()](#ismatch)
+- [ToCSVString()](#tocsvstring)
 
+## Api Reference Details
 * ### IsDateTime()
 Checks if date string with dateFormat is parsable to ```System.DateTime``` format. True if is valid ```System.DateTime``` else returns false.
 ```csharp
