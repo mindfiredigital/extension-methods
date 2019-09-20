@@ -164,3 +164,27 @@ public static string ToCSVString(this object obj, string separator = ",");
     var csv =user.ToCSVString(); //Returns "1,Extension Methods,18"
     csv =user.ToCSVString("|"); //Returns "1|Extension Methods|18"
 ```
+* ### SplitTo()
+Returns an enumerable collection of the specified type containing the substrings in this instance that are delimited by elements of a specified Char array
+```csharp
+/// val : string value
+/// separator : An array of Unicode characters that delimit the substrings in this instance, an empty array containing no delimiters, or null
+public static IEnumerable<T> SplitTo<T>(this string val, params char[] separator) where T : IConvertible ;
+```
+#### Example
+```csharp
+    var bar = "23,34,56,-2,33,100";
+    var foo = bar.SplitTo<int>(',').ToArray();  //Returns new int[] { 23, 34, 56, -2, 33, 100 };
+```
+There is one more overloaded method of `Split()` that Returns an enumerable collection of the specified type containing the substrings in this instance that are delimited by elements of a specified Char array, but this time it does so taking the `StringSplitOptions` into consideration.
+```csharp
+/// val : string value
+/// options : Represents StringSplitOptions like 'RemoveEmptyEntries' or 'None'
+/// separator : An array of Unicode characters that delimit the substrings in this instance, an empty array containing no delimiters, or null
+public static IEnumerable<T> SplitTo<T>(this string val, StringSplitOptions options, params char[] separator) where T : IConvertible;
+```
+#### Example
+```csharp
+    var bar = "23,34,,56,,-2,33,100";
+    var foo = bar.SplitTo<int>(StringSplitOptions.RemoveEmptyEntries, ',').ToArray(); //Returns new int[] { 23, 34, 56, -2, 33, 100 };
+```

@@ -192,7 +192,7 @@ namespace Extension.Methods
         ///     Returns an enumerable collection of the specified type containing the substrings in this instance that are
         ///     delimited by elements of a specified Char array
         /// </summary>
-        /// <param name="str">The string.</param>
+        /// <param name="val">The string.</param>
         /// <param name="separator">
         ///     An array of Unicode characters that delimit the substrings in this instance, an empty array containing no
         ///     delimiters, or null.
@@ -204,16 +204,16 @@ namespace Extension.Methods
         ///     An enumerable collection whose elements contain the substrings in this instance that are delimited by one or more
         ///     characters in separator.
         /// </returns>
-        public static IEnumerable<T> SplitTo<T>(this string str, params char[] separator) where T : IConvertible
+        public static IEnumerable<T> SplitTo<T>(this string val, params char[] separator) where T : IConvertible
         {
-            return str.Split(separator, StringSplitOptions.None).Select(s => (T)Convert.ChangeType(s, typeof(T)));
+            return val.Split(separator, StringSplitOptions.None).Select(s => (T)Convert.ChangeType(s, typeof(T)));
         }
 
         /// <summary>
         ///     Returns an enumerable collection of the specified type containing the substrings in this instance that are
         ///     delimited by elements of a specified Char array
         /// </summary>
-        /// <param name="str">The string.</param>
+        /// <param name="val">The string.</param>
         /// <param name="options">StringSplitOptions <see cref="StringSplitOptions" /></param>
         /// <param name="separator">
         ///     An array of Unicode characters that delimit the substrings in this instance, an empty array containing no
@@ -226,9 +226,9 @@ namespace Extension.Methods
         ///     An enumerable collection whose elements contain the substrings in this instance that are delimited by one or more
         ///     characters in separator.
         /// </returns>
-        public static IEnumerable<T> SplitTo<T>(this string str, StringSplitOptions options, params char[] separator) where T : IConvertible
+        public static IEnumerable<T> SplitTo<T>(this string val, StringSplitOptions options, params char[] separator) where T : IConvertible
         {
-            return str.Split(separator, options).Select(s => (T)Convert.ChangeType(s, typeof(T)));
+            return val.Split(separator, options).Select(s => (T)Convert.ChangeType(s, typeof(T)));
         }
 
         /// <summary>
