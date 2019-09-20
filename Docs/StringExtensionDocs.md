@@ -137,3 +137,16 @@ public static bool IsUrl(this string val);
     isUrl = "http://go ogle.com".IsUrl(); //Returns false.
     isUrl = "http://google.com/abc-ght?url=bar".IsUrl(); //Returns true.
 ```
+* ### ToCSVString()
+Converts an object to CSV String separated by a Separator.
+```csharp
+/// val : string value
+/// separator : string separator, be default it separates with comma.
+public static string ToCSVString(this object obj, string separator = ",");
+```
+#### Example
+```csharp
+    var user = new TestUser { Id = 1, Name = "Extension Methods", Age = 18 };
+    var csv =user.ToCSVString(); //Returns "1,Extension Methods,18"
+    csv =user.ToCSVString("|"); //Returns "1|Extension Methods|18"
+```
