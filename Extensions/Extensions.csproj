@@ -8,14 +8,15 @@
     <Authors>Swagat Kumar Swain</Authors>
     <Company>Mindfire Solutions</Company>
     <Product>Extension Methods</Product>
-    <Description>This contains some of the most helpful extension methods we use everyday.</Description>
+    <Description>This contains some of the most helpful extension methods we use everyday.
+Adds new extensions for string, number and generic</Description>
     <Copyright>MIT</Copyright>
     <PackageLicenseUrl>https://github.com/ssswagatss/Extensions/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/ssswagatss/Extensions</PackageProjectUrl>
     <RepositoryUrl>https://github.com/ssswagatss/Extensions</RepositoryUrl>
     <RepositoryType>Public</RepositoryType>
     <PackageTags>c-sharp extension-methods c# helper-methods</PackageTags>
-    <Version>0.0.1</Version>
+    <Version>0.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
