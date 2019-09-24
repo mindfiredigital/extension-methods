@@ -123,13 +123,13 @@ namespace Extension.Methods
         /// <summary>
         ///     Validate email address
         /// </summary>
-        /// <param name="email">string email address</param>
+        /// <param name="val">string email address</param>
         /// <returns>true or false if email if valid</returns>
-        public static bool IsEmailAddress(this string email)
+        public static bool IsEmailAddress(this string val)
         {
             string pattern =
                 "^[a-zA-Z][\\w\\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\\w\\.-]*[a-zA-Z0-9]\\.[a-zA-Z][a-zA-Z\\.]*[a-zA-Z]$";
-            return Regex.IsMatch(email, pattern);
+            return Regex.IsMatch(val, pattern);
         }
         /// <summary>
         ///     Validates if a string is valid IPv4
@@ -163,14 +163,14 @@ namespace Extension.Methods
         /// <summary>
         /// Determines whether this string is URL.
         /// </summary>
-        /// <param name="text">The text.</param>
+        /// <param name="val">The text.</param>
         /// <returns>
         ///   <c>true</c> if the specified text is URL; otherwise, <c>false</c>.
         /// </returns>
-        public static bool IsUrl(this string text)
+        public static bool IsUrl(this string val)
         {
             var rx = new Regex(@"http(s)?://([\w-]+\.)+[\w-]+(/[\w- ./?%&=]*)?");
-            return rx.IsMatch(text);
+            return rx.IsMatch(val);
         }
         /// <summary>
         /// Converts an object to CSV String separated by a Separator
@@ -192,7 +192,7 @@ namespace Extension.Methods
         ///     Returns an enumerable collection of the specified type containing the substrings in this instance that are
         ///     delimited by elements of a specified Char array
         /// </summary>
-        /// <param name="str">The string.</param>
+        /// <param name="val">The string.</param>
         /// <param name="separator">
         ///     An array of Unicode characters that delimit the substrings in this instance, an empty array containing no
         ///     delimiters, or null.
@@ -204,16 +204,16 @@ namespace Extension.Methods
         ///     An enumerable collection whose elements contain the substrings in this instance that are delimited by one or more
         ///     characters in separator.
         /// </returns>
-        public static IEnumerable<T> SplitTo<T>(this string str, params char[] separator) where T : IConvertible
+        public static IEnumerable<T> SplitTo<T>(this string val, params char[] separator) where T : IConvertible
         {
-            return str.Split(separator, StringSplitOptions.None).Select(s => (T)Convert.ChangeType(s, typeof(T)));
+            return val.Split(separator, StringSplitOptions.None).Select(s => (T)Convert.ChangeType(s, typeof(T)));
         }
 
         /// <summary>
         ///     Returns an enumerable collection of the specified type containing the substrings in this instance that are
         ///     delimited by elements of a specified Char array
         /// </summary>
-        /// <param name="str">The string.</param>
+        /// <param name="val">The string.</param>
         /// <param name="options">StringSplitOptions <see cref="StringSplitOptions" /></param>
         /// <param name="separator">
         ///     An array of Unicode characters that delimit the substrings in this instance, an empty array containing no
@@ -226,15 +226,15 @@ namespace Extension.Methods
         ///     An enumerable collection whose elements contain the substrings in this instance that are delimited by one or more
         ///     characters in separator.
         /// </returns>
-        public static IEnumerable<T> SplitTo<T>(this string str, StringSplitOptions options, params char[] separator) where T : IConvertible
+        public static IEnumerable<T> SplitTo<T>(this string val, StringSplitOptions options, params char[] separator) where T : IConvertible
         {
-            return str.Split(separator, options).Select(s => (T)Convert.ChangeType(s, typeof(T)));
+            return val.Split(separator, options).Select(s => (T)Convert.ChangeType(s, typeof(T)));
         }
 
         /// <summary>
         ///     Converts string to its boolean equivalent
         /// </summary>
-        /// <param name="value">string to convert</param>
+        /// <param name="val">string to convert</param>
         /// <returns>boolean equivalent</returns>
         /// <remarks>
         ///     <exception cref="ArgumentException">
@@ -242,14 +242,13 @@ namespace Extension.Methods
         ///         string is passed
         ///     </exception>
         /// </remarks>
-        public static bool ToBoolean(this string value)
+        public static bool ToBoolean(this string val)
         {
-            if (string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value))
+            if (string.IsNullOrEmpty(val) || string.IsNullOrWhiteSpace(val))
             {
                 throw new ArgumentException("value");
             }
-            string val = value.ToLower().Trim();
-            switch (val)
+            switch (val.ToLower().Trim())
             {
                 case "false":
                     return false;
@@ -279,7 +278,7 @@ namespace Extension.Methods
         ///     if fails returns default enum
         /// </summary>
         /// <typeparam name="T">generic type</typeparam>
-        /// <param name="value"> The string representation of the enumeration name or underlying value to convert</param>
+        /// <param name="val"> The string representation of the enumeration name or underlying value to convert</param>
         /// <param name="defaultValue">Dafault value of the Enum</param>
         /// <param name="ignoreCase">Check if it checks case sensitivity of not</param>
         /// <returns>Enum object</returns>
@@ -289,14 +288,14 @@ namespace Extension.Methods
         ///         only contains white space.-or- value is a name, but not one of the named constants defined for the enumeration
         ///     </exception>
         /// </remarks>
-        public static T ToEnum<T>(this string value, T defaultValue = default(T), bool ignoreCase = false) where T : struct
+        public static T ToEnum<T>(this string val, T defaultValue = default(T), bool ignoreCase = false) where T : struct
         {
             if (!typeof(T).IsEnum)
             {
                 throw new ArgumentException("Type T Must of type System.Enum");
             }
             T result;
-            bool isParsed = Enum.TryParse(value, ignoreCase, out result);
+            bool isParsed = Enum.TryParse(val, ignoreCase, out result);
             return isParsed ? result : defaultValue;
         }
 
@@ -312,21 +311,21 @@ namespace Extension.Methods
         }
 
         /// <summary>
-        ///     Checks if a string is null and returns String if not Empty else returns null/Nothing
+        ///     Checks if a string is Null or EmptyString (`string.Empty`), retuns NULL if the string is NULL or Empty and returns the same string if Not.
         /// </summary>
-        /// <param name="myValue">String value</param>
+        /// <param name="val">String value</param>
         /// <returns>null/nothing if String IsEmpty</returns>
         /// <remarks></remarks>
-        public static string GetNullIfEmptyString(this string myValue)
+        public static string GetNullIfEmptyString(this string val)
         {
-            if (myValue == null || myValue.Length <= 0)
+            if (val == null || val.Length <= 0)
             {
                 return null;
             }
-            myValue = myValue.Trim();
-            if (myValue.Length > 0)
+            val = val.Trim();
+            if (val.Length > 0)
             {
-                return myValue;
+                return val;
             }
             return null;
         }

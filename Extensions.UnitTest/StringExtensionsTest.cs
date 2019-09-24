@@ -655,5 +655,14 @@ namespace Extensions.UnitTest
             Assert.True(data.IsGuid()==expected);
             //Assert.True(Guid.TryParse(data, out var guidvalue) == expected);
         }
+
+        [Theory]
+        [InlineData("http://google.com",true)]
+        [InlineData("http://goog le.com",false)]
+        [InlineData("http://google.com/abc-ght?url=bar",true)]
+        public void IsUrl_ShouldPass(string url, bool actual)
+        {
+            Assert.True(url.IsUrl() == actual);
+        }
     }
 }

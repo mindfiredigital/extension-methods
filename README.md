@@ -45,39 +45,12 @@ This will install the packages and its dependencies to your project and you can 
 
 The project contains extension methods for the followings. 
 
-- [StringExtensions](#string-extensions)
-- NumberExtensions
-- DateTimeExtensions
-- EnumExtensions
-- JsonExtensions
-- GenericExtensions
-
-## String Extensions
-* ### IsDateTime()
-Checks if date string with dateFormat is parsable to ```System.DateTime``` format. True if is valid ```System.DateTime``` else returns false.
-```csharp
-/// data : datetime string
-/// dateFormat : date format "dd/MM/yyyy" by default
-public static bool IsDateTime(this string data, string dateFormat = "dd/MM/yyyy");
-```
-#### Example
-```csharp
-    var isDate = "09/10/2019".IsDateTime(); //Returns true.
-    isDate = "11/28/2019".IsDateTime("MM/dd/yyyy"); // Returns true
-    isDate = "11/28/2019".IsDateTime("dd/MM/yyyy"); // Returns false
-```
-* ### IsInteger()
-Checks if a string is a valid int32 value. Returns true if the string is a valid Integer, else returns false.
-```csharp
-/// val : string value
-public static bool IsInteger(this string val);
-```
-#### Example
-```csharp
-    var isNumber = "112".IsInteger(); //Returns true.
-    isNumber = "-23".IsInteger(); // Returns true
-    isNumber = "".IsInteger(); // Returns false
-```
+- [StringExtensions](https://github.com/ssswagatss/extension-methods/blob/development/Docs/StringExtensionDocs.md)
+- [NumberExtensions](https://github.com/ssswagatss/extension-methods/blob/development/Docs/NumberExtensionsDocs.md)
+- [DateTimeExtensions](https://github.com/ssswagatss/extension-methods/blob/development/Docs/DateTimeExtensionsDocs.md)
+- [EnumExtensions](https://github.com/ssswagatss/extension-methods/blob/development/Docs/EnumExtensionsDocs.md)
+- [JsonExtensions](https://github.com/ssswagatss/extension-methods/blob/development/Docs/JsonExtensionsDocs.md)
+- [GenericExtensions](https://github.com/ssswagatss/extension-methods/blob/development/Docs/GenericExtensionsDocs.md)
 
 ## Contributing
 
