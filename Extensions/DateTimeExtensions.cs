@@ -578,7 +578,63 @@ namespace Extension.Methods
         /// </returns>
         public static bool IsFutureDate(this DateTime date)
         {
-            return date.IsFutureDate(DateTime.Now);
+            return date.IsFutureDate(DateTime.Today);
+        }
+
+        /// <summary>
+        /// Determines whether the date is Today's date or Not.
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified date is today; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsToday(this DateTime date)
+        {
+            return date.Date == DateTime.Today.Date;
+        }
+        /// <summary>
+        /// Determines whether the date is a future date.
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified date is a future date; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsAfterToday(this DateTime date)
+        {
+            return date.IsFutureDate();
+        }
+        /// <summary>
+        /// Determines whether the date is either today or a future date.
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified date is either today or a future date; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsOnOrAfterToday(this DateTime date)
+        {
+            return date.IsToday() || date.IsFutureDate();
+        }
+        /// <summary>
+        /// Determines whether the date is a past date.
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified date is a past date; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsBeforeToday(this DateTime date)
+        {
+            return date.IsPastDate();
+        }
+        /// <summary>
+        /// Determines whether the date is either today or a past date.
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified date is either today or a past date; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsOnOrBeforeToday(this DateTime date)
+        {
+            return date.IsToday() || date.IsPastDate();
         }
         /// <summary>
         /// Determines whether the date is a future date from the specified from date. This only compares the date, ignoring the time.
