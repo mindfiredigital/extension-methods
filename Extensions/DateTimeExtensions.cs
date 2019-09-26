@@ -112,15 +112,15 @@ namespace Extension.Methods
         /// </summary>
         /// <param name="startDate">The start date.</param>
         /// <param name="endDate">The end date.</param>
-        /// <param name="datePary">The date part.</param>
+        /// <param name="datePart">The date part.</param>
         /// <returns>Date Difference in System.long</returns>
         /// <exception cref="Exception"></exception>
-        public static long DateDiff(this DateTime startDate, DateTime endDate, string datePary)
+        public static long DateDiff(this DateTime startDate, DateTime endDate, string datePart)
         {
             long DateDiffVal = 0;
             System.Globalization.Calendar cal = System.Threading.Thread.CurrentThread.CurrentCulture.Calendar;
             TimeSpan ts = new TimeSpan(endDate.Ticks - startDate.Ticks);
-            switch (datePary.ToLower().Trim())
+            switch (datePart.ToLower().Trim())
             {
                 #region year
                 case "year":
@@ -199,7 +199,7 @@ namespace Extension.Methods
                 #endregion
 
                 default:
-                    throw new Exception(string.Format("DatePart \"{0}\" is unknown", datePary));
+                    throw new Exception(string.Format("DatePart \"{0}\" is unknown", datePart));
             }
             return DateDiffVal;
         }
@@ -566,6 +566,55 @@ namespace Extension.Methods
         public static int GetQuarter(this DateTime fromDate)
         {
             return ((fromDate.Month - 1) / 3) + 1;
+        }
+
+        /// <summary>
+        /// Determines whether the date is a future date from today. This only compares the date, ignoring the time.
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <param name="from">From date</param>
+        /// <returns>
+        ///   <c>true</c> if the date is future to the specified from today; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsFutureDate(this DateTime date)
+        {
+            return date.IsFutureDate(DateTime.Now);
+        }
+        /// <summary>
+        /// Determines whether the date is a future date from the specified from date. This only compares the date, ignoring the time.
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <param name="from">From date</param>
+        /// <returns>
+        ///   <c>true</c> if the date is future to the specified from date; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsFutureDate(this DateTime date, DateTime from)
+        {
+            return date.Date > from.Date;
+        }
+        /// <summary>
+        /// Determines whether the date is a past date from the specified from date. This only compares the date, ignoring the time.
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <param name="from">From date</param>
+        /// <returns>
+        ///   <c>true</c> if the date is past to the specified from date; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsPastDate(this DateTime date, DateTime from)
+        {
+            return date.Date < from.Date;
+        }
+        /// <summary>
+        /// Determines whether the date is a past date from today. This only compares the date, ignoring the time.
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <param name="from">From date</param>
+        /// <returns>
+        ///   <c>true</c> if the date is past to the specified from today; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsPastDate(this DateTime date)
+        {
+            return date.IsPastDate(DateTime.Now);
         }
     }
 }
