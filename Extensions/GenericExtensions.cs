@@ -55,7 +55,18 @@ namespace Extension.Methods
         {
             return source != null && source.Any();
         }
-
+        /// <summary>
+        /// Determines whether an object is null or holds its default values.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="value">The Object</param>
+        /// <returns>
+        ///   <c>true</c> if the object is null or it holds the default value; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsNullOrDefault<T>(this T? value) where T : struct
+        {
+            return value == null || value.Value.Equals(default(T));
+        }
         /// <summary>
         /// Convert a IEnumerable<T> to a Collection<T>
         /// </summary>
@@ -467,6 +478,60 @@ namespace Extension.Methods
         public static IEnumerable<T> EmptyIfNull<T>(this IEnumerable<T> sequence)
         {
             return sequence ?? Enumerable.Empty<T>();
+        }
+
+        /// <summary>
+        /// Adds a range of elements to a collection as parameter.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="S"></typeparam>
+        /// <param name="list">The collection.</param>
+        /// <param name="values">The values to be added.</param>
+        public static void AddRange<T, S>(this IList<T> list, params S[] values) where S : T
+        {
+            foreach (S value in values)
+                list.Add(value);
+        }
+        /// <summary>
+        /// Performs binary search on a collection of elements.
+        /// var item = list.BinarySearch(i => i.Id, 42);
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TKey">The type of the key.</typeparam>
+        /// <param name="list">The list.</param>
+        /// <param name="keySelector">The key selector.</param>
+        /// <param name="key">The key.</param>
+        /// <returns>The fact that it throws an InvalidOperationException may seem strange, but that's what Enumerable.First does when there's no matching item.</returns>
+        /// <exception cref="InvalidOperationException">Item not found</exception>
+        public static T BinarySearch<T, TKey>(this IList<T> list, Func<T, TKey> keySelector, TKey key) where TKey : IComparable<TKey>
+        {
+            int min = 0;
+            int max = list.Count;
+            while (min < max)
+            {
+                int mid = (max + min) / 2;
+                T midItem = list[mid];
+                TKey midKey = keySelector(midItem);
+                int comp = midKey.CompareTo(key);
+                if (comp < 0)
+                {
+                    min = mid + 1;
+                }
+                else if (comp > 0)
+                {
+                    max = mid - 1;
+                }
+                else
+                {
+                    return midItem;
+                }
+            }
+            if (min == max &&
+                keySelector(list[min]).CompareTo(key) == 0)
+            {
+                return list[min];
+            }
+            throw new InvalidOperationException("Item not found");
         }
 
         #region Private Methods
