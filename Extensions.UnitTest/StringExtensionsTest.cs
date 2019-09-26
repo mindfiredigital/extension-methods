@@ -634,6 +634,13 @@ namespace Extensions.UnitTest
             Assert.True(res == actual);
         }
 
+
+        [Theory]
+        [InlineData("Emad Alashi found ash on his desk, he went mad, very mad", "mad", 2, 43)]
+        public void NthIndexOf_ShouldPass(string data, string subStr, int occurance, int index)
+        {
+            Assert.Equal(data.NthIndexOf(subStr, occurance), index);
+        }
         [Theory]
         [InlineData("the quick brown\r\nfox jumps over the lazy \tdog.", 9)]
         public void WordCount_ShouldPass(string data, int actual)

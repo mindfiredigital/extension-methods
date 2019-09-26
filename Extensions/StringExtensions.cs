@@ -1127,5 +1127,27 @@ namespace Extension.Methods
             }
             return count;
         }
+        /// <summary>
+        /// Finds the index of the nth occurrence of a string in a string
+        /// </summary>
+        /// <param name="input">The input.</param>
+        /// <param name="stringToBeFound">The string to be found.</param>
+        /// <param name="occurrence">The occurrence.</param>
+        /// <returns></returns>
+        public static int NthIndexOf(this string input, string stringToBeFound, int occurrence)
+        {
+            int occurrenceCounter = 0;
+            int indexOfPassedString = 0 - stringToBeFound.Length;
+            do
+            {
+                indexOfPassedString = input.IndexOf(stringToBeFound, indexOfPassedString + stringToBeFound.Length);
+                if (indexOfPassedString == -1)
+                    break;
+                occurrenceCounter++;
+            }
+            while (occurrenceCounter != occurrence);
+
+            return indexOfPassedString;
+        }
     }
 }
