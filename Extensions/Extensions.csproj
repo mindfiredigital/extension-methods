@@ -11,16 +11,18 @@
     <Description>This contains some of the most helpful extension methods we use everyday.
 Adds new extensions for string, number and generic</Description>
     <Copyright>MIT</Copyright>
-    <PackageLicenseUrl>https://github.com/ssswagatss/Extensions/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/ssswagatss/Extensions</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/ssswagatss/Extensions</RepositoryUrl>
+    <PackageLicenseUrl>https://github.com/ssswagatss/extension-methods/blob/development/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/ssswagatss/extension-methods</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/ssswagatss/extension-methods</RepositoryUrl>
     <RepositoryType>Public</RepositoryType>
     <PackageTags>c-sharp extension-methods c# helper-methods</PackageTags>
-    <Version>0.1.0</Version>
+    <Version>0.2.0</Version>
+    <PackageReleaseNotes>Adds new methods for String Extensions.
+Updates documentations with proper examples.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
   </ItemGroup>
 
 </Project>
