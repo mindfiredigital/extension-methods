@@ -1,8 +1,8 @@
+using Extension.Methods;
 using Extensions.UnitTest.OtherClasses;
 using System;
 using System.Linq;
 using Xunit;
-using Extension.Methods;
 namespace Extensions.UnitTest
 {
     public class StringExtensionsTest
@@ -617,6 +617,7 @@ namespace Extensions.UnitTest
         }
         [Theory]
         [InlineData("my Name is Swagat swain", "My Name Is Swagat Swain")]
+        [InlineData("tHiS is a sTring TesT", "This Is A String Test")]
         [InlineData("", "")]
         public void ToTitleCase_ShouldPass(string data, string actual)
         {
@@ -632,6 +633,14 @@ namespace Extensions.UnitTest
             var res = data.IsMatch(regex);
             Assert.True(res == actual);
         }
+
+        [Theory]
+        [InlineData("the quick brown\r\nfox jumps over the lazy \tdog.", 9)]
+        public void WordCount_ShouldPass(string data, int actual)
+        {
+            Assert.True(data.WordCount() == actual);
+        }
+
         [Theory]
         [InlineData("9238545725", "(923)-854-5725")]
         [InlineData("", "")]
@@ -652,14 +661,14 @@ namespace Extensions.UnitTest
         [InlineData("2302190", false)]
         public void IsGuid_ShouldPass(string data, bool expected)
         {
-            Assert.True(data.IsGuid()==expected);
+            Assert.True(data.IsGuid() == expected);
             //Assert.True(Guid.TryParse(data, out var guidvalue) == expected);
         }
 
         [Theory]
-        [InlineData("http://google.com",true)]
-        [InlineData("http://goog le.com",false)]
-        [InlineData("http://google.com/abc-ght?url=bar",true)]
+        [InlineData("http://google.com", true)]
+        [InlineData("http://goog le.com", false)]
+        [InlineData("http://google.com/abc-ght?url=bar", true)]
         public void IsUrl_ShouldPass(string url, bool actual)
         {
             Assert.True(url.IsUrl() == actual);

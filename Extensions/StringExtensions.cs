@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
@@ -725,8 +726,8 @@ namespace Extension.Methods
         {
             if (source == null) return source;
 
-            System.Globalization.CultureInfo cultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
-            System.Globalization.TextInfo textInfo = cultureInfo.TextInfo;
+            CultureInfo cultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
+            TextInfo textInfo = cultureInfo.TextInfo;
 
             // TextInfo.ToTitleCase only operates on the string if is all lower case, otherwise it returns the string unchanged.
             return textInfo.ToTitleCase(source.ToLower());
@@ -1084,6 +1085,47 @@ namespace Extension.Methods
             }
             return output;
         }
-
+        /// <summary>
+        /// Convert a (A)RGB string to a Color object
+        /// </summary>
+        /// <param name="argb">An RGB or an ARGB string</param>
+        /// <returns>a Color object</returns>
+        public static Color ToColor(this string argb)
+        {
+            argb = argb.Replace("#", "");
+            byte a = Convert.ToByte("ff", 16);
+            byte pos = 0;
+            if (argb.Length == 8)
+            {
+                a = Convert.ToByte(argb.Substring(pos, 2), 16);
+                pos = 2;
+            }
+            byte r = Convert.ToByte(argb.Substring(pos, 2), 16);
+            pos += 2;
+            byte g = Convert.ToByte(argb.Substring(pos, 2), 16);
+            pos += 2;
+            byte b = Convert.ToByte(argb.Substring(pos, 2), 16);
+            return Color.FromArgb(a, r, g, b);
+        }
+        /// <summary>
+        /// Count all words in a given string
+        /// </summary>
+        /// <param name="input">string to begin with</param>
+        /// <returns>int</returns>
+        public static int WordCount(this string input)
+        {
+            var count = 0;
+            try
+            {
+                // Exclude whitespaces, Tabs and line breaks
+                var re = new Regex(@"[^\s]+");
+                var matches = re.Matches(input);
+                count = matches.Count;
+            }
+            catch
+            {
+            }
+            return count;
+        }
     }
 }
