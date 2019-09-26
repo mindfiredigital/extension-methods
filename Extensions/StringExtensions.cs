@@ -1149,5 +1149,23 @@ namespace Extension.Methods
 
             return indexOfPassedString;
         }
+
+        /// <summary>
+        /// Gets all the indexes in which a certain substring appears within the string.
+        /// </summary>
+        /// <param name="input">The search in.</param>
+        /// <param name="searchFor">The substring we are searching for.</param>
+        /// <returns></returns>
+        public static IEnumerable<int> IndicesOf(this string input, string searchFor)
+        {
+            if (string.IsNullOrEmpty(searchFor)) yield break;
+
+            int lastLoc = input.IndexOf(searchFor);
+            while (lastLoc != -1)
+            {
+                yield return lastLoc;
+                lastLoc = input.IndexOf(searchFor, startIndex: lastLoc + 1);
+            }
+        }
     }
 }

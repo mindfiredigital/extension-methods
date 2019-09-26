@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace Extension.Methods
@@ -532,6 +533,62 @@ namespace Extension.Methods
                 return list[min];
             }
             throw new InvalidOperationException("Item not found");
+        }
+
+        /// <summary>
+        /// Finds all the indexes of the given value or values in an enumerable list
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="seq">The sequence of objects.</param>
+        /// <param name="value">The value.</param>
+        /// <returns></returns>
+        public static IEnumerable<int> IndicesOf<T>(this IEnumerable<T> seq, T value)
+        {
+            return (from i in Enumerable.Range(0, seq.Count())
+                    where seq.ElementAt(i).Equals(value)
+                    select i);
+        }
+
+        /// <summary>
+        /// Finds all the indexes of the given collection or values in an enumerable list
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="obj">The object.</param>
+        /// <param name="values">The collection to be searched for</param>
+        /// <returns></returns>
+        public static IEnumerable<int> IndicesOf<T>(this IEnumerable<T> obj, IEnumerable<T> values)
+        {
+            return (from i in Enumerable.Range(0, obj.Count())
+                    where values.Contains(obj.ElementAt(i))
+                    select i);
+        }
+        /// <summary>
+        /// Returns an alphabetically sorted list for all public and instance properties, along with its associated values.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns></returns>
+        public static string ToSortedString(this object value, string charSeparator = ", ")
+        {
+            BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.Public;
+            SortedDictionary<string, string> values = new SortedDictionary<string, string>();
+
+            PropertyInfo[] properties = value.GetType().GetProperties(bindingFlags);
+            foreach (PropertyInfo property in properties)
+            {
+                string propertyName = property.Name;
+                object propertyValue = property.GetValue(value, null);
+                string maskedValue = propertyValue == null ? "null" : propertyValue.ToString();
+
+                values.Add(propertyName, maskedValue);
+            }
+
+            StringBuilder sb = new StringBuilder();
+            foreach (KeyValuePair<string, string> item in values)
+            {
+                sb.AppendFormat("{0}={1}{2}", item.Key, item.Value, charSeparator);
+            }
+
+            return sb.ToString().TrimEnd(charSeparator.ToCharArray());
         }
 
         #region Private Methods

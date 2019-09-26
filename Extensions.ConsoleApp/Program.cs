@@ -17,7 +17,12 @@ namespace Extensions.ConsoleApp
 
             // Extension Method ToString(", ") would make your list nicely formatted with comma separated.
             Console.WriteLine(l.ToString(", "));
-          
+            TestUser user = new TestUser {
+                Age=23,
+                Name="Swagat Swain",
+                TestUserId=11
+            };
+            Console.WriteLine(user.ToSortedString());
             Console.ReadKey();
         }
     }
