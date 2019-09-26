@@ -458,6 +458,16 @@ namespace Extension.Methods
             source.Add(value);
             return source.Count - 1;
         }
+        /// <summary>
+        /// Returns an empty sequense if the sequense is Null
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="sequence">The sequence.</param>
+        /// <returns></returns>
+        public static IEnumerable<T> EmptyIfNull<T>(this IEnumerable<T> sequence)
+        {
+            return sequence ?? Enumerable.Empty<T>();
+        }
 
         #region Private Methods
         private static IEnumerable<T> InnerSplit<T>(IEnumerator<T> enumerator, int splitSize)
