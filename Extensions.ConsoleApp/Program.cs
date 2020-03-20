@@ -8,11 +8,7 @@ namespace Extensions.ConsoleApp
     {
         static void Main(string[] args)
         {
-            foreach (var item in "SwagatKumarSwain".SplitCamelCase())
-            {
-
-                Console.WriteLine(item);
-            }
+            Console.WriteLine("C#Extension Methods".Encrypt("myEncryptionKey"));
             Console.ReadKey();
         }
     }

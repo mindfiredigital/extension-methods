@@ -45,6 +45,9 @@ Followings are the Methods available for public use.
 - [SplitCamelCase()](#splitcamelcase)
 - [ToHumanCase()](#tohumancase)
 - [ToTitleCase()](#totitlecase)
+- [Truncate()](#truncate)
+- [Encrypt()](#encrypt)
+- [Decrypt()](#decrypt)
 
 ## Api Reference Details
 
@@ -623,4 +626,41 @@ public static string ToTitleCase(this string source);
 ```csharp
     var bar = "my Name is Swagat swain".ToTitleCase();// Returns 'My Name Is Swagat Swain' 
     "tHiS is a sTring TesT".SplitCamelCase(); // Returns 'This Is A String Test' 
+```
+
+* ### Truncate()
+Truncates a string to the specified maximum length.
+```csharp
+/// value : the given string
+/// maxLength : The maximum length
+public static string Truncate(this string value, int maxLength);
+```
+#### Example
+```csharp
+    var bar = "FirstName".Truncate(4);// Returns 'Firs' 
+    var bar = "FirstName".Truncate(0);// Returns '' 
+```
+
+* ### Encrypt()
+Encrypt a string using the supplied key. Encoding is done using RSA encryption.
+```csharp
+/// stringToEncrypt : the given string to encrypt
+/// key : Encryption key
+public static string Encrypt(this string stringToEncrypt, string key);
+```
+#### Example
+```csharp
+    var bar = "C#Extension Methods".Encrypt("myEncryptionKey");//Returns back the encrypted string
+```
+
+* ### Decrypt()
+Decrypt a string using the supplied key. Decoding is done using RSA encryption.
+```csharp
+/// stringToDecrypt : the given string to encrypt
+/// key : Encryption key
+public static string Decrypt(this string stringToDecrypt, string key);
+```
+#### Example
+```csharp
+    var bar = "BB-AA-CC".Encrypt("myEncryptionKey");//Returns back original string
 ```
