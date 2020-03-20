@@ -8,7 +8,7 @@ namespace Extensions.ConsoleApp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("C#Extension Methods".Encrypt("myEncryptionKey"));
+            Console.WriteLine("C#Extension Methods".In("Cuttack","Bhubaneswar"));
             Console.ReadKey();
         }
     }

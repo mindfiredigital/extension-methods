@@ -53,6 +53,7 @@ Followings are the Methods available for public use.
 - [DoesNotEndWith()](#doesnotendwith)
 - [CreateHashSha512()](#createhashsha512)
 - [CreateHashSha256()](#createhashsha256)
+- [ToBytes()](#tobytes)
 
 ## Api Reference Details
 
@@ -387,7 +388,7 @@ public static string RemoveChars(this string s, params char[] chars);
 ```
 #### Example
 ```csharp
-    var bar = "swagat swain".RemoveChars("s,w,a,i,n"); //Returns "gt "
+    var bar = "swagat swain".RemoveChars("s","w","a","i","n"); //Returns "gt "
 ```
 
 * ### RemoveCharsIgnoreCase()
@@ -756,4 +757,28 @@ public static string CreateHashSha256(this string val);
 ```csharp
     var password = "YourPassword";
     password.CreateHashSha256(); //Returns Hashed string
+```
+
+* ### ToBytes()
+ Convert a string to its equivalent byte array
+```csharp
+/// val : the given string
+public static string ToBytes(this string val);
+```
+#### Example
+```csharp
+    var bar = "C# is an amazing Language".ToBytes();
+```
+
+* ### In()
+ Convert a string to its equivalent byte array
+```csharp
+/// value : the given string
+/// stringValues : Comma separates strings withing which the given string is to be searched for
+public static bool In(this string value, params string[] stringValues);
+```
+#### Example
+```csharp
+    var bar = "Cuttack".In("Cuttack","Bhubaneswar","Jajpur");//Returns true
+    var bar = "Puri".In("Cuttack","Bhubaneswar","Jajpur");//Returns false
 ```
