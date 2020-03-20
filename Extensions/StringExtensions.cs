@@ -790,13 +790,12 @@ namespace Extension.Methods
         public static IDictionary<string, string> QueryStringToDictionary(this string queryString)
         {
             if (string.IsNullOrWhiteSpace(queryString))
-            {
                 return null;
-            }
             if (!queryString.Contains("?"))
-            {
                 return null;
-            }
+
+            //If the User has sent the entire URL, find out only the query string.
+            queryString = queryString.Right(queryString.Length - queryString.IndexOf("?"));
             string query = queryString.Replace("?", "");
             if (!query.Contains("="))
             {

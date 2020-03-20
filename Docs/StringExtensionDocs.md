@@ -664,3 +664,25 @@ public static string Decrypt(this string stringToDecrypt, string key);
 ```csharp
     var bar = "BB-AA-CC".Encrypt("myEncryptionKey");//Returns back original string
 ```
+
+
+* ### QueryStringToDictionary()
+Convert url query string to IDictionary value key pair
+```csharp
+/// queryString : The url or the pary of querystring starting with ?
+public static IDictionary<string, string> QueryStringToDictionary(this string queryString);
+```
+#### Example
+```csharp
+    var bar = "https://abc.com/?name=swagat&page=12";
+    bar.QueryStringToDictionary(); 
+    //Returns Dictionary<string,string> with 
+    //key = name, value = swagat
+    //key = page, value = 12
+
+     var foo = "?name=swagat&page=12";
+    foo.QueryStringToDictionary(); 
+    //Returns Dictionary<string,string> with 
+    //key = name, value = swagat
+    //key = page, value = 12
+```

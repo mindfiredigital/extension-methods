@@ -1,6 +1,7 @@
 using Extension.Methods;
 using Extensions.UnitTest.OtherClasses;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 namespace Extensions.UnitTest
@@ -688,6 +689,22 @@ namespace Extensions.UnitTest
         public void IsUrl_ShouldPass(string url, bool actual)
         {
             Assert.True(url.IsUrl() == actual);
+        }
+
+        [Fact]
+        public void QueryStringToDictionary_ShouldPass()
+        {
+            var url = "https://abc.com/?name=swagat&page=12";
+            var expected = new Dictionary<string, string>();
+            expected.Add("name", "swagat");
+            expected.Add("page", "12");
+            var actual = url.QueryStringToDictionary();
+            Assert.Equal(expected, actual);
+
+            var url2 = "?name=swagat&page=12";
+           
+            var actual2 = url2.QueryStringToDictionary();
+            Assert.Equal(expected, actual2);
         }
     }
 }
