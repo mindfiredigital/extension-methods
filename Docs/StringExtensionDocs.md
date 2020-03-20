@@ -57,6 +57,8 @@ Followings are the Methods available for public use.
 - [In()](#in)
 - [InWithIgnoreCase()](#inwithignorecase)
 - [SeoFriendlyURL()](#seofriendlyurl)
+- [Format()](#format)
+- [GetOnlyDigits()](#getonlydigits)
 
 ## Api Reference Details
 
@@ -813,4 +815,35 @@ public static string SeoFriendlyURL(this string title, int maxLength);
 
     bar = "10 reasons why we waste time on people & emotions";
     bar.SeoFriendlyURL(255);//Returns '10-reasons-why-we-waste-time-on-people-emotions'
+```
+
+
+* ### Format()
+ Replaces the format item in a specified string with the string representation of a corresponding object in a specified object or array.
+```csharp
+/// value : A composite format string
+/// arg0 : An System.Object to format
+public static string Format(this string value, object arg0);
+
+
+/// value :A composite format string
+/// args : An object array that contains zero or more objects to format
+public static string Format(this string value, params object[] args)
+```
+#### Example
+```csharp
+    var bar ="My name is {0}".Format("Swagat"); //Returns "My Name is Swagat"
+    bar = "{0} is my favourite {1}".Format("C#","Language");//Returns "C# is my favourite Language"
+```
+
+* ### GetOnlyDigits()
+ Gets the only digits from a specified string. If the string is "123-12-1234", returns "123121234".
+```csharp
+/// value : A given string
+public static string GetOnlyDigits(this string value);
+```
+#### Example
+```csharp
+    var bar ="123-12-1234".GetOnlyDigits(); //Returns "123121234"
+    bar ="Hello #@45 World".GetOnlyDigits(); //Returns "45"
 ```

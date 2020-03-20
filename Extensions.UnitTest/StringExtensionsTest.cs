@@ -706,5 +706,13 @@ namespace Extensions.UnitTest
             var actual2 = url2.QueryStringToDictionary();
             Assert.Equal(expected, actual2);
         }
+
+        [Theory]
+        [InlineData("Hello #@45 World", "45")]
+        [InlineData("C# is my 10th fav language", "10")]
+        public void GetOnlyDigits_ShouldPass(string data, string actual)
+        {
+            Assert.True(data.GetOnlyDigits() == actual);
+        }
     }
 }
