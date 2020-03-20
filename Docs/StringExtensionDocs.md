@@ -21,6 +21,7 @@ Followings are the Methods available for public use.
 - [LastCharacter()](#lastcharacter)
 - [EndsWithIgnoreCase()](#endswithignorecase)
 - [StartsWithIgnoreCase()](#startswithignorecase)
+- [Capitalize()](#capitalize)
 
 ## Api Reference Details
 * ### IsDateTime()
@@ -278,6 +279,17 @@ public static bool EndsWithIgnoreCase(this string val, string suffix);
 ```csharp
 /// val : string value
 public static bool StartsWithIgnoreCase(this string val, string suffix);
+```
+#### Example
+```csharp
+    var bar = "Royal College".StartsWithIgnoreCase("royal"); //Returns true
+```
+
+* ### Capitalize()
+ Read in a sequence of words from standard input and capitalize each one (make first letter uppercase; make rest lowercase).
+```csharp
+/// s : string value
+public static string Capitalize(this string s);
 ```
 #### Example
 ```csharp
