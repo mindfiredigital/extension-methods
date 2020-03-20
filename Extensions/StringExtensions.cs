@@ -1039,7 +1039,7 @@ namespace Extension.Methods
         /// <summary>
         /// Masks the phone number.
         /// If a phone number is "(800) 555-1212", the output will be "(###) ### -1212"
-        /// If a phone number is "800 555-7890", the output will be "### ### 7890"
+        /// If a phone number is "800 555-7890", the output will be "### ###-7890"
         /// If a phone number is "1234561111", the output will be "######1111"
         /// </summary>
         /// <param name="phoneNumber">The phone number</param>

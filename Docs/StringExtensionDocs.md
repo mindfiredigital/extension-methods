@@ -59,6 +59,8 @@ Followings are the Methods available for public use.
 - [SeoFriendlyURL()](#seofriendlyurl)
 - [Format()](#format)
 - [GetOnlyDigits()](#getonlydigits)
+- [MaskEmail()](#maskemail)
+- [MaskPhoneNumber()](#maskphonenumber)
 
 ## Api Reference Details
 
@@ -846,4 +848,30 @@ public static string GetOnlyDigits(this string value);
 ```csharp
     var bar ="123-12-1234".GetOnlyDigits(); //Returns "123121234"
     bar ="Hello #@45 World".GetOnlyDigits(); //Returns "45"
+```
+
+* ### MaskEmail()
+ Masks the email string. If an email address is "abc@gmail.com", the output is a#c@g####.com
+```csharp
+/// emailAddress :The email address
+/// maskChar : The mask character, "*" by default
+public static string MaskEmail(this string emailAddress, char maskChar = '*');
+```
+#### Example
+```csharp
+    var bar ="youremail@gmail.com".MaskEmail(); //Returns "y*******l@g****.com"
+    bar ="ail@yahoo.com".MaskEmail('*'); //Returns "*@*.*"
+```
+
+* ### MaskPhoneNumber()
+ Masks the email string. If an email address is "abc@gmail.com", the output is a#c@g####.com
+```csharp
+/// phoneNumber :The phone number
+/// maskChar : The mask character, "*" by default
+public static string MaskPhoneNumber(this string phoneNumber, char maskChar = '*');
+```
+#### Example
+```csharp
+    var bar ="(800) 555-1212".MaskPhoneNumber(); //Returns "(###) ###-1212"
+    bar ="1234561111".MaskPhoneNumber('*'); //Returns "######1111"
 ```

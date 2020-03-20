@@ -714,5 +714,21 @@ namespace Extensions.UnitTest
         {
             Assert.True(data.GetOnlyDigits() == actual);
         }
+        [Theory]
+        [InlineData("youremail@gmail.com", "y*******l@g****.com")]
+        [InlineData("youremail@yahoo.com", "y*******l@y****.com")]
+        [InlineData("ail@yahoo.com", "*@*.*")]
+        public void MaskEmail_ShouldPass(string data, string actual)
+        {
+            Assert.True(data.MaskEmail('*') == actual);
+        }
+        [Theory]
+        [InlineData("(800) 555-1212", "(###) ###-1212")]
+        [InlineData("800 555-7890", "### ###-7890")]
+        [InlineData("1234561111", "######1111")]
+        public void MaskPhoneNumber_ShouldPass(string data, string actual)
+        {
+            Assert.True(data.MaskPhoneNumber('#') == actual);
+        }
     }
 }
