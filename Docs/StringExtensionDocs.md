@@ -49,6 +49,8 @@ Followings are the Methods available for public use.
 - [Encrypt()](#encrypt)
 - [Decrypt()](#decrypt)
 - [RemoveLineFeeds()](#removelinefeeds)
+- [DoesNotStartWith()](#doesnotstartwith)
+- [DoesNotEndWith()](#doesnotendwith)
 
 ## Api Reference Details
 
@@ -293,6 +295,8 @@ public static bool ToBoolean(this string val);
 Converts string to its Enum type. Checks of string is a member of type `T` enum before converting. If fails returns `default enum`
 ```csharp
 /// val : string value
+/// defaultValue : The default value of Type T
+/// ignoreCase :  Indicates whether the compare should ignore case
 public static T ToEnum<T>(this string val, T defaultValue = default(T), bool ignoreCase = false) where T : struct;
 ```
 #### Example
@@ -698,4 +702,32 @@ public static string RemoveLineFeeds(this string val);
 ```csharp
     var bar = "https://abc.com/?name=swagat&page=12";
     bar.RemoveLineFeeds(); //Removes linefeed from string.
+```
+
+* ### DoesNotStartWith()
+ Remove Line Feeds
+```csharp
+/// val : The given string
+/// prefix : The string which is to be measured.
+/// ignoreCase :  Indicates whether the compare should ignore case
+public static bool DoesNotStartWith(this string val, string prefix, bool ignoreCase = false)
+```
+#### Example
+```csharp
+    var bar = "C# is am amazing language";
+    bar.DoesNotStartWith("c#",true); //Returns true
+```
+
+* ### DoesNotEndWith()
+ Remove Line Feeds
+```csharp
+/// val : The given string
+/// suffix : The string which is to be measured.
+/// ignoreCase :  Indicates whether the compare should ignore case
+public static bool DoesNotEndWith(this string val, string suffix, bool ignoreCase = false)
+```
+#### Example
+```csharp
+    var bar = "C# is am amazing language";
+    bar.DoesNotEndWith("c#",true); //Returns false
 ```
