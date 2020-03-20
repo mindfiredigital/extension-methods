@@ -27,6 +27,9 @@ Followings are the Methods available for public use.
 - [RemoveString()](#removestring)
 - [RemoveStringIgnoreCase()](#removestringignorecase)
 - [Reverse()](#reverse)
+- [ParseToCsv()](#parsetocsv)
+- [CountOccurrences()](#countoccurrences)
+- [CountOccurrencesIgnoreCase()](#countoccurrencesignorecase)
 
 ## Api Reference Details
 * ### IsDateTime()
@@ -361,4 +364,41 @@ public static string Reverse(this string val);
 #### Example
 ```csharp
     string s = "C# is hot".Reverse("HO");//Returns 'toh si #C'
+```
+
+* ### ParseToCsv()
+ Appends String quotes for type CSV data
+```csharp
+/// val : string to be converted into CSV string
+public static string ParseToCsv(this string val);
+```
+#### Example
+```csharp
+    string s = "C# is hot".ParseToCsv();//Returns "C# is hot" (With Quotes)
+```
+
+* ### CountOccurrences()
+ Count number of occurrences in string
+```csharp
+/// val : string containing text
+/// stringToMatch : string or pattern find
+public static int CountOccurrences(this string val, string stringToMatch);
+```
+#### Example
+```csharp
+    "Mahesh Chand is a founder of C# CornerMahesh Chand is a founder of C# Corner".CountOccurrences("mahesh");// Returns 0
+    "Mahesh Chand is a founder of C# CornerMahesh Chand is a founder of C# Corner".CountOccurrences("Mahesh");// Returns 2
+```
+
+* ### CountOccurrencesIgnoreCase()
+ Count number of occurrences in string ignoring Case
+```csharp
+/// val : string containing text
+/// stringToMatch : string or pattern find
+public static int CountOccurrencesIgnoreCase(this string val, string stringToMatch);
+```
+#### Example
+```csharp
+    "Mahesh Chand is a founder of C# CornerMahesh Chand is a founder of C# Corner".CountOccurrences("mahesh");// Returns 0
+    "Mahesh Chand is a founder of C# CornerMahesh Chand is a founder of C# Corner".CountOccurrences("Mahesh");// Returns 2
 ```

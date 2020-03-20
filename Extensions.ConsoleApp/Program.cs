@@ -8,7 +8,7 @@ namespace Extensions.ConsoleApp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("swagat kumar swain".Capitalize());
+            Console.WriteLine("swagat kumar swain".ParseToCsv());
             Console.ReadKey();
         }
     }
