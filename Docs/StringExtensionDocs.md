@@ -54,6 +54,8 @@ Followings are the Methods available for public use.
 - [CreateHashSha512()](#createhashsha512)
 - [CreateHashSha256()](#createhashsha256)
 - [ToBytes()](#tobytes)
+- [In()](#in)
+- [InWithIgnoreCase()](#inwithignorecase)
 
 ## Api Reference Details
 
