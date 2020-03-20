@@ -2,6 +2,9 @@
 This contains Extension Methods that mostly deal with strings. You can check the examples below for more details. 
 Followings are the Methods available for public use. 
 
+- [IsNull()](#isnull)
+- [IsNullOrEmpty()](#isnullorempty)
+- [IsNullOrWhiteSpace()](#isnullorwhitespace)
 - [IsDateTime()](#isdateTime)
 - [IsInteger()](#isinteger)
 - [IsDecimal()](#isdecimal)
@@ -38,6 +41,53 @@ Followings are the Methods available for public use.
 - [Right()](#right)
 
 ## Api Reference Details
+
+* ### IsNull()
+Checks if a string is null
+```csharp
+/// var : The input String
+public static bool IsNull(this string val);
+```
+#### Example
+```csharp
+    var bar = "Swag".IsNull(); //Returns false
+    var bar = "".IsNull(); //Returns false
+
+    string bar=null;
+    bar.IsNull();//Returns true
+```
+
+* ### IsNullOrEmpty()
+Checks if a string is null or empty
+```csharp
+/// var : The input String
+public static bool IsNullOrEmpty(this string val);
+```
+#### Example
+```csharp
+    var bar = "Swag".IsNullOrEmpty(); //Returns false
+    var bar = "".IsNullOrEmpty(); //Returns true
+
+    string bar=null;
+    bar.IsNullOrEmpty();//Returns true
+```
+* ### IsNullOrWhiteSpace()
+Checks if a string is null or whitespace
+```csharp
+/// var : The input String
+public static bool IsNullOrWhiteSpace(this string val);
+```
+#### Example
+```csharp
+    var bar = "Swag".IsNullOrWhiteSpace(); //Returns false
+    var bar = "".IsNullOrWhiteSpace(); //Returns true
+    var bar = "     ".IsNullOrWhiteSpace(); //Returns true
+
+    string bar=null;
+    bar.IsNullOrWhiteSpace();//Returns true
+```
+
+
 * ### IsDateTime()
 Checks if date string with dateFormat is parsable to ```System.DateTime``` format. True if is valid ```System.DateTime``` else returns false.
 ```csharp
