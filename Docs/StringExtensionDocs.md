@@ -30,6 +30,8 @@ Followings are the Methods available for public use.
 - [ParseToCsv()](#parsetocsv)
 - [CountOccurrences()](#countoccurrences)
 - [CountOccurrencesIgnoreCase()](#countoccurrencesignorecase)
+- [RemovePrefix()](#removeprefix)
+- [RemoveSuffix()](#removesuffix)
 
 ## Api Reference Details
 * ### IsDateTime()
@@ -401,4 +403,32 @@ public static int CountOccurrencesIgnoreCase(this string val, string stringToMat
 ```csharp
     "Mahesh Chand is a founder of C# CornerMahesh Chand is a founder of C# Corner".CountOccurrences("mahesh");// Returns 0
     "Mahesh Chand is a founder of C# CornerMahesh Chand is a founder of C# Corner".CountOccurrences("Mahesh");// Returns 2
+```
+
+* ### RemovePrefix()
+ Removes the first part of the string, if no match found return original string
+```csharp
+/// val : string to remove prefix
+/// prefix : prefix
+/// ignoreCase : Indicates whether the compare should ignore case
+public static string RemovePrefix(this string val, string prefix, bool ignoreCase = true);
+```
+#### Example
+```csharp
+    "Swagat Kumar Swain".RemovePrefix("Swa",true);// Returns 'gat Kumar Swain'
+    "Swagat Kumar Swain".RemovePrefix("swa",false);// Returns 'Swagat Kumar Swain'
+```
+
+* ### RemoveSuffix()
+ Removes the first part of the string, if no match found return original string
+```csharp
+/// val : string to remove suffix
+/// suffix : suffix
+/// ignoreCase : Indicates whether the compare should ignore case
+public static string RemoveSuffix(this string val, string suffix, bool ignoreCase = true);
+```
+#### Example
+```csharp
+    "Swagat Kumar Swain".RemovePrefix("Swa",true);// Returns 'Swagat Kumar Swain'
+    "Swagat Kumar Swain".RemovePrefix("Swain",false);// Returns 'Swagat Kumar '
 ```
