@@ -61,6 +61,7 @@ Followings are the Methods available for public use.
 - [GetOnlyDigits()](#getonlydigits)
 - [MaskEmail()](#maskemail)
 - [MaskPhoneNumber()](#maskphonenumber)
+- [ToPhoneNumber()](#tophonenumber)
 
 ## Api Reference Details
 
@@ -874,4 +875,15 @@ public static string MaskPhoneNumber(this string phoneNumber, char maskChar = '*
 ```csharp
     var bar ="(800) 555-1212".MaskPhoneNumber(); //Returns "(###) ###-1212"
     bar ="1234561111".MaskPhoneNumber('*'); //Returns "######1111"
+```
+
+* ### ToPhoneNumber()
+ Transforms a string to phone number If a phone number is "1234567890", then the formatted string will be "(123) 456-7890"
+```csharp
+/// phoneNumber :The phone number
+public static string ToPhoneNumber(this string phoneNumber);
+```
+#### Example
+```csharp
+    var bar ="1234567890".MaskPhoneNumber(); //Returns "(123) 456-7890"
 ```
