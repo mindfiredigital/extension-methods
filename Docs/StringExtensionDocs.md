@@ -48,6 +48,7 @@ Followings are the Methods available for public use.
 - [Truncate()](#truncate)
 - [Encrypt()](#encrypt)
 - [Decrypt()](#decrypt)
+- [RemoveLineFeeds()](#removelinefeeds)
 
 ## Api Reference Details
 
@@ -685,4 +686,16 @@ public static IDictionary<string, string> QueryStringToDictionary(this string qu
     //Returns Dictionary<string,string> with 
     //key = name, value = swagat
     //key = page, value = 12
+```
+
+* ### RemoveLineFeeds()
+ Remove Line Feeds
+```csharp
+/// val : The given string
+public static string RemoveLineFeeds(this string val);
+```
+#### Example
+```csharp
+    var bar = "https://abc.com/?name=swagat&page=12";
+    bar.RemoveLineFeeds(); //Removes linefeed from string.
 ```
