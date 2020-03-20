@@ -56,6 +56,7 @@ Followings are the Methods available for public use.
 - [ToBytes()](#tobytes)
 - [In()](#in)
 - [InWithIgnoreCase()](#inwithignorecase)
+- [SeoFriendlyURL()](#seofriendlyurl)
 
 ## Api Reference Details
 
@@ -796,4 +797,20 @@ public static bool InWithIgnoreCase(this string value, params string[] stringVal
 ```csharp
     var bar = "cuttack".InWithIgnoreCase("Cuttack","Bhubaneswar","Jajpur");//Returns true
     var bar = "Puri".InWithIgnoreCase("Cuttack","Bhubaneswar","Jajpur");//Returns false
+```
+
+* ### SeoFriendlyURL()
+ Converts a string to a SEO friendly URL.
+```csharp
+/// title : URL string
+/// maxLength : Maximum allowed length of the URL
+public static string SeoFriendlyURL(this string title, int maxLength);
+```
+#### Example
+```csharp
+    var bar = "C# is my favourite Language";
+    bar.SeoFriendlyURL(255);//Returns 'c-sharp-is-my-favourite-language'
+
+    bar = "10 reasons why we waste time on people & emotions";
+    bar.SeoFriendlyURL(255);//Returns '10-reasons-why-we-waste-time-on-people-emotions'
 ```
