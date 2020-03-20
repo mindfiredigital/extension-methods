@@ -26,6 +26,7 @@ Followings are the Methods available for public use.
 - [RemoveCharsIgnoreCase()](#removecharsignorecase)
 - [RemoveString()](#removestring)
 - [RemoveStringIgnoreCase()](#removestringignorecase)
+- [Reverse()](#reverse)
 
 ## Api Reference Details
 * ### IsDateTime()
@@ -349,4 +350,15 @@ public static string RemoveString(this string s, string replaceString);
 #### Example
 ```csharp
     string s = "C# is hot".RemoveString("HO");//Returns 'C# is t'
+```
+
+* ### Reverse()
+ Reverse a given string
+```csharp
+/// val : string to be reversed
+public static string Reverse(this string val);
+```
+#### Example
+```csharp
+    string s = "C# is hot".Reverse("HO");//Returns 'toh si #C'
 ```
