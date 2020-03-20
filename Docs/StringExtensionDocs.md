@@ -771,7 +771,7 @@ public static string ToBytes(this string val);
 ```
 
 * ### In()
- Convert a string to its equivalent byte array
+ Checks string object's value to array of string values, does not ignore case sensitivity
 ```csharp
 /// value : the given string
 /// stringValues : Comma separates strings withing which the given string is to be searched for
@@ -781,4 +781,17 @@ public static bool In(this string value, params string[] stringValues);
 ```csharp
     var bar = "Cuttack".In("Cuttack","Bhubaneswar","Jajpur");//Returns true
     var bar = "Puri".In("Cuttack","Bhubaneswar","Jajpur");//Returns false
+````
+
+* ### InWithIgnoreCase()
+ Checks string object's value to array of string values, ignores case sensitivity
+```csharp
+/// value : the given string
+/// stringValues : Comma separates strings withing which the given string is to be searched for
+public static bool InWithIgnoreCase(this string value, params string[] stringValues);
+```
+#### Example
+```csharp
+    var bar = "cuttack".InWithIgnoreCase("Cuttack","Bhubaneswar","Jajpur");//Returns true
+    var bar = "Puri".InWithIgnoreCase("Cuttack","Bhubaneswar","Jajpur");//Returns false
 ```
