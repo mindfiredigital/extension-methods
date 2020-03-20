@@ -1,6 +1,7 @@
 using Extension.Methods;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace Extensions.ConsoleApp
 {
@@ -8,7 +9,8 @@ namespace Extensions.ConsoleApp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("C#Extension Methods".In("Cuttack","Bhubaneswar"));
+            Color color = "ffffcc88".ToColor();
+            var bar = color.R;
             Console.ReadKey();
         }
     }

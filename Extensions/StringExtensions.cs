@@ -1061,32 +1061,6 @@ namespace Extension.Methods
         }
 
         /// <summary>
-        /// Formats the string according to the specified mask
-        /// </summary>
-        /// <param name="input">The input string.</param>
-        /// <param name="mask">The mask for formatting. Like "A##-##-T-###Z"</param>
-        /// <returns>The formatted string</returns>
-        public static string Mask(this string input, string mask)
-        {
-            if (input.IsNullOrEmpty()) return input;
-            var output = string.Empty;
-            var index = 0;
-            foreach (var m in mask)
-            {
-                if (m == '#')
-                {
-                    if (index < input.Length)
-                    {
-                        output += input[index];
-                        index++;
-                    }
-                }
-                else
-                    output += m;
-            }
-            return output;
-        }
-        /// <summary>
         /// Convert a (A)RGB string to a Color object
         /// </summary>
         /// <param name="argb">An RGB or an ARGB string</param>
@@ -1109,7 +1083,7 @@ namespace Extension.Methods
             return Color.FromArgb(a, r, g, b);
         }
         /// <summary>
-        /// Count all words in a given string
+        /// Count all words in a given string excluding white spaces, tabs, line breaks
         /// </summary>
         /// <param name="input">string to begin with</param>
         /// <returns>int</returns>
@@ -1118,7 +1092,7 @@ namespace Extension.Methods
             var count = 0;
             try
             {
-                // Exclude whitespaces, Tabs and line breaks
+                // Exclude whitespace, Tabs and line breaks
                 var re = new Regex(@"[^\s]+");
                 var matches = re.Matches(input);
                 count = matches.Count;
@@ -1149,24 +1123,6 @@ namespace Extension.Methods
             while (occurrenceCounter != occurrence);
 
             return indexOfPassedString;
-        }
-
-        /// <summary>
-        /// Gets all the indexes in which a certain substring appears within the string.
-        /// </summary>
-        /// <param name="input">The search in.</param>
-        /// <param name="searchFor">The substring we are searching for.</param>
-        /// <returns></returns>
-        public static IEnumerable<int> IndicesOf(this string input, string searchFor)
-        {
-            if (string.IsNullOrEmpty(searchFor)) yield break;
-
-            int lastLoc = input.IndexOf(searchFor);
-            while (lastLoc != -1)
-            {
-                yield return lastLoc;
-                lastLoc = input.IndexOf(searchFor, startIndex: lastLoc + 1);
-            }
         }
     }
 }

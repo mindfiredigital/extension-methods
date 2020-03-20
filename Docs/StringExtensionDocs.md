@@ -62,6 +62,9 @@ Followings are the Methods available for public use.
 - [MaskEmail()](#maskemail)
 - [MaskPhoneNumber()](#maskphonenumber)
 - [ToPhoneNumber()](#tophonenumber)
+- [ToColor()](#tocolor)
+- [WordCount()](#wordcount)
+- [NthIndexOf()](#nthindexof)
 
 ## Api Reference Details
 
@@ -886,4 +889,39 @@ public static string ToPhoneNumber(this string phoneNumber);
 #### Example
 ```csharp
     var bar ="1234567890".MaskPhoneNumber(); //Returns "(123) 456-7890"
+```
+
+* ### ToColor()
+ Convert a (A)RGB string to a Color object
+```csharp
+/// argb : An RGB or an ARGB string
+public static Color ToColor(this string argb);
+```
+#### Example
+```csharp
+    Color bar ="ffffcc88".ToColor();
+```
+
+* ### WordCount()
+ Count all words in a given string excluding white spaces, tabs, line breaks
+```csharp
+/// input : string to begin with
+public static int WordCount(this string input);
+```
+#### Example
+```csharp
+    Color bar ="the quick brown\r\nfox jumps over the lazy \tdog.".WordCount();//Returns 9
+```
+
+* ### NthIndexOf()
+ Finds the index of the nth occurrence of a string in a string
+```csharp
+/// input : string to begin with
+/// stringToBeFound : string whose index is to be found
+/// occurrence : occurrence
+public static int NthIndexOf(this string input, string stringToBeFound, int occurrence);
+```
+#### Example
+```csharp
+    Color bar ="Emad Alashi found ash on his desk, he went mad, very mad".NthIndexOf("mad",2);//Returns 43
 ```
