@@ -34,6 +34,8 @@ Followings are the Methods available for public use.
 - [RemoveSuffix()](#removesuffix)
 - [AppendPrefixIfMissing()](#appendprefixifmissing)
 - [AppendSuffixIfMissing()](#appendsuffixifmissing)
+- [Left()](#left)
+- [Right()](#right)
 
 ## Api Reference Details
 * ### IsDateTime()
@@ -461,4 +463,30 @@ public static string AppendSuffixIfMissing(this string val, string suffix, bool 
 ```csharp
     "Swagat Kumar".AppendSuffixIfMissing(" ,Swain",true);// Returns 'Swagat Kumar ,Swain'
     "Swagat Kumar Swain".AppendSuffixIfMissing("Swain",false);// Returns 'Swagat Kumar Swain'
+```
+
+* ### Left()
+ Extracts the Left part of the input string limited with the length parameter
+```csharp
+/// val : The input string to take the Left part from
+/// length : The total number characters to take from the input string
+public static string Left(this string val, int length);
+```
+#### Example
+```csharp
+    "Swagat Kumar Swain".Left(8);// Returns 'Swagat K'
+    "Swagat Kumar Swain".Left(0);// Returns ''
+```
+
+* ### Right()
+ Extracts the right part of the input string limited with the length parameter
+```csharp
+/// val : The input string to take the right part from
+/// length : The total number characters to take from the input string
+public static string Right(this string val, int length);
+```
+#### Example
+```csharp
+    "Swagat Kumar Swain".Right(8);// Returns 'ar Swain'
+    "Swagat Kumar Swain".Right(2);// Returns 'in'
 ```
