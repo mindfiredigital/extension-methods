@@ -8,7 +8,11 @@ namespace Extensions.ConsoleApp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("swagat kumar swain".ParseToCsv());
+            foreach (var item in "SwagatKumarSwain".SplitCamelCase())
+            {
+
+                Console.WriteLine(item);
+            }
             Console.ReadKey();
         }
     }

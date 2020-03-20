@@ -707,7 +707,9 @@ namespace Extension.Methods
             }
         }
 
-        /// <summary>Converts to humancase. If the input is "FirstName", It will return "First Name"</summary>
+        /// <summary>
+        /// Converts to humancase. If the input is "FirstName", It will return "First Name"
+        /// </summary>
         /// <param name="source">The source.</param>
         /// <returns></returns>
         public static string ToHumanCase(this string source)

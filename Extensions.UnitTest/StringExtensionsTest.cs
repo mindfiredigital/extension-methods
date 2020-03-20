@@ -497,6 +497,15 @@ namespace Extensions.UnitTest
         }
 
         [Theory]
+        [InlineData("SwagatKumarSwain", "Swagat Kumar Swain")]
+        [InlineData("SWAGAT", "S W A G A T")]
+        [InlineData("swagat", "swagat")]
+        public void SplitCamelCase_ShouldPass(string data, string actual)
+        {
+            Assert.True(string.Join(" ", data.SplitCamelCase()) == actual);
+        }
+
+        [Theory]
         [InlineData(null, 0, 0, false)]
         [InlineData("", 0, 0, true)]
         [InlineData("", 1, 5, false)]

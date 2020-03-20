@@ -42,6 +42,9 @@ Followings are the Methods available for public use.
 - [IsMinLength()](#isminlength)
 - [IsMaxLength()](#ismaxlength)
 - [IsBetweenLength()](#isbetweenlength)
+- [SplitCamelCase()](#splitcamelcase)
+- [ToHumanCase()](#tohumancase)
+- [ToTitleCase()](#totitlecase)
 
 ## Api Reference Details
 
@@ -584,4 +587,40 @@ public static bool IsBetweenLength(this string val, int minCharLength, int maxCh
 ```csharp
     "Swag".IsBetweenLength(2, 5);// Returns true
     "Swag  t".IsBetweenLength(2, 5);// Returns false
+```
+
+* ### SplitCamelCase()
+ Checks if string length satisfies minimum and maximum allowable char length. does not ignore leading and trailing white-space
+```csharp
+/// source : The camelcase string
+public static IEnumerable<string> SplitCamelCase(this string source);
+```
+#### Example
+```csharp
+    var bar = "SwagatKumarSwain".SplitCamelCase();// Returns 'Swagat' 'Kumar' 'Swain' 
+    "FirstName".SplitCamelCase(); // Returns 'First' 'Name' 
+```
+
+* ### ToHumanCase()
+ Converts to humancase. If the input is "FirstName", It will return "First Name"
+```csharp
+/// source : the given string
+public static string ToHumanCase(this string source);
+```
+#### Example
+```csharp
+    var bar = "SwagatKumarSwain".ToHumanCase();// Returns 'Swagat Kumar Swain' 
+    "FirstName".SplitCamelCase(); // Returns 'First Name' 
+```
+
+* ### ToTitleCase()
+Converts a string to Title Case
+```csharp
+/// source : the given string
+public static string ToTitleCase(this string source);
+```
+#### Example
+```csharp
+    var bar = "my Name is Swagat swain".ToTitleCase();// Returns 'My Name Is Swagat Swain' 
+    "tHiS is a sTring TesT".SplitCamelCase(); // Returns 'This Is A String Test' 
 ```
