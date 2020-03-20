@@ -854,7 +854,7 @@ namespace Extension.Methods
         /// <param name="val">string to hash</param>
         /// <returns>Hashed string</returns>
         /// <exception cref="ArgumentException"></exception>
-        public static string CreateHashSha512(string val)
+        public static string CreateHashSha512(this string val)
         {
             if (string.IsNullOrEmpty(val))
             {
@@ -877,7 +877,7 @@ namespace Extension.Methods
         /// </summary>
         /// <param name="val">string to hash</param>
         /// <returns>Hashed string</returns>
-        public static string CreateHashSha256(string val)
+        public static string CreateHashSha256(this string val)
         {
             if (string.IsNullOrEmpty(val))
             {

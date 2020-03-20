@@ -51,6 +51,8 @@ Followings are the Methods available for public use.
 - [RemoveLineFeeds()](#removelinefeeds)
 - [DoesNotStartWith()](#doesnotstartwith)
 - [DoesNotEndWith()](#doesnotendwith)
+- [CreateHashSha512()](#createhashsha512)
+- [CreateHashSha256()](#createhashsha256)
 
 ## Api Reference Details
 
@@ -724,10 +726,34 @@ public static bool DoesNotStartWith(this string val, string prefix, bool ignoreC
 /// val : The given string
 /// suffix : The string which is to be measured.
 /// ignoreCase :  Indicates whether the compare should ignore case
-public static bool DoesNotEndWith(this string val, string suffix, bool ignoreCase = false)
+public static bool DoesNotEndWith(this string val, string suffix, bool ignoreCase = false);
 ```
 #### Example
 ```csharp
     var bar = "C# is am amazing language";
     bar.DoesNotEndWith("c#",true); //Returns false
+```
+
+* ### CreateHashSha512()
+ Convert string to Hash using Sha512
+```csharp
+/// val : string to hash
+public static string CreateHashSha512(this string val);
+```
+#### Example
+```csharp
+    var password = "YourPassword";
+    password.CreateHashSha512(); //Returns Hashed string
+```
+
+* ### CreateHashSha256()
+ Convert string to Hash using Sha256
+```csharp
+/// val : string to hash
+public static string CreateHashSha256(this string val);
+```
+#### Example
+```csharp
+    var password = "YourPassword";
+    password.CreateHashSha256(); //Returns Hashed string
 ```
