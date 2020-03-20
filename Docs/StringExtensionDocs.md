@@ -23,6 +23,7 @@ Followings are the Methods available for public use.
 - [StartsWithIgnoreCase()](#startswithignorecase)
 - [Capitalize()](#capitalize)
 - [RemoveChars()](#removechars)
+- [RemoveCharsIgnoreCase()](#removecharsignorecase)
 
 ## Api Reference Details
 * ### IsDateTime()
@@ -300,7 +301,7 @@ public static string Capitalize(this string s);
 ```
 
 * ### RemoveChars()
- Read in a sequence of words from standard input and capitalize each one (make first letter uppercase; make rest lowercase).
+ Replace specified characters with an empty string without ignoring the cases.
 ```csharp
 /// s : string to remove characters from
 /// chars : array of characters that are to be removed
@@ -309,4 +310,17 @@ public static string RemoveChars(this string s, params char[] chars);
 #### Example
 ```csharp
     var bar = "swagat swain".RemoveChars("s,w,a,i,n"); //Returns "gt "
+```
+
+* ### RemoveCharsIgnoreCase()
+ Replace specified characters with an empty string ignoring the cases.
+```csharp
+/// s : string to remove characters from
+/// chars : array of characters that are to be removed
+public static string RemoveCharsIgnoreCase(this string s, params char[] chars);
+```
+#### Example
+```csharp
+    string s = "Friends";
+    s = s.Replace('f', 'r','i','s');// s becomes 'end'
 ```
