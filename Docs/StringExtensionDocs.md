@@ -32,6 +32,8 @@ Followings are the Methods available for public use.
 - [CountOccurrencesIgnoreCase()](#countoccurrencesignorecase)
 - [RemovePrefix()](#removeprefix)
 - [RemoveSuffix()](#removesuffix)
+- [AppendPrefixIfMissing()](#appendprefixifmissing)
+- [AppendSuffixIfMissing()](#appendsuffixifmissing)
 
 ## Api Reference Details
 * ### IsDateTime()
@@ -431,4 +433,32 @@ public static string RemoveSuffix(this string val, string suffix, bool ignoreCas
 ```csharp
     "Swagat Kumar Swain".RemovePrefix("Swa",true);// Returns 'Swagat Kumar Swain'
     "Swagat Kumar Swain".RemovePrefix("Swain",false);// Returns 'Swagat Kumar '
+```
+
+* ### AppendPrefixIfMissing()
+ Appends the prefix to the start of the string if the string does not already start with prefix.
+```csharp
+/// val : string to append prefix
+/// prefix : prefix
+/// ignoreCase : Indicates whether the compare should ignore case
+public static string AppendPrefixIfMissing(this string val, string prefix, bool ignoreCase = true);
+```
+#### Example
+```csharp
+    "Swagat Kumar".AppendPrefixIfMissing("Swagat",true);// Returns 'Swagat Kumar'
+    "Swagat Kumar Swain".AppendPrefixIfMissing("swain",false);// Returns 'swagatSwagat Kumar Swain'
+```
+
+* ### AppendSuffixIfMissing()
+ Appends the prefix to the start of the string if the string does not already start with prefix.
+```csharp
+/// val : string to append suffix
+/// suffix : suffix
+/// ignoreCase : Indicates whether the compare should ignore case
+public static string AppendSuffixIfMissing(this string val, string suffix, bool ignoreCase = true);
+```
+#### Example
+```csharp
+    "Swagat Kumar".AppendSuffixIfMissing(" ,Swain",true);// Returns 'Swagat Kumar ,Swain'
+    "Swagat Kumar Swain".AppendSuffixIfMissing("Swain",false);// Returns 'Swagat Kumar Swain'
 ```
