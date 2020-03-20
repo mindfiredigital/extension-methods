@@ -24,6 +24,8 @@ Followings are the Methods available for public use.
 - [Capitalize()](#capitalize)
 - [RemoveChars()](#removechars)
 - [RemoveCharsIgnoreCase()](#removecharsignorecase)
+- [RemoveString()](#removestring)
+- [RemoveStringIgnoreCase()](#removestringignorecase)
 
 ## Api Reference Details
 * ### IsDateTime()
@@ -323,4 +325,28 @@ public static string RemoveCharsIgnoreCase(this string s, params char[] chars);
 ```csharp
     string s = "Friends";
     s = s.Replace('f', 'r','i','s');// s becomes 'end'
+```
+
+* ### RemoveString()
+ Remove string from string.
+```csharp
+/// s : string to remove characters from
+/// replaceString : String  to be removed
+public static string RemoveString(this string s, string replaceString);
+```
+#### Example
+```csharp
+    string s = "C# is hot".RemoveString("ho");//Returns 'C# is t'
+```
+
+* ### RemoveStringIgnoreCase()
+ Remove string from string ignoring the case
+```csharp
+/// s : string to remove characters from
+/// replaceString : String  to be removed
+public static string RemoveString(this string s, string replaceString);
+```
+#### Example
+```csharp
+    string s = "C# is hot".RemoveString("HO");//Returns 'C# is t'
 ```
