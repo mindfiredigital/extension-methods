@@ -502,9 +502,9 @@ namespace Extensions.UnitTest
         [InlineData("", 1, 5, false)]
         [InlineData("Swag", 2, 5, true)]
         [InlineData("Swag  ", 2, 5, false)]
-        public void IsLength_ShouldPass(string data, int min, int max, bool actual)
+        public void IsBetweenLength_ShouldPass(string data, int min, int max, bool actual)
         {
-            Assert.True(data.IsLength(min, max) == actual);
+            Assert.True(data.IsBetweenLength(min, max) == actual);
         }
         [Theory]
         [InlineData("FirstName", "First Name")]

@@ -689,7 +689,7 @@ namespace Extension.Methods
         /// <param name="minCharLength">minimum char length</param>
         /// <param name="maxCharLength">maximum char length</param>
         /// <returns>true if string satisfies minimum and maximum allowable length</returns>
-        public static bool IsLength(this string val, int minCharLength, int maxCharLength)
+        public static bool IsBetweenLength(this string val, int minCharLength, int maxCharLength)
         {
             return val != null && val.Length >= minCharLength && val.Length <= maxCharLength;
         }

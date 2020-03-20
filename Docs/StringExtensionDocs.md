@@ -39,6 +39,9 @@ Followings are the Methods available for public use.
 - [AppendSuffixIfMissing()](#appendsuffixifmissing)
 - [Left()](#left)
 - [Right()](#right)
+- [IsMinLength()](#isminlength)
+- [IsMaxLength()](#ismaxlength)
+- [IsBetweenLength()](#isbetweenlength)
 
 ## Api Reference Details
 
@@ -539,4 +542,46 @@ public static string Right(this string val, int length);
 ```csharp
     "Swagat Kumar Swain".Right(8);// Returns 'ar Swain'
     "Swagat Kumar Swain".Right(2);// Returns 'in'
+```
+
+
+* ### IsMinLength()
+ Checks if string length is a certain minimum number of characters, does not ignore leading and trailing white-space. null strings will always evaluate to false.
+```csharp
+/// val : string to evaluate minimum length
+/// minCharLength : minimum allowable string length
+public static bool IsMinLength(this string val, int minCharLength);
+```
+#### Example
+```csharp
+    "Swag".IsMinLength(5);// Returns false
+    "".IsMinLength(2);// Returns true
+```
+
+* ### IsMaxLength()
+ Checks if string length is a certain maximum number of characters, does not ignore leading and trailing white-space. null strings will always evaluate to false.
+```csharp
+/// val : string to evaluate maximum length
+/// maxCharLength : maximum allowable string length
+public static bool IsMaxLength(this string val, int maxCharLength);
+```
+#### Example
+```csharp
+    "Swag".IsMaxLength(5);// Returns true
+    "".IsMaxLength(2);// Returns false
+```
+
+
+* ### IsBetweenLength()
+ Checks if string length is a certain maximum and minimum number of characters, does not ignore leading and trailing white-space. null strings will always evaluate to false.
+```csharp
+/// val : string to evaluate
+/// minCharLength : minimum allowable string length
+/// maxCharLength : maximum allowable string length
+public static bool IsBetweenLength(this string val, int minCharLength, int maxCharLength);
+```
+#### Example
+```csharp
+    "Swag".IsBetweenLength(2, 5);// Returns true
+    "Swag  t".IsBetweenLength(2, 5);// Returns false
 ```
