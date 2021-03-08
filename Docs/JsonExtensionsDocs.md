@@ -4,6 +4,8 @@ This contains Extension Methods that mostly deal with JSON Data. You can check t
 Followings are the Methods available for public use.
 
 - [JsonToObject()](#jsontoobject)
+- [ToJson()](#tojson)
+- [JsonToDictionary()](#jsontodictionary)
 
 ## Api Reference Details
 
