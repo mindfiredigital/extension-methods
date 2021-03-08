@@ -2,6 +2,7 @@ using Extension.Methods;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 
 namespace Extensions.ConsoleApp
 {
@@ -9,20 +10,15 @@ namespace Extensions.ConsoleApp
     {
         static void Main(string[] args)
         {
-            //var obj = new Bar()
-            //{
-            //    FirstName = "Swagat",
-            //    LastName = "Swain",
-            //    Age = 29
-            //};
-            //var jsonString = obj.ToJson();
-            //Console.WriteLine(jsonString);
+            Decimal value = 106.25m;
+            Console.WriteLine("Current Culture: {0}",
+                              CultureInfo.CurrentCulture.Name);
+            Console.WriteLine("Currency Symbol: {0}",
+                              NumberFormatInfo.CurrentInfo.CurrencySymbol);
+            Console.WriteLine("Currency Value:  {0:C2}", value);
 
+            Console.ReadKey();
 
-            var jsonString = "{\"FirstName\":\"Swagat\",\"LastName\":\"Swain\",\"Age\":29}";
-            //var bar = jsonString.JsonToObject<Bar>();
-            var foo = jsonString.JsonToDictionary();
-            
             Console.ReadKey();
         }
     }

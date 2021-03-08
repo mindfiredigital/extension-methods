@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace Extension.Methods
@@ -14,7 +15,7 @@ namespace Extension.Methods
         /// <returns>Returns string in the format of  MM/dd/yyyy</returns>
         public static string ToMMDDYY(this DateTime dateTime, char separator = '/')
         {
-            return dateTime.ToString($"MM{separator}dd{separator}yyyy");
+            return dateTime.ToString($"MM{separator}dd{separator}yyyy", CultureInfo.InvariantCulture);
         }
 
         /// <summary>
@@ -24,10 +25,10 @@ namespace Extension.Methods
         /// <param name="dateTime">The date time.</param>
         /// <param name="separator">The separator.</param>
         /// <returns>Returns string in the format of  MM/dd/yyyy, and Empty String if the date is NULL</returns>
-        public static string ToMMDDYY(this DateTime? dateTime, char separator = '/')
+        public static string ToMMDDYY(this DateTime? dateTime, string separator = "/")
         {
             return dateTime.HasValue ?
-                        dateTime.Value.ToString($"MM{separator}dd{separator}yyyy")
+                        dateTime.Value.ToString($"MM{separator}dd{separator}yyyy", CultureInfo.InvariantCulture)
                         : string.Empty;
         }
         /// <summary>
@@ -36,9 +37,10 @@ namespace Extension.Methods
         /// <param name="dateTime">The date time.</param>
         /// <param name="separator">The separator.</param>
         /// <returns>Returns string in the format of  dd/MM/yyyy</returns>
-        public static string ToDDMMYY(this DateTime dateTime, char separator = '/')
+        public static string ToDDMMYY(this DateTime dateTime, string separator = "/")
         {
-            return dateTime.ToString($"dd{separator}MM{separator}yyyy");
+            var format = $"dd{separator}MM{separator}yyyy";
+            return dateTime.ToString(format, CultureInfo.InvariantCulture);
         }
 
         /// <summary>

@@ -48,14 +48,12 @@ namespace Extensions.UnitTest
             var expected = "09-24-2019";
 
             DateTime? dateTime = new DateTime(2019, 09, 24);
-            var actual = dateTime.ToMMDDYY('-');
+            var actual = dateTime.ToMMDDYY("-");
 
             Assert.Equal(actual, expected);
         }
 
         #endregion
-
-
         #region DateTimeExtensions.ToDDMMYY
 
         [Fact]
@@ -75,7 +73,7 @@ namespace Extensions.UnitTest
             var expected = "24-09-2019";
 
             var dateTime = new DateTime(2019, 09, 24);
-            var actual = dateTime.ToDDMMYY('-');
+            var actual = dateTime.ToDDMMYY("-");
 
             Assert.Equal(actual, expected);
         }
@@ -103,5 +101,14 @@ namespace Extensions.UnitTest
         }
 
         #endregion
+
+        [Theory]
+        [InlineData(01,01,2021, 11,30,00,"11:30 AM")]
+        public void ToTime_ShouldPass(int day, int month, int year, int hour, int minute, int sec, string actual)
+        {
+            var date = new DateTime(year, month, day, hour, minute, sec);
+            string res = date.ToTime();
+            Assert.Equal(res, actual);
+        }
     }
 }
