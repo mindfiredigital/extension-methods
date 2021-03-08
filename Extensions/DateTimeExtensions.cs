@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace Extension.Methods
@@ -7,42 +8,43 @@ namespace Extension.Methods
     public static class DateTimeExtensions
     {
         /// <summary>
-        /// Converts a given datetime to MM/dd/yyyy. You can also specify the separator. 
+        /// Converts a given date-time to MM/dd/yyyy. You can also specify the separator. 
         /// </summary>
         /// <param name="dateTime">The date time.</param>
         /// <param name="separator">The separator.</param>
         /// <returns>Returns string in the format of  MM/dd/yyyy</returns>
         public static string ToMMDDYY(this DateTime dateTime, char separator = '/')
         {
-            return dateTime.ToString($"MM{separator}dd{separator}yyyy");
+            return dateTime.ToString($"MM{separator}dd{separator}yyyy", CultureInfo.InvariantCulture);
         }
 
         /// <summary>
-        /// Converts a given nullable datetime to MM/dd/yyyy. You can also specify the separator.
+        /// Converts a given nullable date-time to MM/dd/yyyy. You can also specify the separator.
         /// Returns an empty string if the given date in null.
         /// </summary>
         /// <param name="dateTime">The date time.</param>
         /// <param name="separator">The separator.</param>
         /// <returns>Returns string in the format of  MM/dd/yyyy, and Empty String if the date is NULL</returns>
-        public static string ToMMDDYY(this DateTime? dateTime, char separator = '/')
+        public static string ToMMDDYY(this DateTime? dateTime, string separator = "/")
         {
             return dateTime.HasValue ?
-                        dateTime.Value.ToString($"MM{separator}dd{separator}yyyy")
+                        dateTime.Value.ToString($"MM{separator}dd{separator}yyyy", CultureInfo.InvariantCulture)
                         : string.Empty;
         }
         /// <summary>
-        /// Converts a given datetime to dd/MM/yyyy. You can also specify the separator. 
+        /// Converts a given date-time to dd/MM/yyyy. You can also specify the separator. 
         /// </summary>
         /// <param name="dateTime">The date time.</param>
         /// <param name="separator">The separator.</param>
         /// <returns>Returns string in the format of  dd/MM/yyyy</returns>
-        public static string ToDDMMYY(this DateTime dateTime, char separator = '/')
+        public static string ToDDMMYY(this DateTime dateTime, string separator = "/")
         {
-            return dateTime.ToString($"dd{separator}MM{separator}yyyy");
+            var format = $"dd{separator}MM{separator}yyyy";
+            return dateTime.ToString(format, CultureInfo.InvariantCulture);
         }
 
         /// <summary>
-        /// Converts a given nullable datetime to dd/MM/yyyy. You can also specify the separator.
+        /// Converts a given nullable date-time to dd/MM/yyyy. You can also specify the separator.
         /// Returns an empty string if the given date in null.
         /// </summary>
         /// <param name="dateTime">The date time.</param>
@@ -99,7 +101,7 @@ namespace Extension.Methods
         }
         /// <summary>
         /// DateDiff in SQL style.
-        /// Datepart implemented:
+        /// Date-part implemented:
         /// "year" (abbr. "yy", "yyyy"),
         /// "quarter" (abbr. "qq", "q"),
         /// "month" (abbr. "mm", "m"),
@@ -112,15 +114,15 @@ namespace Extension.Methods
         /// </summary>
         /// <param name="startDate">The start date.</param>
         /// <param name="endDate">The end date.</param>
-        /// <param name="datePary">The date part.</param>
+        /// <param name="datePart">The date part.</param>
         /// <returns>Date Difference in System.long</returns>
         /// <exception cref="Exception"></exception>
-        public static long DateDiff(this DateTime startDate, DateTime endDate, string datePary)
+        public static long DateDiff(this DateTime startDate, DateTime endDate, string datePart)
         {
             long DateDiffVal = 0;
             System.Globalization.Calendar cal = System.Threading.Thread.CurrentThread.CurrentCulture.Calendar;
             TimeSpan ts = new TimeSpan(endDate.Ticks - startDate.Ticks);
-            switch (datePary.ToLower().Trim())
+            switch (datePart.ToLower().Trim())
             {
                 #region year
                 case "year":
@@ -199,7 +201,7 @@ namespace Extension.Methods
                 #endregion
 
                 default:
-                    throw new Exception(string.Format("DatePart \"{0}\" is unknown", datePary));
+                    throw new Exception(string.Format("DatePart \"{0}\" is unknown", datePart));
             }
             return DateDiffVal;
         }
@@ -254,7 +256,7 @@ namespace Extension.Methods
         /// </summary>
         /// <param name="dateTime">The value.</param>
         /// <returns>
-        /// System.String if the datetime is not null and an Empty string if the given date is null.
+        /// System.String if the date-time is not null and an Empty string if the given date is null.
         /// </returns>
         public static string ToReadableTime(this DateTime? dateTime)
         {
@@ -331,7 +333,7 @@ namespace Extension.Methods
             return date.DayOfWeek != DayOfWeek.Saturday && date.DayOfWeek != DayOfWeek.Sunday;
         }
         /// <summary>
-        /// Determines whether a given date is a WeekEnd (Daturday-Sunday)
+        /// Determines whether a given date is a WeekEnd (Saturday-Sunday)
         /// </summary>
         /// <param name="date">The date.</param>
         /// <returns>
@@ -523,13 +525,13 @@ namespace Extension.Methods
             return date.FirstDateOfWeek(startOfWeek).AddDays(6);
         }
         /// <summary>
-        /// Checks if a range decided by a given date and end date intersects the daterange betweer intersectingStartDate and intersectingEndDate
+        /// Checks if a range decided by a given date and end date intersects the date-range between intersectingStartDate and intersectingEndDate
         /// </summary>
         /// <param name="startDate">The given start date of the range to be compared</param>
         /// <param name="endDate">The given end date of the range to be compared</param>
         /// <param name="intersectingStartDate">The intersecting start date.</param>
         /// <param name="intersectingEndDate">The intersecting end date.</param>
-        /// <returns>True, if the range interscects else false</returns>
+        /// <returns>True, if the range intersects else false</returns>
         public static bool Intersects(this DateTime startDate, DateTime endDate, DateTime intersectingStartDate, DateTime intersectingEndDate)
         {
             return (intersectingEndDate >= startDate && intersectingStartDate <= endDate);
@@ -566,6 +568,111 @@ namespace Extension.Methods
         public static int GetQuarter(this DateTime fromDate)
         {
             return ((fromDate.Month - 1) / 3) + 1;
+        }
+
+        /// <summary>
+        /// Determines whether the date is a future date from today. This only compares the date, ignoring the time.
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <param name="from">From date</param>
+        /// <returns>
+        ///   <c>true</c> if the date is future to the specified from today; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsFutureDate(this DateTime date)
+        {
+            return date.IsFutureDate(DateTime.Today);
+        }
+
+        /// <summary>
+        /// Determines whether the date is Today's date or Not.
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified date is today; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsToday(this DateTime date)
+        {
+            return date.Date == DateTime.Today.Date;
+        }
+        /// <summary>
+        /// Determines whether the date is a future date.
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified date is a future date; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsAfterToday(this DateTime date)
+        {
+            return date.IsFutureDate();
+        }
+        /// <summary>
+        /// Determines whether the date is either today or a future date.
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified date is either today or a future date; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsOnOrAfterToday(this DateTime date)
+        {
+            return date.IsToday() || date.IsFutureDate();
+        }
+        /// <summary>
+        /// Determines whether the date is a past date.
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified date is a past date; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsBeforeToday(this DateTime date)
+        {
+            return date.IsPastDate();
+        }
+        /// <summary>
+        /// Determines whether the date is either today or a past date.
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified date is either today or a past date; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsOnOrBeforeToday(this DateTime date)
+        {
+            return date.IsToday() || date.IsPastDate();
+        }
+        /// <summary>
+        /// Determines whether the date is a future date from the specified from date. This only compares the date, ignoring the time.
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <param name="from">From date</param>
+        /// <returns>
+        ///   <c>true</c> if the date is future to the specified from date; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsFutureDate(this DateTime date, DateTime from)
+        {
+            return date.Date > from.Date;
+        }
+        /// <summary>
+        /// Determines whether the date is a past date from the specified from date. This only compares the date, ignoring the time.
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <param name="from">From date</param>
+        /// <returns>
+        ///   <c>true</c> if the date is past to the specified from date; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsPastDate(this DateTime date, DateTime from)
+        {
+            return date.Date < from.Date;
+        }
+        /// <summary>
+        /// Determines whether the date is a past date from today. This only compares the date, ignoring the time.
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <param name="from">From date</param>
+        /// <returns>
+        ///   <c>true</c> if the date is past to the specified from today; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsPastDate(this DateTime date)
+        {
+            return date.IsPastDate(DateTime.Now);
         }
     }
 }

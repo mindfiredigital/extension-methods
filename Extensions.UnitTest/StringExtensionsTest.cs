@@ -1,8 +1,9 @@
+using Extension.Methods;
 using Extensions.UnitTest.OtherClasses;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Xunit;
-using Extension.Methods;
 namespace Extensions.UnitTest
 {
     public class StringExtensionsTest
@@ -497,14 +498,23 @@ namespace Extensions.UnitTest
         }
 
         [Theory]
+        [InlineData("SwagatKumarSwain", "Swagat Kumar Swain")]
+        [InlineData("SWAGAT", "S W A G A T")]
+        [InlineData("swagat", "swagat")]
+        public void SplitCamelCase_ShouldPass(string data, string actual)
+        {
+            Assert.True(string.Join(" ", data.SplitCamelCase()) == actual);
+        }
+
+        [Theory]
         [InlineData(null, 0, 0, false)]
         [InlineData("", 0, 0, true)]
         [InlineData("", 1, 5, false)]
         [InlineData("Swag", 2, 5, true)]
         [InlineData("Swag  ", 2, 5, false)]
-        public void IsLength_ShouldPass(string data, int min, int max, bool actual)
+        public void IsBetweenLength_ShouldPass(string data, int min, int max, bool actual)
         {
-            Assert.True(data.IsLength(min, max) == actual);
+            Assert.True(data.IsBetweenLength(min, max) == actual);
         }
         [Theory]
         [InlineData("FirstName", "First Name")]
@@ -617,6 +627,7 @@ namespace Extensions.UnitTest
         }
         [Theory]
         [InlineData("my Name is Swagat swain", "My Name Is Swagat Swain")]
+        [InlineData("tHiS is a sTring TesT", "This Is A String Test")]
         [InlineData("", "")]
         public void ToTitleCase_ShouldPass(string data, string actual)
         {
@@ -632,6 +643,21 @@ namespace Extensions.UnitTest
             var res = data.IsMatch(regex);
             Assert.True(res == actual);
         }
+
+
+        [Theory]
+        [InlineData("Emad Alashi found ash on his desk, he went mad, very mad", "mad", 2, 43)]
+        public void NthIndexOf_ShouldPass(string data, string subStr, int occurance, int index)
+        {
+            Assert.Equal(data.NthIndexOf(subStr, occurance), index);
+        }
+        [Theory]
+        [InlineData("the quick brown\r\nfox jumps over the lazy \tdog.", 9)]
+        public void WordCount_ShouldPass(string data, int actual)
+        {
+            Assert.True(data.WordCount() == actual);
+        }
+
         [Theory]
         [InlineData("9238545725", "(923)-854-5725")]
         [InlineData("", "")]
@@ -652,17 +678,57 @@ namespace Extensions.UnitTest
         [InlineData("2302190", false)]
         public void IsGuid_ShouldPass(string data, bool expected)
         {
-            Assert.True(data.IsGuid()==expected);
+            Assert.True(data.IsGuid() == expected);
             //Assert.True(Guid.TryParse(data, out var guidvalue) == expected);
         }
 
         [Theory]
-        [InlineData("http://google.com",true)]
-        [InlineData("http://goog le.com",false)]
-        [InlineData("http://google.com/abc-ght?url=bar",true)]
+        [InlineData("http://google.com", true)]
+        [InlineData("http://goog le.com", false)]
+        [InlineData("http://google.com/abc-ght?url=bar", true)]
         public void IsUrl_ShouldPass(string url, bool actual)
         {
             Assert.True(url.IsUrl() == actual);
+        }
+
+        [Fact]
+        public void QueryStringToDictionary_ShouldPass()
+        {
+            var url = "https://abc.com/?name=swagat&page=12";
+            var expected = new Dictionary<string, string>();
+            expected.Add("name", "swagat");
+            expected.Add("page", "12");
+            var actual = url.QueryStringToDictionary();
+            Assert.Equal(expected, actual);
+
+            var url2 = "?name=swagat&page=12";
+           
+            var actual2 = url2.QueryStringToDictionary();
+            Assert.Equal(expected, actual2);
+        }
+
+        [Theory]
+        [InlineData("Hello #@45 World", "45")]
+        [InlineData("C# is my 10th fav language", "10")]
+        public void GetOnlyDigits_ShouldPass(string data, string actual)
+        {
+            Assert.True(data.GetOnlyDigits() == actual);
+        }
+        [Theory]
+        [InlineData("youremail@gmail.com", "y*******l@g****.com")]
+        [InlineData("youremail@yahoo.com", "y*******l@y****.com")]
+        [InlineData("ail@yahoo.com", "*@*.*")]
+        public void MaskEmail_ShouldPass(string data, string actual)
+        {
+            Assert.True(data.MaskEmail('*') == actual);
+        }
+        [Theory]
+        [InlineData("(800) 555-1212", "(###) ###-1212")]
+        [InlineData("800 555-7890", "### ###-7890")]
+        [InlineData("1234561111", "######1111")]
+        public void MaskPhoneNumber_ShouldPass(string data, string actual)
+        {
+            Assert.True(data.MaskPhoneNumber('#') == actual);
         }
     }
 }

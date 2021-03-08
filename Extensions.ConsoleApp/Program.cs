@@ -1,6 +1,8 @@
 using Extension.Methods;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Globalization;
 
 namespace Extensions.ConsoleApp
 {
@@ -8,17 +10,23 @@ namespace Extensions.ConsoleApp
     {
         static void Main(string[] args)
         {
-            var l = new List<int>() { 1, 2, 4, 8, 5, 3 };
-            l.Sort();
+            Decimal value = 106.25m;
+            Console.WriteLine("Current Culture: {0}",
+                              CultureInfo.CurrentCulture.Name);
+            Console.WriteLine("Currency Symbol: {0}",
+                              NumberFormatInfo.CurrentInfo.CurrencySymbol);
+            Console.WriteLine("Currency Value:  {0:C2}", value);
 
-            // Sort the list before calling InsertSorted().
-            // The method below inserts 6 at the appropriate position inside the sorted list.
-            l.InsertSorted(6);
+            Console.ReadKey();
 
-            // Extension Method ToString(", ") would make your list nicely formatted with comma separated.
-            Console.WriteLine(l.ToString(", "));
-          
             Console.ReadKey();
         }
+    }
+
+    public class Bar
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public int Age { get; set; }
     }
 }

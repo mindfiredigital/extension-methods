@@ -1,5 +1,6 @@
 ﻿using Xunit;
 using Extension.Methods;
+using System.Globalization;
 
 namespace Extensions.UnitTest
 {
@@ -27,13 +28,14 @@ namespace Extensions.UnitTest
             Assert.Equal(res, actual);
         }
         [Theory]
-        [InlineData(23, "$23.00")]
-        [InlineData(0, "$0.00")]
-        [InlineData(98.2311, "$98.23")]
-        [InlineData(98.2389, "$98.24")]
-        [InlineData(1000.00, "$1,000.00")]
+        [InlineData(23, "23.00")]
+        [InlineData(0, "0.00")]
+        [InlineData(98.2311, "98.23")]
+        [InlineData(98.2389, "98.24")]
+        [InlineData(1000.00, "1,000.00")]
         public void ToLocalCurrencyString_ShouldPass(double data, string actual)
         {
+            actual = $"{NumberFormatInfo.CurrentInfo.CurrencySymbol} {actual}";
             var res = data.ToLocalCurrencyString();
             Assert.Equal(res, actual);
         }

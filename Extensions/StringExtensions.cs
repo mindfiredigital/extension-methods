@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
@@ -279,7 +280,7 @@ namespace Extension.Methods
         /// </summary>
         /// <typeparam name="T">generic type</typeparam>
         /// <param name="val"> The string representation of the enumeration name or underlying value to convert</param>
-        /// <param name="defaultValue">Dafault value of the Enum</param>
+        /// <param name="defaultValue">Default value of the Enum</param>
         /// <param name="ignoreCase">Check if it checks case sensitivity of not</param>
         /// <returns>Enum object</returns>
         /// <remarks>
@@ -311,7 +312,7 @@ namespace Extension.Methods
         }
 
         /// <summary>
-        ///     Checks if a string is Null or EmptyString (`string.Empty`), retuns NULL if the string is NULL or Empty and returns the same string if Not.
+        ///     Checks if a string is Null or EmptyString (`string.Empty`), returns NULL if the string is NULL or Empty and returns the same string if Not.
         /// </summary>
         /// <param name="val">String value</param>
         /// <returns>null/nothing if String IsEmpty</returns>
@@ -688,7 +689,7 @@ namespace Extension.Methods
         /// <param name="minCharLength">minimum char length</param>
         /// <param name="maxCharLength">maximum char length</param>
         /// <returns>true if string satisfies minimum and maximum allowable length</returns>
-        public static bool IsLength(this string val, int minCharLength, int maxCharLength)
+        public static bool IsBetweenLength(this string val, int minCharLength, int maxCharLength)
         {
             return val != null && val.Length >= minCharLength && val.Length <= maxCharLength;
         }
@@ -706,7 +707,9 @@ namespace Extension.Methods
             }
         }
 
-        /// <summary>Converts to humancase. If the input is "FirstName", It will return "First Name"</summary>
+        /// <summary>
+        /// Converts to human-case. If the input is "FirstName", It will return "First Name"
+        /// </summary>
         /// <param name="source">The source.</param>
         /// <returns></returns>
         public static string ToHumanCase(this string source)
@@ -725,8 +728,8 @@ namespace Extension.Methods
         {
             if (source == null) return source;
 
-            System.Globalization.CultureInfo cultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
-            System.Globalization.TextInfo textInfo = cultureInfo.TextInfo;
+            CultureInfo cultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
+            TextInfo textInfo = cultureInfo.TextInfo;
 
             // TextInfo.ToTitleCase only operates on the string if is all lower case, otherwise it returns the string unchanged.
             return textInfo.ToTitleCase(source.ToLower());
@@ -780,20 +783,19 @@ namespace Extension.Methods
         }
 
         /// <summary>
-        ///     Convert url query string to IDictionary value key pair
+        ///     Convert URL query string to IDictionary value key pair
         /// </summary>
         /// <param name="queryString">query string value</param>
         /// <returns>IDictionary value key pair</returns>
         public static IDictionary<string, string> QueryStringToDictionary(this string queryString)
         {
             if (string.IsNullOrWhiteSpace(queryString))
-            {
                 return null;
-            }
             if (!queryString.Contains("?"))
-            {
                 return null;
-            }
+
+            //If the User has sent the entire URL, find out only the query string.
+            queryString = queryString.Right(queryString.Length - queryString.IndexOf("?"));
             string query = queryString.Replace("?", "");
             if (!query.Contains("="))
             {
@@ -852,7 +854,7 @@ namespace Extension.Methods
         /// <param name="val">string to hash</param>
         /// <returns>Hashed string</returns>
         /// <exception cref="ArgumentException"></exception>
-        public static string CreateHashSha512(string val)
+        public static string CreateHashSha512(this string val)
         {
             if (string.IsNullOrEmpty(val))
             {
@@ -875,7 +877,7 @@ namespace Extension.Methods
         /// </summary>
         /// <param name="val">string to hash</param>
         /// <returns>Hashed string</returns>
-        public static string CreateHashSha256(string val)
+        public static string CreateHashSha256(this string val)
         {
             if (string.IsNullOrEmpty(val))
             {
@@ -1037,7 +1039,7 @@ namespace Extension.Methods
         /// <summary>
         /// Masks the phone number.
         /// If a phone number is "(800) 555-1212", the output will be "(###) ### -1212"
-        /// If a phone number is "800 555-7890", the output will be "### ### 7890"
+        /// If a phone number is "800 555-7890", the output will be "### ###-7890"
         /// If a phone number is "1234561111", the output will be "######1111"
         /// </summary>
         /// <param name="phoneNumber">The phone number</param>
@@ -1059,31 +1061,68 @@ namespace Extension.Methods
         }
 
         /// <summary>
-        /// Formats the string according to the specified mask
-        /// </summary>
-        /// <param name="input">The input string.</param>
-        /// <param name="mask">The mask for formatting. Like "A##-##-T-###Z"</param>
-        /// <returns>The formatted string</returns>
-        public static string Mask(this string input, string mask)
+        /// Convert a (A)RGB string to a Color object
+        /// </summary>
+        /// <param name="argb">An RGB or an ARGB string</param>
+        /// <returns>a Color object</returns>
+        public static Color ToColor(this string argb)
         {
-            if (input.IsNullOrEmpty()) return input;
-            var output = string.Empty;
-            var index = 0;
-            foreach (var m in mask)
+            argb = argb.Replace("#", "");
+            byte a = Convert.ToByte("ff", 16);
+            byte pos = 0;
+            if (argb.Length == 8)
             {
-                if (m == '#')
-                {
-                    if (index < input.Length)
-                    {
-                        output += input[index];
-                        index++;
-                    }
-                }
-                else
-                    output += m;
+                a = Convert.ToByte(argb.Substring(pos, 2), 16);
+                pos = 2;
             }
-            return output;
+            byte r = Convert.ToByte(argb.Substring(pos, 2), 16);
+            pos += 2;
+            byte g = Convert.ToByte(argb.Substring(pos, 2), 16);
+            pos += 2;
+            byte b = Convert.ToByte(argb.Substring(pos, 2), 16);
+            return Color.FromArgb(a, r, g, b);
         }
+        /// <summary>
+        /// Count all words in a given string excluding white spaces, tabs, line breaks
+        /// </summary>
+        /// <param name="input">string to begin with</param>
+        /// <returns>int</returns>
+        public static int WordCount(this string input)
+        {
+            var count = 0;
+            try
+            {
+                // Exclude whitespace, Tabs and line breaks
+                var re = new Regex(@"[^\s]+");
+                var matches = re.Matches(input);
+                count = matches.Count;
+            }
+            catch
+            {
+            }
+            return count;
+        }
+        /// <summary>
+        /// Finds the index of the nth occurrence of a string in a string
+        /// </summary>
+        /// <param name="input">The input.</param>
+        /// <param name="stringToBeFound">The string to be found.</param>
+        /// <param name="occurrence">The occurrence.</param>
+        /// <returns></returns>
+        public static int NthIndexOf(this string input, string stringToBeFound, int occurrence)
+        {
+            int occurrenceCounter = 0;
+            int indexOfPassedString = 0 - stringToBeFound.Length;
+            do
+            {
+                indexOfPassedString = input.IndexOf(stringToBeFound, indexOfPassedString + stringToBeFound.Length);
+                if (indexOfPassedString == -1)
+                    break;
+                occurrenceCounter++;
+            }
+            while (occurrenceCounter != occurrence);
 
+            return indexOfPassedString;
+        }
     }
 }

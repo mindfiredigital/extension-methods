@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace Extension.Methods
@@ -10,7 +11,7 @@ namespace Extension.Methods
     {
         private static Random random = new Random();
         /// <summary>
-        /// Itterates over any IEnumerable
+        /// Iterates over any IEnumerable
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="source">The source.</param>
@@ -55,7 +56,18 @@ namespace Extension.Methods
         {
             return source != null && source.Any();
         }
-
+        /// <summary>
+        /// Determines whether an object is null or holds its default values.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="value">The Object</param>
+        /// <returns>
+        ///   <c>true</c> if the object is null or it holds the default value; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsNullOrDefault<T>(this T? value) where T : struct
+        {
+            return value == null || value.Value.Equals(default(T));
+        }
         /// <summary>
         /// Convert a IEnumerable<T> to a Collection<T>
         /// </summary>
@@ -411,7 +423,7 @@ namespace Extension.Methods
         /// <typeparam name="T"></typeparam>
         /// <param name="source">The sorted source.</param>
         /// <param name="value">The value to be inserted</param>
-        /// <param name="comparison">The comparison that implements the Compare() for comparision of two objects of Type T.</param>
+        /// <param name="comparison">The comparison that implements the Compare() for comparison of two objects of Type T.</param>
         /// <returns>Returns the position where the value was inserted</returns>
         /// <exception cref="ArgumentNullException">source</exception>
         public static int InsertSorted<T>(this IList<T> source, T value, IComparer<T> comparison)
@@ -438,7 +450,7 @@ namespace Extension.Methods
         /// <typeparam name="T"></typeparam>
         /// <param name="source">The sorted source.</param>
         /// <param name="value">The value to be inserted</param>
-        /// <param name="comparison">The comparison deligate that compares two objects of Type T.</param>
+        /// <param name="comparison">The comparison delegate that compares two objects of Type T.</param>
         /// <returns>Returns the position where the value was inserted</returns>
         /// <exception cref="ArgumentNullException">source</exception>
         public static int InsertSorted<T>(this IList<T> source, T value, Comparison<T> comparison)
@@ -457,6 +469,126 @@ namespace Extension.Methods
             }
             source.Add(value);
             return source.Count - 1;
+        }
+        /// <summary>
+        /// Returns an empty sequence if the sequence is Null
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="sequence">The sequence.</param>
+        /// <returns></returns>
+        public static IEnumerable<T> EmptyIfNull<T>(this IEnumerable<T> sequence)
+        {
+            return sequence ?? Enumerable.Empty<T>();
+        }
+
+        /// <summary>
+        /// Adds a range of elements to a collection as parameter.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="S"></typeparam>
+        /// <param name="list">The collection.</param>
+        /// <param name="values">The values to be added.</param>
+        public static void AddRange<T, S>(this IList<T> list, params S[] values) where S : T
+        {
+            foreach (S value in values)
+                list.Add(value);
+        }
+        /// <summary>
+        /// Performs binary search on a collection of elements.
+        /// var item = list.BinarySearch(i => i.Id, 42);
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TKey">The type of the key.</typeparam>
+        /// <param name="list">The list.</param>
+        /// <param name="keySelector">The key selector.</param>
+        /// <param name="key">The key.</param>
+        /// <returns>The fact that it throws an InvalidOperationException may seem strange, but that's what Enumerable.First does when there's no matching item.</returns>
+        /// <exception cref="InvalidOperationException">Item not found</exception>
+        public static T BinarySearch<T, TKey>(this IList<T> list, Func<T, TKey> keySelector, TKey key) where TKey : IComparable<TKey>
+        {
+            int min = 0;
+            int max = list.Count;
+            while (min < max)
+            {
+                int mid = (max + min) / 2;
+                T midItem = list[mid];
+                TKey midKey = keySelector(midItem);
+                int comp = midKey.CompareTo(key);
+                if (comp < 0)
+                {
+                    min = mid + 1;
+                }
+                else if (comp > 0)
+                {
+                    max = mid - 1;
+                }
+                else
+                {
+                    return midItem;
+                }
+            }
+            if (min == max &&
+                keySelector(list[min]).CompareTo(key) == 0)
+            {
+                return list[min];
+            }
+            throw new InvalidOperationException("Item not found");
+        }
+
+        /// <summary>
+        /// Finds all the indexes of the given value or values in an enumerable list
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="seq">The sequence of objects.</param>
+        /// <param name="value">The value.</param>
+        /// <returns></returns>
+        public static IEnumerable<int> IndicesOf<T>(this IEnumerable<T> seq, T value)
+        {
+            return (from i in Enumerable.Range(0, seq.Count())
+                    where seq.ElementAt(i).Equals(value)
+                    select i);
+        }
+
+        /// <summary>
+        /// Finds all the indexes of the given collection or values in an enumerable list
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="obj">The object.</param>
+        /// <param name="values">The collection to be searched for</param>
+        /// <returns></returns>
+        public static IEnumerable<int> IndicesOf<T>(this IEnumerable<T> obj, IEnumerable<T> values)
+        {
+            return (from i in Enumerable.Range(0, obj.Count())
+                    where values.Contains(obj.ElementAt(i))
+                    select i);
+        }
+        /// <summary>
+        /// Returns an alphabetically sorted list for all public and instance properties, along with its associated values.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns></returns>
+        public static string ToSortedString(this object value, string charSeparator = ", ")
+        {
+            BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.Public;
+            SortedDictionary<string, string> values = new SortedDictionary<string, string>();
+
+            PropertyInfo[] properties = value.GetType().GetProperties(bindingFlags);
+            foreach (PropertyInfo property in properties)
+            {
+                string propertyName = property.Name;
+                object propertyValue = property.GetValue(value, null);
+                string maskedValue = propertyValue == null ? "null" : propertyValue.ToString();
+
+                values.Add(propertyName, maskedValue);
+            }
+
+            StringBuilder sb = new StringBuilder();
+            foreach (KeyValuePair<string, string> item in values)
+            {
+                sb.AppendFormat("{0}={1}{2}", item.Key, item.Value, charSeparator);
+            }
+
+            return sb.ToString().TrimEnd(charSeparator.ToCharArray());
         }
 
         #region Private Methods

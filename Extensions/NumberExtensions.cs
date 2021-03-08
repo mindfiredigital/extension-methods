@@ -15,20 +15,20 @@ namespace Extension.Methods
 
         #region Doubles
         /// <summary>
-        /// Returns a formatted double or emtpy string
+        /// Returns a formatted double or empty string
         /// </summary>
         /// <param name="t">double</param>
-        /// <param name="format">double formatstring </param>
+        /// <param name="format">double format string </param>
         /// <returns></returns>
         public static string ToString(this double t, string format)
         {
             return t.ToString(format);
         }
         /// <summary>
-        /// Returns a formatted double or emtpy string
+        /// Returns a formatted double or empty string
         /// </summary>
         /// <param name="t">double or null</param>
-        /// <param name="format">double formatstring </param>
+        /// <param name="format">double format string </param>
         /// <returns></returns>
         public static string ToString(this double? t, string format)
         {
@@ -125,24 +125,35 @@ namespace Extension.Methods
         {
             return double.Parse(number.ToString("G", CultureInfo.InvariantCulture));
         }
+
+        /// <summary>
+        /// Replace "Enumerable.Range(n)" with "n.Range()":
+        /// </summary>
+        /// <param name="n">iterations</param>
+        /// <returns>0..n-1</returns>
+        public static IEnumerable<int> Range(this int n)
+        {
+            for (int i = 0; i < n; i++)
+                yield return i;
+        }
         #endregion
 
         #region Integers
         /// <summary>
-        /// Returns a formatted integer or emtpy string
+        /// Returns a formatted integer or empty string
         /// </summary>
         /// <param name="t">integer</param>
-        /// <param name="format">integer formatstring </param>
+        /// <param name="format">integer format-string </param>
         /// <returns></returns>
         public static string ToString(this int t, string format)
         {
             return t.ToString(format);
         }
         /// <summary>
-        /// Returns a formatted integer or emtpy string
+        /// Returns a formatted integer or empty string
         /// </summary>
         /// <param name="t">integer or null</param>
-        /// <param name="format">integer formatstring </param>
+        /// <param name="format">integer format string </param>
         /// <returns></returns>
         public static string ToString(this int? t, string format)
         {
