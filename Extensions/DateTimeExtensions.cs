@@ -7,7 +7,7 @@ namespace Extension.Methods
     public static class DateTimeExtensions
     {
         /// <summary>
-        /// Converts a given datetime to MM/dd/yyyy. You can also specify the separator. 
+        /// Converts a given date-time to MM/dd/yyyy. You can also specify the separator. 
         /// </summary>
         /// <param name="dateTime">The date time.</param>
         /// <param name="separator">The separator.</param>
@@ -18,7 +18,7 @@ namespace Extension.Methods
         }
 
         /// <summary>
-        /// Converts a given nullable datetime to MM/dd/yyyy. You can also specify the separator.
+        /// Converts a given nullable date-time to MM/dd/yyyy. You can also specify the separator.
         /// Returns an empty string if the given date in null.
         /// </summary>
         /// <param name="dateTime">The date time.</param>
@@ -31,7 +31,7 @@ namespace Extension.Methods
                         : string.Empty;
         }
         /// <summary>
-        /// Converts a given datetime to dd/MM/yyyy. You can also specify the separator. 
+        /// Converts a given date-time to dd/MM/yyyy. You can also specify the separator. 
         /// </summary>
         /// <param name="dateTime">The date time.</param>
         /// <param name="separator">The separator.</param>
@@ -42,7 +42,7 @@ namespace Extension.Methods
         }
 
         /// <summary>
-        /// Converts a given nullable datetime to dd/MM/yyyy. You can also specify the separator.
+        /// Converts a given nullable date-time to dd/MM/yyyy. You can also specify the separator.
         /// Returns an empty string if the given date in null.
         /// </summary>
         /// <param name="dateTime">The date time.</param>
@@ -99,7 +99,7 @@ namespace Extension.Methods
         }
         /// <summary>
         /// DateDiff in SQL style.
-        /// Datepart implemented:
+        /// Date-part implemented:
         /// "year" (abbr. "yy", "yyyy"),
         /// "quarter" (abbr. "qq", "q"),
         /// "month" (abbr. "mm", "m"),
@@ -254,7 +254,7 @@ namespace Extension.Methods
         /// </summary>
         /// <param name="dateTime">The value.</param>
         /// <returns>
-        /// System.String if the datetime is not null and an Empty string if the given date is null.
+        /// System.String if the date-time is not null and an Empty string if the given date is null.
         /// </returns>
         public static string ToReadableTime(this DateTime? dateTime)
         {
@@ -331,7 +331,7 @@ namespace Extension.Methods
             return date.DayOfWeek != DayOfWeek.Saturday && date.DayOfWeek != DayOfWeek.Sunday;
         }
         /// <summary>
-        /// Determines whether a given date is a WeekEnd (Daturday-Sunday)
+        /// Determines whether a given date is a WeekEnd (Saturday-Sunday)
         /// </summary>
         /// <param name="date">The date.</param>
         /// <returns>
@@ -523,13 +523,13 @@ namespace Extension.Methods
             return date.FirstDateOfWeek(startOfWeek).AddDays(6);
         }
         /// <summary>
-        /// Checks if a range decided by a given date and end date intersects the daterange betweer intersectingStartDate and intersectingEndDate
+        /// Checks if a range decided by a given date and end date intersects the date-range between intersectingStartDate and intersectingEndDate
         /// </summary>
         /// <param name="startDate">The given start date of the range to be compared</param>
         /// <param name="endDate">The given end date of the range to be compared</param>
         /// <param name="intersectingStartDate">The intersecting start date.</param>
         /// <param name="intersectingEndDate">The intersecting end date.</param>
-        /// <returns>True, if the range interscects else false</returns>
+        /// <returns>True, if the range intersects else false</returns>
         public static bool Intersects(this DateTime startDate, DateTime endDate, DateTime intersectingStartDate, DateTime intersectingEndDate)
         {
             return (intersectingEndDate >= startDate && intersectingStartDate <= endDate);

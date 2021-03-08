@@ -280,7 +280,7 @@ namespace Extension.Methods
         /// </summary>
         /// <typeparam name="T">generic type</typeparam>
         /// <param name="val"> The string representation of the enumeration name or underlying value to convert</param>
-        /// <param name="defaultValue">Dafault value of the Enum</param>
+        /// <param name="defaultValue">Default value of the Enum</param>
         /// <param name="ignoreCase">Check if it checks case sensitivity of not</param>
         /// <returns>Enum object</returns>
         /// <remarks>
@@ -312,7 +312,7 @@ namespace Extension.Methods
         }
 
         /// <summary>
-        ///     Checks if a string is Null or EmptyString (`string.Empty`), retuns NULL if the string is NULL or Empty and returns the same string if Not.
+        ///     Checks if a string is Null or EmptyString (`string.Empty`), returns NULL if the string is NULL or Empty and returns the same string if Not.
         /// </summary>
         /// <param name="val">String value</param>
         /// <returns>null/nothing if String IsEmpty</returns>
@@ -708,7 +708,7 @@ namespace Extension.Methods
         }
 
         /// <summary>
-        /// Converts to humancase. If the input is "FirstName", It will return "First Name"
+        /// Converts to human-case. If the input is "FirstName", It will return "First Name"
         /// </summary>
         /// <param name="source">The source.</param>
         /// <returns></returns>
@@ -783,7 +783,7 @@ namespace Extension.Methods
         }
 
         /// <summary>
-        ///     Convert url query string to IDictionary value key pair
+        ///     Convert URL query string to IDictionary value key pair
         /// </summary>
         /// <param name="queryString">query string value</param>
         /// <returns>IDictionary value key pair</returns>

@@ -9,7 +9,7 @@ namespace Extension.Methods
     public static class EnumExtensions
     {
         /// <summary>
-        /// Converts an Enum to a list containinng all values
+        /// Converts an Enum to a list containing all values
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>

@@ -11,7 +11,7 @@ namespace Extension.Methods
     {
         private static Random random = new Random();
         /// <summary>
-        /// Itterates over any IEnumerable
+        /// Iterates over any IEnumerable
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="source">The source.</param>
@@ -423,7 +423,7 @@ namespace Extension.Methods
         /// <typeparam name="T"></typeparam>
         /// <param name="source">The sorted source.</param>
         /// <param name="value">The value to be inserted</param>
-        /// <param name="comparison">The comparison that implements the Compare() for comparision of two objects of Type T.</param>
+        /// <param name="comparison">The comparison that implements the Compare() for comparison of two objects of Type T.</param>
         /// <returns>Returns the position where the value was inserted</returns>
         /// <exception cref="ArgumentNullException">source</exception>
         public static int InsertSorted<T>(this IList<T> source, T value, IComparer<T> comparison)
@@ -450,7 +450,7 @@ namespace Extension.Methods
         /// <typeparam name="T"></typeparam>
         /// <param name="source">The sorted source.</param>
         /// <param name="value">The value to be inserted</param>
-        /// <param name="comparison">The comparison deligate that compares two objects of Type T.</param>
+        /// <param name="comparison">The comparison delegate that compares two objects of Type T.</param>
         /// <returns>Returns the position where the value was inserted</returns>
         /// <exception cref="ArgumentNullException">source</exception>
         public static int InsertSorted<T>(this IList<T> source, T value, Comparison<T> comparison)
@@ -471,7 +471,7 @@ namespace Extension.Methods
             return source.Count - 1;
         }
         /// <summary>
-        /// Returns an empty sequense if the sequense is Null
+        /// Returns an empty sequence if the sequence is Null
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="sequence">The sequence.</param>
