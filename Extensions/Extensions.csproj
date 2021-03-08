@@ -16,9 +16,8 @@ Adds new extensions for string, number and generic</Description>
     <RepositoryUrl>https://github.com/ssswagatss/extension-methods</RepositoryUrl>
     <RepositoryType>Public</RepositoryType>
     <PackageTags>c-sharp extension-methods c# helper-methods</PackageTags>
-    <Version>0.2.0</Version>
-    <PackageReleaseNotes>Adds new methods for String Extensions.
-Updates documentations with proper examples.</PackageReleaseNotes>
+    <Version>0.3.0</Version>
+    <PackageReleaseNotes>Fixes issues with Datetime methods</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
