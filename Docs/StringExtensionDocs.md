@@ -923,5 +923,5 @@ public static int NthIndexOf(this string input, string stringToBeFound, int occu
 ```
 #### Example
 ```csharp
-    Color bar ="Emad Alashi found ash on his desk, he went mad, very mad".NthIndexOf("mad",2);//Returns 43
+    var bar ="Emad Alashi found ash on his desk, he went mad, very mad".NthIndexOf("mad",2);//Returns 43
 ```
