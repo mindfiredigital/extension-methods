@@ -11,15 +11,20 @@
     <Description>This contains some of the most helpful extension methods we use everyday.
 Adds new extensions for string, number and generic</Description>
     <Copyright>MIT</Copyright>
-    <PackageLicenseUrl>https://github.com/mindfiredigital/extension-methods/blob/development/LICENSE</PackageLicenseUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/mindfiredigital/extension-methods</PackageProjectUrl>
     <RepositoryUrl>https://github.com/mindfiredigital/extension-methods</RepositoryUrl>
     <RepositoryType>Public</RepositoryType>
     <PackageTags>c-sharp extension-methods c# helper-methods</PackageTags>
     <Version>1.0.0</Version>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageReleaseNotes>Fixes issues with Datetime methods</PackageReleaseNotes>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="" />
+  </ItemGroup>
+ 
   
 
 </Project>
