@@ -22,7 +22,7 @@ Adds new extensions for string, number and generic</Description>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="README.md" Pack="true" PackagePath="" />
+    <None Include="../README.md" Pack="true" PackagePath="" />
   </ItemGroup>
  
   
