@@ -2,6 +2,8 @@
 
 **Extension.Methods** is a C# library built on top of .Net Standard 2.0. This library contains most of the extension methods that you would use in everyday life. We are committed to adding new methods.
 
+Published and maintained by Mindfire Digital LLP. Visit https://www.mindfiresolutions.com/ for more information.
+
 The reason why we started this project is very simple. Mostly to automate a redundant process. Each time we used to start a new project, we had to copy and paste these lines of codes to our project. Though most of the extension methods are available in the internet, they are not present under a single library. So we added everything to one place and created a package out of it. Adding this package to your existing/new project is as easy as adding any other NuGet package.
 
 ## Installation
@@ -39,18 +41,17 @@ This will install the packages and its dependencies to your project and you can 
         }
     }
 ```
-    
 
 ## API References
 
 The project contains extension methods for the followings. 
 
-- [StringExtensions](https://github.com/ssswagatss/extension-methods/blob/development/Docs/StringExtensionDocs.md)
-- [NumberExtensions](https://github.com/ssswagatss/extension-methods/blob/development/Docs/NumberExtensionsDocs.md)
-- [DateTimeExtensions](https://github.com/ssswagatss/extension-methods/blob/development/Docs/DateTimeExtensionsDocs.md)
-- [EnumExtensions](https://github.com/ssswagatss/extension-methods/blob/development/Docs/EnumExtensionsDocs.md)
-- [JsonExtensions](https://github.com/ssswagatss/extension-methods/blob/development/Docs/JsonExtensionsDocs.md)
-- [GenericExtensions](https://github.com/ssswagatss/extension-methods/blob/development/Docs/GenericExtensionsDocs.md)
+- [StringExtensions](https://github.com/mindfiredigital/extension-methods/blob/development/Docs/StringExtensionDocs.md)
+- [NumberExtensions](https://github.com/mindfiredigital/extension-methods/blob/development/Docs/NumberExtensionsDocs.md)
+- [DateTimeExtensions](https://github.com/mindfiredigital/extension-methods/blob/development/Docs/DateTimeExtensionsDocs.md)
+- [EnumExtensions](https://github.com/mindfiredigital/extension-methods/blob/development/Docs/EnumExtensionsDocs.md)
+- [JsonExtensions](https://github.com/mindfiredigital/extension-methods/blob/development/Docs/JsonExtensionsDocs.md)
+- [GenericExtensions](https://github.com/mindfiredigital/extension-methods/blob/development/Docs/GenericExtensionsDocs.md)
 
 ## Contributing
 
@@ -58,9 +59,9 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 Please make sure to update tests as appropriate.
 
 ## Feedback
-Any feedback or issues can be added to the [issues](https://github.com/ssswagatss/extension-methods/issues) for this project in GitHub.
+Any feedback or issues can be added to the [issues](https://github.com/mindfiredigital/extension-methods/issues) for this project in GitHub.
 
 ## License
-Copyright (c) Swagat Swain. All rights reserved.
+Copyright (c) 2019 Mindfire Digital LLP. All rights reserved.
 
 Licensed under the [MIT](https://choosealicense.com/licenses/mit/) license.
