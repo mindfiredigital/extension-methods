@@ -386,8 +386,8 @@ public static string Capitalize(this string s);
 ```
 #### Example
 ```csharp
-    var bar = "swagat".StartsWithIgnoreCase("Swagat"); //Returns true
-    var bar = "swagat kumar swain".StartsWithIgnoreCase("Swagat kumar swain"); //Returns true
+    var bar = "swagat".Capitalize(); //Returns "Swagat"
+    bar = "sWAGAT kuMAR".Capitalize(); //Returns "Swagat kumar"
 ```
 
 * ### RemoveChars()
@@ -399,7 +399,7 @@ public static string RemoveChars(this string s, params char[] chars);
 ```
 #### Example
 ```csharp
-    var bar = "swagat swain".RemoveChars("s","w","a","i","n"); //Returns "gt "
+    var bar = "swagat swain".RemoveChars('s','w','a','i','n'); //Returns "gt "
 ```
 
 * ### RemoveCharsIgnoreCase()
@@ -411,8 +411,8 @@ public static string RemoveCharsIgnoreCase(this string s, params char[] chars);
 ```
 #### Example
 ```csharp
-    string s = "Friends";
-    s = s.Replace('f', 'r','i','s');// s becomes 'end'
+    var s = "Friends";
+    s = s.RemoveCharsIgnoreCase('f','r','i','s'); // s becomes "end"
 ```
 
 * ### RemoveString()
@@ -432,11 +432,11 @@ public static string RemoveString(this string s, string replaceString);
 ```csharp
 /// s : string to remove characters from
 /// replaceString : String  to be removed
-public static string RemoveString(this string s, string replaceString);
+public static string RemoveStringIgnoreCase(this string s, string replaceString);
 ```
 #### Example
 ```csharp
-    string s = "C# is hot".RemoveString("HO");//Returns 'C# is t'
+    var s = "C# is hot".RemoveStringIgnoreCase("HO"); //Returns "C# is t"
 ```
 
 * ### Reverse()
@@ -447,7 +447,7 @@ public static string Reverse(this string val);
 ```
 #### Example
 ```csharp
-    string s = "C# is hot".Reverse("HO");//Returns 'toh si #C'
+    var s = "C# is hot".Reverse(); //Returns "toh si #C"
 ```
 
 * ### ParseToCsv()
@@ -483,8 +483,8 @@ public static int CountOccurrencesIgnoreCase(this string val, string stringToMat
 ```
 #### Example
 ```csharp
-    "Mahesh Chand is a founder of C# CornerMahesh Chand is a founder of C# Corner".CountOccurrences("mahesh");// Returns 0
-    "Mahesh Chand is a founder of C# CornerMahesh Chand is a founder of C# Corner".CountOccurrences("Mahesh");// Returns 2
+    "Mahesh Chand is a founder of C# CornerMahesh Chand is a founder of C# Corner".CountOccurrencesIgnoreCase("mahesh"); // Returns 2
+    "Mahesh Chand is a founder of C# CornerMahesh Chand is a founder of C# Corner".CountOccurrencesIgnoreCase("Mahesh"); // Returns 2
 ```
 
 * ### RemovePrefix()
@@ -511,8 +511,8 @@ public static string RemoveSuffix(this string val, string suffix, bool ignoreCas
 ```
 #### Example
 ```csharp
-    "Swagat Kumar Swain".RemovePrefix("Swa",true);// Returns 'Swagat Kumar Swain'
-    "Swagat Kumar Swain".RemovePrefix("Swain",false);// Returns 'Swagat Kumar '
+    "Swagat Kumar Swain".RemoveSuffix("Swa", true);   // Returns 'Swagat Kumar Swain'
+    "Swagat Kumar Swain".RemoveSuffix("Swain", false); // Returns 'Swagat Kumar '
 ```
 
 * ### AppendPrefixIfMissing()
@@ -526,11 +526,11 @@ public static string AppendPrefixIfMissing(this string val, string prefix, bool 
 #### Example
 ```csharp
     "Swagat Kumar".AppendPrefixIfMissing("Swagat",true);// Returns 'Swagat Kumar'
-    "Swagat Kumar Swain".AppendPrefixIfMissing("swain",false);// Returns 'swagatSwagat Kumar Swain'
+    "Swagat Kumar Swain".AppendPrefixIfMissing("swain",false);// Returns 'swainSwagat Kumar Swain'
 ```
 
 * ### AppendSuffixIfMissing()
- Appends the prefix to the start of the string if the string does not already start with prefix.
+ Appends the suffix to the end of the string if the string does not already end with suffix.
 ```csharp
 /// val : string to append suffix
 /// suffix : suffix
@@ -719,7 +719,7 @@ public static string RemoveLineFeeds(this string val);
 ```
 
 * ### DoesNotStartWith()
- Remove Line Feeds
+ Checks if a string does NOT start with a given prefix.
 ```csharp
 /// val : The given string
 /// prefix : The string which is to be measured.
@@ -733,7 +733,7 @@ public static bool DoesNotStartWith(this string val, string prefix, bool ignoreC
 ```
 
 * ### DoesNotEndWith()
- Remove Line Feeds
+ Checks if a string does NOT end with a given suffix.
 ```csharp
 /// val : The given string
 /// suffix : The string which is to be measured.
@@ -774,7 +774,7 @@ public static string CreateHashSha256(this string val);
  Convert a string to its equivalent byte array
 ```csharp
 /// val : the given string
-public static string ToBytes(this string val);
+public static byte[] ToBytes(this string val);
 ```
 #### Example
 ```csharp
@@ -888,7 +888,7 @@ public static string ToPhoneNumber(this string phoneNumber);
 ```
 #### Example
 ```csharp
-    var bar ="1234567890".MaskPhoneNumber(); //Returns "(123) 456-7890"
+    var bar ="1234567890".ToPhoneNumber(); //Returns "(123)-456-7890"
 ```
 
 * ### ToColor()
