@@ -1,7 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <RootNamespace>Extension.Methods</RootNamespace>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>Extension.Methods</PackageId>
@@ -11,17 +11,15 @@
     <Description>This contains some of the most helpful extension methods we use everyday.
 Adds new extensions for string, number and generic</Description>
     <Copyright>MIT</Copyright>
-    <PackageLicenseUrl>https://github.com/ssswagatss/extension-methods/blob/development/LICENSE</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/ssswagatss/extension-methods</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/ssswagatss/extension-methods</RepositoryUrl>
+    <PackageLicenseUrl>https://github.com/mindfiredigital/extension-methods/blob/development/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/mindfiredigital/extension-methods</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/mindfiredigital/extension-methods</RepositoryUrl>
     <RepositoryType>Public</RepositoryType>
     <PackageTags>c-sharp extension-methods c# helper-methods</PackageTags>
     <Version>0.3.0</Version>
     <PackageReleaseNotes>Fixes issues with Datetime methods</PackageReleaseNotes>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
-  </ItemGroup>
+  
 
 </Project>
